@@ -35,7 +35,7 @@ export function AppModal({ modalVisible, hideModal, children, showFooter }) {
     >
       <View className="relative flex-1 items-center justify-center">
         <ShadeComponent hideModal={hideModal} />
-        <View className="w-80 h-80 bg-black-700 z-50 flex rounded-sm">
+        <View className="w-80 h-80 bg-black-600 z-50 flex rounded-sm">
           <ExitButtonComponent hideModal={hideModal} />
           <TabsComponent />
           {showFooter && <FooterComponent />}
@@ -71,7 +71,7 @@ const TabsComponent = () => {
   const [selectedTab, setSelectedTab] = useState(TabsEnum.ABOUT);
   const SelectedTab = Tabs.find((tab) => tab.id === selectedTab);
   return (
-    <View className="flex-1 bg-black-600 shadow-md rounded-sm">
+    <View className="flex-1 bg-black-500 shadow-md rounded-sm">
       <View className="flex-row mt-2.5 z-10 mx-1">
         {Tabs.map((Tab) => (
           <TabComponenet
@@ -82,7 +82,7 @@ const TabsComponent = () => {
           />
         ))}
       </View>
-      <ScrollView className="flex-1 bg-black-500 py-4">
+      <ScrollView className="flex-1 bg-black-700 py-4">
         {SelectedTab.ContentComponenet()}
       </ScrollView>
     </View>
@@ -92,8 +92,8 @@ const TabsComponent = () => {
 const TabComponenet = ({ id, title, isSelected = false, setSelectedTab }) => {
   return (
     <Pressable
-      className={`mr-1 bg-black-500 w-28 rounded-md px-2 py-2 translate-y-1 ${
-        isSelected ? `border-b-black-500 border-b-4` : `bg-transparent`
+      className={`mr-1 bg-black-700 w-28 rounded-md px-2 py-2 translate-y-1 ${
+        isSelected ? `border-b-black-700 border-b-4` : `bg-transparent`
       }`}
       onPress={() => setSelectedTab(id)}
     >
@@ -111,7 +111,7 @@ const TabComponenet = ({ id, title, isSelected = false, setSelectedTab }) => {
 const AboutTabContentComponent = () => {
   return (
     <View>
-      <View className="bg-black-600 px-2 py-2 w-full mb-4">
+      <View className="bg-black-500 px-2 py-2 w-full mb-4">
         <Text className="text-white leading-6" style={{ fontSize: 15 }}>
           <Text className="font-bold text-yellow-500">Remember</Text> the last
           time you awkwardly shook hands with someone, it was so embarrassing,
@@ -119,7 +119,7 @@ const AboutTabContentComponent = () => {
           thousand times more. Haha don't worry, you'll laugh about it...
         </Text>
       </View>
-      <View className="bg-black-600 px-2 py-2 w-full">
+      <View className="bg-black-500 px-2 py-2 w-full">
         <Text
           className="text-yellow-500 leading-6 font-bold"
           style={{ fontSize: 15 }}
@@ -138,7 +138,7 @@ const AboutTabContentComponent = () => {
 const HintsTabContentComponent = () => {
   return (
     <View>
-      <View className="bg-black-600 px-2 py-2 w-full mb-4">
+      <View className="bg-black-500 px-2 py-2 w-full mb-4">
         <Text
           className="text-yellow-500 leading-6 font-bold"
           style={{ fontSize: 15 }}

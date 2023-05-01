@@ -68,7 +68,7 @@ const ContentComponent = () => {
         className="bg-yellow-500 w-full h-16 my-5 rounded-md flex-row items-center justify-center space-x-4"
         onPress={() => navigation.navigate("QuickGameRoundScreen")}
       >
-        <Text className="text-black-500 text-lg text-center font-bold">
+        <Text className="text-black-700 text-lg text-center font-bold">
           Start playing
         </Text>
         <Text className="text-xl">🤝</Text>
