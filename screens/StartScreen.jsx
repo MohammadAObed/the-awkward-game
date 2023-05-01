@@ -4,6 +4,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useState } from "react";
 import useModal from "../hooks/common/useModal";
 import AppModal from "../components/common/AppModal";
+import { useNavigation } from "@react-navigation/native";
 
 const StartScreen = () => {
   const [videoLoaded, setVideoLoaded] = useState(false);
@@ -15,11 +16,13 @@ const StartScreen = () => {
       <ShadeComponent />
       <ContentComponent />
       <FooterComponent showModal={showModal} />
-      <AppModal
-        hideModal={hideModal}
-        modalVisible={modalVisible}
-        showFooter={true}
-      />
+      {modalVisible && ( //for faster performance
+        <AppModal
+          hideModal={hideModal}
+          modalVisible={modalVisible}
+          showFooter={true}
+        />
+      )}
     </View>
   );
 };
@@ -55,13 +58,17 @@ const ShadeComponent = () => {
 };
 
 const ContentComponent = () => {
+  const navigation = useNavigation();
   return (
     <SafeAreaView className="flex-1 flex items-center justify-center px-5 mt-10">
       <Text className="text-white text-3xl font-bold w-60 text-center mt-10">
         Get Awkward !
       </Text>
-      <TouchableOpacity className="bg-[#47b84b] w-full h-16 my-5 rounded-md flex-row items-center justify-center space-x-4">
-        <Text className="text-white text-lg text-center font-bold">
+      <TouchableOpacity
+        className="bg-yellow-500 w-full h-16 my-5 rounded-md flex-row items-center justify-center space-x-4"
+        onPress={() => navigation.navigate("QuickGameRoundScreen")}
+      >
+        <Text className="text-black-500 text-lg text-center font-bold">
           Start playing
         </Text>
         <Text className="text-xl">🤝</Text>

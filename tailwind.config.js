@@ -7,7 +7,19 @@ module.exports = {
     "./common/**/*.{js,jsx,ts,tsx}", //for directory
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        transparent: "transparent",
+        black: {
+          500: "#191919",
+          600: "#212121",
+          700: "#1D1D1D",
+        },
+        yellow: {
+          500: "#F4C41C",
+        },
+      },
+    },
   },
   plugins: [],
 };
