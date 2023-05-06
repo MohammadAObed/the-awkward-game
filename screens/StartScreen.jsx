@@ -10,12 +10,12 @@ const StartScreen = () => {
   const [videoLoaded, setVideoLoaded] = useState(false);
   const { modalVisible, showModal, hideModal } = useModal();
   return (
-    <View className="flex-1">
-      {!videoLoaded && <ImageFirstFrameOfVideoComponenet />}
-      <BgVideoComponent setVideoLoaded={setVideoLoaded} />
-      <ShadeComponent />
-      <ContentComponent />
-      <FooterComponent showModal={showModal} />
+    <View className="flex-1 bg-black-700">
+      {!videoLoaded && <ImageFirstFrameOfVideo />}
+      <BgVideo setVideoLoaded={setVideoLoaded} />
+      <Shade />
+      <Content />
+      <Footer showModal={showModal} />
       {modalVisible && ( //for faster performance
         <AppModal
           hideModal={hideModal}
@@ -29,7 +29,7 @@ const StartScreen = () => {
 
 export default StartScreen;
 
-const ImageFirstFrameOfVideoComponenet = () => {
+const ImageFirstFrameOfVideo = () => {
   return (
     <Image
       source={require("../assets/images/VideoFirstFrame.jpg")}
@@ -38,7 +38,7 @@ const ImageFirstFrameOfVideoComponenet = () => {
   );
 };
 
-const BgVideoComponent = ({ setVideoLoaded }) => {
+const BgVideo = ({ setVideoLoaded }) => {
   return (
     <Video
       source={require("../assets/Video/AwkwardVideoCompressed.mp4")}
@@ -51,13 +51,13 @@ const BgVideoComponent = ({ setVideoLoaded }) => {
   );
 };
 
-const ShadeComponent = () => {
+const Shade = () => {
   return (
     <SafeAreaView className="absolute bg-[#00000099] w-full h-full left-0 top-0" />
   );
 };
 
-const ContentComponent = () => {
+const Content = () => {
   const navigation = useNavigation();
   return (
     <SafeAreaView className="flex-1 flex items-center justify-center px-5 mt-10">
@@ -69,7 +69,7 @@ const ContentComponent = () => {
         onPress={() => navigation.navigate("QuickGameRoundScreen")}
       >
         <Text className="text-black-700 text-lg text-center font-bold">
-          Start playing
+          Start shaking
         </Text>
         <Text className="text-xl">🤝</Text>
       </TouchableOpacity>
@@ -77,7 +77,7 @@ const ContentComponent = () => {
   );
 };
 
-const FooterComponent = ({ showModal }) => {
+const Footer = ({ showModal }) => {
   return (
     <TouchableOpacity
       onPress={showModal}

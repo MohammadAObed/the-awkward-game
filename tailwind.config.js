@@ -5,6 +5,7 @@ module.exports = {
     "./screens/**/*.{js,jsx,ts,tsx}", //for directory
     "./components/**/*.{js,jsx,ts,tsx}", //for directory
     "./common/**/*.{js,jsx,ts,tsx}", //for directory
+    "./libraries/**/*.{js,jsx,ts,tsx}", //for directory
   ],
   theme: {
     extend: {

@@ -11,7 +11,10 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator
         headerMode="float"
-        screenOptions={{ header: () => <Navbar /> }}
+        screenOptions={{
+          animation: "fade_from_bottom",
+          header: () => <Navbar />,
+        }}
       >
         <Stack.Screen
           name="StartScreen"

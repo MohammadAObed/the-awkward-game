@@ -35,9 +35,9 @@ export function AppModal({ modalVisible, hideModal, children, showFooter }) {
     >
       <View className="relative flex-1 items-center justify-center">
         <ShadeComponent hideModal={hideModal} />
-        <View className="w-80 h-80 bg-black-600 z-50 flex rounded-sm">
+        <View className=" bg-black-600 z-50 flex rounded-sm">
           <ExitButtonComponent hideModal={hideModal} />
-          <TabsComponent />
+          {children || <TabsComponent />}
           {showFooter && <FooterComponent />}
         </View>
       </View>
@@ -71,7 +71,7 @@ const TabsComponent = () => {
   const [selectedTab, setSelectedTab] = useState(TabsEnum.ABOUT);
   const SelectedTab = Tabs.find((tab) => tab.id === selectedTab);
   return (
-    <View className="flex-1 bg-black-500 shadow-md rounded-sm">
+    <View className=" h-72 w-80 bg-black-500 shadow-md rounded-sm">
       <View className="flex-row mt-2.5 z-10 mx-1">
         {Tabs.map((Tab) => (
           <TabComponenet
