@@ -73,7 +73,7 @@ const useWalkthrough = () => {
     goToNth,
     goToPrev,
     visible,
-    copilotEvents,
+    walkthroughEvents: copilotEvents,
     isFirstStep,
     isLastStep,
     currentStepNumber,

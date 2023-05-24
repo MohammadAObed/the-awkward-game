@@ -19,7 +19,7 @@ export const WalkthroughTooltip = ({ labels }) => {
   };
 
   return (
-    <View className="flex justify-center items-center py-2">
+    <View className="flex justify-center items-center ">
       <View className="">
         <Text
           testID="stepDescription"
