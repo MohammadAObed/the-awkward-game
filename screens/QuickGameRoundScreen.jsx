@@ -1,10 +1,9 @@
 import { View, Text, Image, TouchableOpacity, Button, ScrollView, Pressable, Animated, Easing } from "react-native";
 import React, { useEffect, useRef, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useWalkthrough, WalkthroughProvider, WalkthroughTooltip } from "../libraries/walkthrough";
+import { WalkthroughProvider, WalkthroughTooltip } from "../libraries/walkthrough";
 import handshakes from "../data/Handshake";
-import { Handshake } from "../models/Handshake";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import useTimer from "../hooks/QuickGameRoundScreen/useTimer";
 import useWalkthroughShow from "../hooks/QuickGameRoundScreen/useWalkthroughShow";
 import useAnimatedHandshake from "../hooks/QuickGameRoundScreen/useAnimatedHandshake";
@@ -146,7 +145,9 @@ const PersonLineComponent = () => {
     <View className="h-fit mb-6 space-y-2 flex items-center bg-black-600 p-5 pt-7">
       <Text className="text-xl text-white text-center">
         {initialPerson.name}:
-        {globalState.selectedHandshake.id !== globalState.selectedPersonHandshake.id ? ` Haha, that was awkward! don't worry about it, ` : ` Nice grip you got there! `}
+        {globalState.selectedHandshake.id !== globalState.selectedPersonHandshake.id
+          ? ` Haha, that was awkward! don't worry about it, `
+          : ` Nice grip you got there! `}
       </Text>
       <Text className="text-center text-xl text-yellow-500">{initialPerson.signatureLine}!</Text>
     </View>

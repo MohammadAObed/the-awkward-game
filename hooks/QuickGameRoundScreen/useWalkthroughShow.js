@@ -14,15 +14,6 @@ export default useWalkthroughShow = (screenName = "", listOrder = 1) => {
 
   useEffect(() => {
     const walkthroughOnStop = () => {
-      //below condition is eqivelant for: if (prevStep.name === "Third") {
-      if (currentStep && currentStep.order === 2) {
-        navigation.navigate(ScreenNames.QuickGameRoundScreen);
-        return;
-      }
-      // if (prevStep.name === "Third") {
-      //   navigation.navigate(ScreenNames.QuickGameRoundScreen);
-      //   return;
-      // }
       // walkthrough tutorial finished!
       globalState.dispatch(
         walkthroughUpdate({
@@ -32,7 +23,6 @@ export default useWalkthroughShow = (screenName = "", listOrder = 1) => {
         })
       );
       setShowWalkthrough(false);
-      // goToNth(3);
     };
 
     walkthroughEvents.on("stop", walkthroughOnStop);

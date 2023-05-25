@@ -22,14 +22,8 @@ export const selectWalkthroughSlice = (state) => {
   return state.walkthrough.walkthroughes;
 };
 
-export const selectWalkthroughSliceByScreenNameAndListOrder = (
-  state,
-  screenName = "",
-  listOrder = 1
-) => {
-  return state.walkthrough.walkthroughes.find(
-    (item) => item.screenName === screenName && item.listOrder === listOrder
-  );
+export const selectWalkthroughSliceByScreenNameAndListOrder = (state, screenName = "", listOrder = 1) => {
+  return state.walkthrough.walkthroughes.find((item) => item.screenName === screenName && item.listOrder === listOrder);
 };
 
 export const { walkthroughUpdate } = walkthroughSlice.actions;
