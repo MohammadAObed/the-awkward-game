@@ -9,3 +9,7 @@ export function WalkthroughUpdate(state, action) {
   });
   state.walkthroughes = [...walkthroughUpdated];
 }
+
+export function WalkthroughReset(state, action, initialState) {
+  state.walkthroughes = initialState.walkthroughes;
+}

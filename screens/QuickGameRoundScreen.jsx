@@ -5,7 +5,7 @@ import { WalkthroughProvider, WalkthroughTooltip } from "../libraries/walkthroug
 import handshakes from "../data/Handshake";
 import { useDispatch } from "react-redux";
 import useTimer from "../hooks/QuickGameRoundScreen/useTimer";
-import useWalkthroughShow from "../hooks/QuickGameRoundScreen/useWalkthroughShow";
+import useWalkthroughShow from "../hooks/common/useWalkthroughShow";
 import useAnimatedHandshake from "../hooks/QuickGameRoundScreen/useAnimatedHandshake";
 import { getRandomNumber } from "../utils/common/getRandomNumber";
 import MovingHandshakeComponent from "../components/QuickGameRoundScreen/MovingHandshakeComponent";
@@ -21,7 +21,7 @@ import useGlobalState from "../hooks/common/useGlobalState";
 import useModal from "../hooks/common/useModal";
 import EmptyModal from "../components/common/EmptyModal";
 import { useNavigation } from "@react-navigation/native";
-import useGoBack from "../hooks/common/useGoBack";
+import { walkthroughReset } from "../features/walkthroughSlice";
 
 const QuickGameRoundScreen = () => {
   return (
@@ -45,29 +45,13 @@ const QuickGameRoundScreen = () => {
 const QuickGameRoundComponent = () => {
   const dispatch = useDispatch();
   globalState.dispatch = dispatch;
+  const navigation = useNavigation();
+  globalState.navigation = navigation;
+  //dispatch(walkthroughReset({}));
 
-  useGlobalState(globalState, useGoBack, [], null, null, true);
-  useGlobalState(globalState, useWalkthroughShow, [ScreenNames.QuickGameRoundScreen, 1], null, null, true);
-  //above is equivelant to below:
-  // const { showWalkthrough, startWalkthrough } = useWalkthroughShow(ScreenNames.QuickGameRoundScreen, 1);
-  // globalState.showWalkthrough = showWalkthrough;
-  // globalState.startWalkthrough = startWalkthrough;
-  useGlobalState(globalState, useState, [false], nGlobalState.hasShakeStarted, nGlobalState.setHasShakeStarted);
-  //above is equivelant to below:
-  //const [hasShakeEnded, setHasShakeEnded] = useState(false);
-  //globalState.hasShakeEnded = hasShakeEnded;
-  //globalState.setHasShakeEnded = setHasShakeEnded;
-  useGlobalState(globalState, useState, [false], nGlobalState.hasShakeEnded, nGlobalState.setHasShakeEnded);
-  useGlobalState(globalState, useState, [initialHandshake], nGlobalState.selectedHandshake, nGlobalState.setSelectedHandshake);
-  useGlobalState(globalState, useState, [initialPersonHandshake], nGlobalState.selectedPersonHandshake, nGlobalState.setSelectedPersonHandshake);
-  useGlobalState(globalState, useTimer, [], nGlobalState.timer, nGlobalState.setTimer);
-
-  const personHandshakeAnimation = useAnimatedHandshake(PlayerType.PERSON, personHandshakeAnimationValues);
-  const playerHandshakeAnimation = useAnimatedHandshake(PlayerType.PLAYER, playerHandshakeAnimationValues);
-  globalState.personHandshakeAnimation = personHandshakeAnimation;
-  globalState.playerHandshakeAnimation = playerHandshakeAnimation;
-
-  // const { modalVisible, showModal, hideModal } = useModal();
+  useGlobalState(globalState, useWalkthroughShow, [globalState, { ...initialState.showWalkthrough }], null, null, true);
+  useGlobalState(globalState, useState, [initialState.hasShakeStarted], nGlobalState.hasShakeStarted, nGlobalState.setHasShakeStarted);
+  useGlobalState(globalState, useState, [initialState.hasShakeEnded], nGlobalState.hasShakeEnded, nGlobalState.setHasShakeEnded);
   useGlobalState(globalState, useModal, [], null, null, true);
 
   useEffect(() => {
@@ -87,8 +71,7 @@ const QuickGameRoundComponent = () => {
       </View>
       {!globalState.showWalkthrough && (
         <View className="z-0">
-          <MovingHandshakeComponent playerType={PlayerType.PERSON} />
-          <MovingHandshakeComponent playerType={PlayerType.PLAYER} />
+          <MovingHandshakesComponent />
         </View>
       )}
       {globalState.hasShakeEnded === false && (
@@ -108,7 +91,25 @@ const QuickGameRoundComponent = () => {
   );
 };
 
+const MovingHandshakesComponent = () => {
+  useGlobalState(globalState, useState, [initialHandshake], nGlobalState.selectedHandshake, nGlobalState.setSelectedHandshake);
+  useGlobalState(globalState, useState, [initialPersonHandshake], nGlobalState.selectedPersonHandshake, nGlobalState.setSelectedPersonHandshake);
+
+  const personHandshakeAnimation = useAnimatedHandshake(PlayerType.PERSON, personHandshakeAnimationValues);
+  const playerHandshakeAnimation = useAnimatedHandshake(PlayerType.PLAYER, playerHandshakeAnimationValues);
+  globalState.personHandshakeAnimation = personHandshakeAnimation;
+  globalState.playerHandshakeAnimation = playerHandshakeAnimation;
+  return (
+    <>
+      <MovingHandshakeComponent playerType={PlayerType.PERSON} />
+      <MovingHandshakeComponent playerType={PlayerType.PLAYER} />
+    </>
+  );
+};
+
 const TimerComponent = () => {
+  useGlobalState(globalState, useTimer, [], nGlobalState.timer, nGlobalState.setTimer);
+
   return (
     <View className="w-14 h-14 bg-[#eb1f1f] justify-center items-center flex rounded-full">
       <Text className="text-xl text-black-500 font-bold">{globalState.timer}</Text>
@@ -155,10 +156,19 @@ const PersonLineComponent = () => {
 };
 
 const LeaveMsgComponent = () => {
+  const navigation = useNavigation();
   return (
     <View className="mt-52">
       <Text className="text-white w-72 text-center text-lg">{initialPerson.name} enjoyed that!, you can contact with him later</Text>
-      <TouchableOpacity className="bg-yellow-500 px-14 py-4 rounded-sm mt-2" onPress={() => {}}>
+      <TouchableOpacity
+        className="bg-yellow-500 px-14 py-4 rounded-sm mt-2"
+        onPress={() => {
+          globalState.navigation.reset({
+            index: 0,
+            routes: [{ name: ScreenNames.HomeScreen }],
+          });
+        }}
+      >
         <Text className="text-xl text-black-500 text-center font-bold">Leave!</Text>
       </TouchableOpacity>
     </View>

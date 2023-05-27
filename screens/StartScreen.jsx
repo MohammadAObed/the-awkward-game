@@ -58,7 +58,7 @@ const ContentComponent = () => {
         onPress={() => {
           navigation.reset({
             index: 0,
-            routes: [{ name: "QuickGameRoundScreen" }], //helps performance, bcz it kills this screen so the video won't keep playing in the background when on the QuickGameRoundScreen,
+            routes: [{ name: ScreenNames.QuickGameRoundScreen }], //helps performance, bcz it kills this screen so the video won't keep playing in the background when on the QuickGameRoundScreen,
           });
           //navigation.navigate(ScreenNames.QuickGameRoundScreen);
         }}

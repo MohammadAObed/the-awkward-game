@@ -7,7 +7,7 @@ import walkthroughReducer from "./features/walkthroughSlice";
 const persistConfig = {
   key: "root",
   storage: AsyncStorage,
-  // version: 1,
+  version: 1,
   // blacklist: ["walkthrough"],
 };
 

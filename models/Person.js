@@ -9,9 +9,10 @@ class Person {
 }
 
 class PersonImages {
-  constructor(Happy, Angry) {
+  constructor(Happy, Angry, Normal) {
     this.Happy = Happy;
     this.Angry = Angry;
+    this.Normal = Normal;
   }
 }
 

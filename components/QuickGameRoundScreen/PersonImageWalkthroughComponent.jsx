@@ -9,11 +9,13 @@ const WalkthroughView = walkthroughable(View);
 
 const PersonImageWalkthroughComponent = () => {
   return (
-    <WalkthroughStep text={`Quick! ${initialPerson.name} is approaching you`} order={1} name="First">
-      <WalkthroughView>
-        <PersonImageComponent />
-      </WalkthroughView>
-    </WalkthroughStep>
+    <View className="-mt-0 z-50">
+      <WalkthroughStep text={`Quick! ${initialPerson.name} is approaching you`} order={1} name="First">
+        <WalkthroughView>
+          <PersonImageComponent />
+        </WalkthroughView>
+      </WalkthroughStep>
+    </View>
   );
 };
 
@@ -25,7 +27,7 @@ const PersonImageComponent = () => {
         <Image
           className="w-full h-full"
           style={{ opacity: globalState.modalVisible ? 0.2 : 1 }}
-          source={globalState.hasShakeEnded ? initialPerson.images.Happy : initialPerson.images.Angry}
+          source={globalState.hasShakeEnded ? initialPerson.images.Happy : initialPerson.images.Normal}
           onLoad={() => globalState.showWalkthrough === true && globalState.startWalkthrough()}
         />
       </View>

@@ -1,7 +1,5 @@
-//Works With globalState object (gs)
-
-//Notes:
-//1- Order Of useGlobalState Call is important! bcz a custom hook may be using a state that is defined after that hook
+//- Works With globalState object (gs)
+//- Order Of useGlobalState Call is important! bcz a custom hook may be using a state that is defined after that hook
 import React from "react";
 
 //! 1-for later: try put useMemo for global state property variable assignment
@@ -24,3 +22,15 @@ const useGlobalState = (globalState, cb, args, valueName, setValueName, isObjRet
 };
 
 export default useGlobalState;
+
+//useGlobalState(globalState, useState, [initialState.hasShakeStarted], nGlobalState.hasShakeStarted, nGlobalState.setHasShakeStarted);
+//above is equivelant to below:
+//const [hasShakeEnded, setHasShakeEnded] = useState(false);
+//globalState.hasShakeEnded = hasShakeEnded;
+//globalState.setHasShakeEnded = setHasShakeEnded;
+
+//useGlobalState(globalState, useState, [initialState.hasShakeStarted], nGlobalState.hasShakeStarted, nGlobalState.setHasShakeStarted);
+//above is equivelant to below:
+// const { showWalkthrough, startWalkthrough } = useWalkthroughShow(ScreenNames.QuickGameRoundScreen, 1);
+// globalState.showWalkthrough = showWalkthrough;
+// globalState.startWalkthrough = startWalkthrough;

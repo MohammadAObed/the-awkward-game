@@ -1,6 +1,6 @@
 import { Handshake } from "../models/Handshake";
 export const globalState = {
-  navigation: null,
+  navigation: {},
   timer: 0,
   setTimer: function () {},
   hasShakeStarted: false,

@@ -8,12 +8,12 @@ import { globalState } from "../../global/QuickGameRoundScreen";
 const MovingHandshakeComponent = ({ playerType = PlayerType.PLAYER }) => {
   const selectedHandshake = playerType === PlayerType.PLAYER ? globalState.selectedHandshake : globalState.selectedPersonHandshake;
   const handshakeRotation = playerType === PlayerType.PLAYER ? selectedHandshake.rotation : selectedHandshake.personRotation;
-  const handshakeAnimationValues = playerType === PlayerType.PLAYER ? globalState.playerHandshakeAnimation.values : globalState.personHandshakeAnimation.values;
+  const handshakeAnimationValues =
+    playerType === PlayerType.PLAYER ? globalState.playerHandshakeAnimation.values : globalState.personHandshakeAnimation.values;
   const { positionY, positionX, opacity } = handshakeAnimationValues;
 
   return (
     <Animated.View
-      // className={style}
       style={{
         transform: [{ translateY: positionY }, { translateX: positionX }],
         opacity,

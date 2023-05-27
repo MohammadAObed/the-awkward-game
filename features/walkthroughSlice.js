@@ -1,12 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { WalkthroughUpdate } from "../controllers/WalkthroughController";
+import { WalkthroughReset, WalkthroughUpdate } from "../controllers/WalkthroughController";
 import { Walkthrough } from "../models/Walkthrough";
 import { ScreenNames } from "../constants/ScreenNames";
 //containing all items
-const initialState = {
+export const initialState = {
   walkthroughes: [
     new Walkthrough(ScreenNames.QuickGameRoundScreen, 1).serialize(),
     new Walkthrough(ScreenNames.QuickGameRoundScreen, 2).serialize(),
+    new Walkthrough(ScreenNames.PersonsScreen, 1).serialize(),
+    new Walkthrough(ScreenNames.PersonsScreen, 2).serialize(),
   ],
 };
 
@@ -15,6 +17,7 @@ export const walkthroughSlice = createSlice({
   initialState,
   reducers: {
     walkthroughUpdate: (state, action) => WalkthroughUpdate(state, action),
+    walkthroughReset: (state, action) => WalkthroughReset(state, action, initialState),
   },
 });
 
@@ -26,6 +29,6 @@ export const selectWalkthroughSliceByScreenNameAndListOrder = (state, screenName
   return state.walkthrough.walkthroughes.find((item) => item.screenName === screenName && item.listOrder === listOrder);
 };
 
-export const { walkthroughUpdate } = walkthroughSlice.actions;
+export const { walkthroughUpdate, walkthroughReset } = walkthroughSlice.actions;
 
 export default walkthroughSlice.reducer;

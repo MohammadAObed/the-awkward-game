@@ -1,19 +1,19 @@
-import { useNavigation } from "@react-navigation/native";
 import React, { useEffect } from "react";
 
-const useGoBack = () => {
-  const navigation = useNavigation();
+const initialOptions = {
+  reset: false,
+};
 
-  useEffect(
-    () =>
-      navigation.addListener("beforeRemove", (e) => {
-        // Prevent default behavior of leaving the screen
-        e.preventDefault();
-        // navigation.dispatch(e.data.action); // remove the prevention
-      }),
-    [navigation]
-  );
-  return { navigation };
+const useGoBack = (navigation, options = initialOptions) => {
+  useEffect(() => {
+    return navigation.addListener("beforeRemove", (e) => {
+      // Prevent default behavior of leaving the screen
+      console.log("Not Working");
+      e.preventDefault();
+      // navigation.dispatch(e.data.action); // remove the prevention
+    });
+  }, [navigation]);
+  return {};
 };
 
 export default useGoBack;

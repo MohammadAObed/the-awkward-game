@@ -1,3 +1,4 @@
+//#region constants
 export const TimerStartValue = 7;
 export const TimerIntervalValue = 1000;
 export const HandshakeDuration = 750;
@@ -16,3 +17,11 @@ export const personHandshakeAnimationValues = {
   x2: HandshakeSpaceX / 2,
 };
 export const FinishMsgTimeout = 2000;
+//#endregion
+
+//#region Enums
+export const GameType = {
+  Normal: 1,
+  Quick: 2,
+};
+//#endregion

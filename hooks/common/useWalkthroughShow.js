@@ -2,15 +2,14 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectWalkthroughSliceByScreenNameAndListOrder, walkthroughUpdate } from "../../features/walkthroughSlice";
 import { useWalkthrough } from "../../libraries/walkthrough";
-import { globalState } from "../../global/QuickGameRoundScreen";
 import { useNavigation } from "@react-navigation/native";
 import { ScreenNames } from "../../constants/ScreenNames";
 
-export default useWalkthroughShow = (screenName = "", listOrder = 1) => {
+export default useWalkthroughShow = (globalState, { screenName = "", listOrder = 1 }) => {
   const { start, stop, walkthroughEvents, currentStep } = useWalkthrough();
   const walkthroughObj = useSelector((state) => selectWalkthroughSliceByScreenNameAndListOrder(state, screenName, listOrder));
-  const [showWalkthrough, setShowWalkthrough] = useState(walkthroughObj.show); //change true to the state in the storage
-  const navigation = useNavigation();
+  console.log(walkthroughObj);
+  const [showWalkthrough, setShowWalkthrough] = useState(walkthroughObj?.show || false); //change true to the state in the storage
 
   useEffect(() => {
     const walkthroughOnStop = () => {
