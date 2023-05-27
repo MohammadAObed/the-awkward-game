@@ -8,7 +8,7 @@ import { ScreenNames } from "../constants/ScreenNames";
 export const initialState = {
   hasShakeStarted: false,
   hasShakeEnded: false,
-  showWalkthrough: { screenName: ScreenNames.QuickGameRoundScreen, listOrder: 1 },
+  showWalkthrough: { screenName: ScreenNames.GameScreen, listOrder: 1 },
   initialPerson: persons[getRandomNumber(persons.length)] || new Person(),
   initialHandshake: handshakes[0] || new Handshake(),
   initialPersonHandshake: handshakes[getRandomNumber(handshakes.length)] || new Handshake(),

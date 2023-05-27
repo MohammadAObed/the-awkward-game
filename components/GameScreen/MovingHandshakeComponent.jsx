@@ -2,8 +2,8 @@ import { View, Text, Animated } from "react-native";
 import React from "react";
 import { PlayerType } from "../../constants/PlayerType";
 import { Handshake } from "../../models/Handshake";
-import { HandshakeSpaceX } from "../../constants/QuickGameRoundScreen";
-import { globalState } from "../../global/QuickGameRoundScreen";
+import { HandshakeSpaceX } from "../../constants/GameScreen";
+import { globalState } from "../../global/GameScreen";
 
 const MovingHandshakeComponent = ({ playerType = PlayerType.PLAYER }) => {
   const selectedHandshake = playerType === PlayerType.PLAYER ? globalState.selectedHandshake : globalState.selectedPersonHandshake;

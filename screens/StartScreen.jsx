@@ -58,9 +58,9 @@ const ContentComponent = () => {
         onPress={() => {
           navigation.reset({
             index: 0,
-            routes: [{ name: ScreenNames.QuickGameRoundScreen }], //helps performance, bcz it kills this screen so the video won't keep playing in the background when on the QuickGameRoundScreen,
+            routes: [{ name: ScreenNames.GameScreen }], //helps performance, bcz it kills this screen so the video won't keep playing in the background when on the GameScreen,
           });
-          //navigation.navigate(ScreenNames.QuickGameRoundScreen);
+          //navigation.navigate(ScreenNames.GameScreen);
         }}
       >
         <Text className="text-black-700 text-lg text-center font-bold">Start shaking</Text>

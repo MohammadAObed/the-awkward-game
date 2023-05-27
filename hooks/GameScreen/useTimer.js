@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import handshakes from "../../data/Handshake";
 import { Handshake } from "../../models/Handshake";
 import { getRandomNumber } from "../../utils/common/getRandomNumber";
-import { globalState } from "../../global/QuickGameRoundScreen";
-import { HandshakeDuration, TimerIntervalValue, TimerStartValue } from "../../constants/QuickGameRoundScreen";
+import { globalState } from "../../global/GameScreen";
+import { HandshakeDuration, TimerIntervalValue, TimerStartValue } from "../../constants/GameScreen";
 
 export default useTimer = () => {
   const [timer, setTimer] = useState(TimerStartValue);

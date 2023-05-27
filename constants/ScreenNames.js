@@ -1,7 +1,7 @@
 //For Walkthroughs
 export const ScreenNames = {
   StartScreen: "StartScreen",
-  QuickGameRoundScreen: "QuickGameRoundScreen",
+  GameScreen: "GameScreen",
   HomeScreen: "HomeScreen",
   PersonsScreen: "PersonsScreen",
   ProgressScreen: "ProgressScreen",

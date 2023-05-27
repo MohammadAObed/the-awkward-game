@@ -4,26 +4,26 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { WalkthroughProvider, WalkthroughTooltip } from "../libraries/walkthrough";
 import handshakes from "../data/Handshake";
 import { useDispatch } from "react-redux";
-import useTimer from "../hooks/QuickGameRoundScreen/useTimer";
+import useTimer from "../hooks/GameScreen/useTimer";
 import useWalkthroughShow from "../hooks/common/useWalkthroughShow";
-import useAnimatedHandshake from "../hooks/QuickGameRoundScreen/useAnimatedHandshake";
+import useAnimatedHandshake from "../hooks/GameScreen/useAnimatedHandshake";
 import { getRandomNumber } from "../utils/common/getRandomNumber";
-import MovingHandshakeComponent from "../components/QuickGameRoundScreen/MovingHandshakeComponent";
+import MovingHandshakeComponent from "../components/GameScreen/MovingHandshakeComponent";
 import { PlayerType } from "../constants/PlayerType";
-import HandshakesWalkthroughComponent from "../components/QuickGameRoundScreen/HandshakesWalkthroughComponent";
-import PersonImageWalkthroughComponent from "../components/QuickGameRoundScreen/PersonImageWalkthroughComponent";
-import { initialState } from "../initials/QuickGameRoundScreen";
+import HandshakesWalkthroughComponent from "../components/GameScreen/HandshakesWalkthroughComponent";
+import PersonImageWalkthroughComponent from "../components/GameScreen/PersonImageWalkthroughComponent";
+import { initialState } from "../initials/GameScreen";
 const { initialPersonHandshake, initialPerson, initialHandshake } = initialState;
-import { globalState, nGlobalState } from "../global/QuickGameRoundScreen";
+import { globalState, nGlobalState } from "../global/GameScreen";
 import { ScreenNames } from "../constants/ScreenNames";
-import { FinishMsgTimeout, personHandshakeAnimationValues, playerHandshakeAnimationValues } from "../constants/QuickGameRoundScreen";
+import { FinishMsgTimeout, personHandshakeAnimationValues, playerHandshakeAnimationValues } from "../constants/GameScreen";
 import useGlobalState from "../hooks/common/useGlobalState";
 import useModal from "../hooks/common/useModal";
 import EmptyModal from "../components/common/EmptyModal";
 import { useNavigation } from "@react-navigation/native";
 import { walkthroughReset } from "../features/walkthroughSlice";
 
-const QuickGameRoundScreen = () => {
+const GameScreen = () => {
   return (
     <WalkthroughProvider
       tooltipComponent={() => (
@@ -37,12 +37,12 @@ const QuickGameRoundScreen = () => {
         />
       )}
     >
-      <QuickGameRoundComponent />
+      <GameComponent />
     </WalkthroughProvider>
   );
 };
 
-const QuickGameRoundComponent = () => {
+const GameComponent = () => {
   const dispatch = useDispatch();
   globalState.dispatch = dispatch;
   const navigation = useNavigation();
@@ -174,4 +174,4 @@ const LeaveMsgComponent = () => {
     </View>
   );
 };
-export default QuickGameRoundScreen;
+export default GameScreen;

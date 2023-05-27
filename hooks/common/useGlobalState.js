@@ -31,6 +31,6 @@ export default useGlobalState;
 
 //useGlobalState(globalState, useState, [initialState.hasShakeStarted], nGlobalState.hasShakeStarted, nGlobalState.setHasShakeStarted);
 //above is equivelant to below:
-// const { showWalkthrough, startWalkthrough } = useWalkthroughShow(ScreenNames.QuickGameRoundScreen, 1);
+// const { showWalkthrough, startWalkthrough } = useWalkthroughShow(ScreenNames.GameScreen, 1);
 // globalState.showWalkthrough = showWalkthrough;
 // globalState.startWalkthrough = startWalkthrough;

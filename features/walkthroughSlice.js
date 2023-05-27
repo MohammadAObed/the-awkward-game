@@ -5,8 +5,8 @@ import { ScreenNames } from "../constants/ScreenNames";
 //containing all items
 export const initialState = {
   walkthroughes: [
-    new Walkthrough(ScreenNames.QuickGameRoundScreen, 1).serialize(),
-    new Walkthrough(ScreenNames.QuickGameRoundScreen, 2).serialize(),
+    new Walkthrough(ScreenNames.GameScreen, 1).serialize(),
+    new Walkthrough(ScreenNames.GameScreen, 2).serialize(),
     new Walkthrough(ScreenNames.PersonsScreen, 1).serialize(),
     new Walkthrough(ScreenNames.PersonsScreen, 2).serialize(),
   ],

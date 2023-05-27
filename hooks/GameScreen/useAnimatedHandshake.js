@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { Easing } from "react-native";
 import { Animated } from "react-native";
-import { globalState } from "../../global/QuickGameRoundScreen";
+import { globalState } from "../../global/GameScreen";
 import { PlayerType } from "../../constants/PlayerType";
 
 const animDurationAtLastMomemt = 250;

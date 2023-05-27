@@ -1,8 +1,8 @@
 import { View, Text, Image } from "react-native";
 import React from "react";
 import { WalkthroughStep, walkthroughable } from "../../libraries/walkthrough";
-import { initialState } from "../../initials/QuickGameRoundScreen";
-import { globalState } from "../../global/QuickGameRoundScreen";
+import { initialState } from "../../initials/GameScreen";
+import { globalState } from "../../global/GameScreen";
 const { initialPerson } = initialState;
 
 const WalkthroughView = walkthroughable(View);

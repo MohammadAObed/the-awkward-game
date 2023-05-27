@@ -1,7 +1,7 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import NavbarComponent from "./components/common/NavbarComponent";
-import QuickGameRoundScreen from "./screens/QuickGameRoundScreen";
+import GameScreen from "./screens/GameScreen";
 import StartScreen from "./screens/StartScreen";
 import { store, persistor } from "./store";
 import { Provider } from "react-redux";
@@ -26,7 +26,7 @@ export default function App() {
             }}
           >
             <Stack.Screen name={ScreenNames.StartScreen} component={StartScreen} />
-            <Stack.Screen name={ScreenNames.QuickGameRoundScreen} component={QuickGameRoundScreen} />
+            <Stack.Screen name={ScreenNames.GameScreen} component={GameScreen} />
             <Stack.Screen name={ScreenNames.HomeScreen} component={HomeScreenWithTabs} />
           </Stack.Navigator>
         </PersistGate>

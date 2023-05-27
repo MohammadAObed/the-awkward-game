@@ -4,7 +4,7 @@ import { Handshake } from "../../models/Handshake";
 import { WalkthroughStep, walkthroughable } from "../../libraries/walkthrough";
 import handshakes from "../../data/Handshake";
 import { ChevronRightIcon } from "react-native-heroicons/solid";
-import { globalState } from "../../global/QuickGameRoundScreen";
+import { globalState } from "../../global/GameScreen";
 
 const WalkthroughView = walkthroughable(View);
 
