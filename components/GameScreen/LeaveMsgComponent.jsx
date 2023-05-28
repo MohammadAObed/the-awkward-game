@@ -1,10 +1,15 @@
 import { View, Text, TouchableOpacity } from "react-native";
 import React from "react";
 import { globalState } from "../../global/GameScreen";
+import { GameType } from "../../constants/GameScreen";
 
 const LeaveMsgComponent = ({ leaveScreen = function () {} }) => {
   const msg = `${globalState.person.name} ${
-    globalState.personHadEnough && globalState.timesPlayed === 1 ? `enjoyed that!, you can contact with him later` : `got bored! bye bye`
+    globalState.isFirstTime && globalState.personHadEnough
+      ? `enjoyed that!, you can contact with him later...`
+      : globalState.gameType == GameType.Quick && globalState.personHadEnough
+      ? `was just passing by and left...`
+      : `got bored! bye bye...`
   }`;
   return (
     <View className="mt-52 flex items-center">

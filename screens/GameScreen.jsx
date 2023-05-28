@@ -93,7 +93,7 @@ const GameComponent = () => {
   function handleShakeEnded() {
     if (globalState.hasShakeEnded == false) return;
     globalState.setTimesPlayed((prev) => prev + 1);
-    if (globalState.isFirstTime || globalState.timesPlayed >= MaxTimesPlayed) {
+    if (globalState.isFirstTime || globalState.timesPlayed >= MaxTimesPlayed || gameType === GameType.Quick) {
       globalState.setPersonHadEnough((prev) => true);
       const finishMsgTimeout = setTimeout(
         () => {
