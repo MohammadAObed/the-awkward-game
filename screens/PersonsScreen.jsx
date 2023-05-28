@@ -10,6 +10,7 @@ import { initialState } from "../initials/PersonsScreen";
 import useWalkthroughShow from "../hooks/common/useWalkthroughShow";
 import { useDispatch } from "react-redux";
 import PersonWalkthroughComponent from "../components/PersonsScreen/PersonWalkthroughComponent";
+import { ScreenNames } from "../constants/ScreenNames";
 
 const PersonsScreen = () => {
   return (

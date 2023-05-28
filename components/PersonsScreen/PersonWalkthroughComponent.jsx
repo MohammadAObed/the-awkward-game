@@ -5,6 +5,9 @@ import { WalkthroughStep, walkthroughable } from "../../libraries/walkthrough";
 import PersonImageComponent from "./PersonImageComponent";
 import PersonBarWalkthroughComponent from "./PersonBarWalkthroughComponent";
 import { PhoneIcon } from "react-native-heroicons/solid";
+import { GameType } from "../../constants/GameScreen";
+import { globalState } from "../../global/GameScreen";
+import { ScreenNames } from "../../constants/ScreenNames";
 
 const WalkthroughView = walkthroughable(View);
 
@@ -24,9 +27,12 @@ const PersonWalkthroughComponent = ({ person = new Person(), isWalkthrough = fal
   );
 };
 
-const PersonComponent = ({ person, isWalkthrough }) => {
+const PersonComponent = ({ person = new Person(), isWalkthrough }) => {
+  const navigateToGame = () => {
+    globalState.navigation.navigate(ScreenNames.GameScreen, { gameType: GameType.Normal, personId: person.id });
+  };
   return (
-    <TouchableOpacity className="p-2 rounded-xl bg-black-500 mt-5 flex-row justify-between items-center">
+    <TouchableOpacity className="p-2 rounded-xl bg-black-500 mt-5 flex-row justify-between items-center" onPress={navigateToGame}>
       <View className="flex-row items-center space-x-2">
         <PersonImageComponent person={person} />
         <View className="">
@@ -35,7 +41,7 @@ const PersonComponent = ({ person, isWalkthrough }) => {
         </View>
       </View>
 
-      <TouchableOpacity className="p-2">
+      <TouchableOpacity className="p-2" onPress={navigateToGame}>
         <PhoneIcon size={23} color={"gray"} />
       </TouchableOpacity>
     </TouchableOpacity>

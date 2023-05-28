@@ -6,6 +6,7 @@ import useModal from "../hooks/common/useModal";
 import AppModal from "../components/common/TabsModal";
 import { useNavigation, useIsFocused } from "@react-navigation/native";
 import { ScreenNames } from "../constants/ScreenNames";
+import { GameType } from "../constants/GameScreen";
 
 const StartScreen = () => {
   const [videoLoaded, setVideoLoaded] = useState(false);
@@ -58,7 +59,7 @@ const ContentComponent = () => {
         onPress={() => {
           navigation.reset({
             index: 0,
-            routes: [{ name: ScreenNames.GameScreen }], //helps performance, bcz it kills this screen so the video won't keep playing in the background when on the GameScreen,
+            routes: [{ name: ScreenNames.GameScreen, params: { gameType: GameType.Quick } }], //helps performance, bcz it kills this screen so the video won't keep playing in the background when on the GameScreen,
           });
           //navigation.navigate(ScreenNames.GameScreen);
         }}

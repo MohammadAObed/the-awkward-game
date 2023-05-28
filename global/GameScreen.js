@@ -1,4 +1,6 @@
+import { GameType } from "../constants/GameScreen";
 import { Handshake } from "../models/Handshake";
+import { Person } from "../models/Person";
 export const globalState = {
   navigation: {},
   timer: 0,
@@ -11,6 +13,16 @@ export const globalState = {
   setSelectedHandshake: function () {},
   selectedPersonHandshake: new Handshake(),
   setSelectedPersonHandshake: function () {},
+  person: new Person(),
+  setPerson: function () {},
+  personHadEnough: false,
+  setPersonHadEnough: function () {},
+  timesPlayed: 0,
+  setTimesPlayed: function () {},
+  isFirstTime: true,
+  setIsFirstTime: function () {},
+  hasPlayStarted: false,
+  setHasPlayStarted: function () {},
   playerHandshakeAnimation: { values: {} },
   personHandshakeAnimation: { values: {} },
   dispatch: function () {},
@@ -18,6 +30,7 @@ export const globalState = {
   startWalkthrough: function () {},
   modalVisible: false,
   showModal: function () {},
+  gameType: GameType.Normal,
 };
 export const nGlobalState = {
   navigation: "navigation",
@@ -31,6 +44,16 @@ export const nGlobalState = {
   setSelectedHandshake: "setSelectedHandshake",
   selectedPersonHandshake: "selectedPersonHandshake",
   setSelectedPersonHandshake: "setSelectedPersonHandshake",
+  person: "person",
+  setPerson: "setPerson",
+  personHadEnough: "personHadEnough",
+  setPersonHadEnough: "setPersonHadEnough",
+  timesPlayed: "timesPlayed",
+  setTimesPlayed: "setTimesPlayed",
+  isFirstTime: "isFirstTime",
+  setIsFirstTime: "setIsFirstTime",
+  hasPlayStarted: "hasPlayStarted",
+  setHasPlayStarted: "setHasPlayStarted",
   playerHandshakeAnimation: "playerHandshakeAnimation",
   personHandshakeAnimation: "personHandshakeAnimation",
   dispatch: "dispatch",
@@ -38,4 +61,5 @@ export const nGlobalState = {
   startWalkthrough: "startWalkthrough",
   modalVisible: "modalVisible",
   showModal: "showModal",
+  // gameType: "gameType",
 };

@@ -3,6 +3,7 @@ import { Easing } from "react-native";
 import { Animated } from "react-native";
 import { globalState } from "../../global/GameScreen";
 import { PlayerType } from "../../constants/PlayerType";
+import { TimerStartValue } from "../../constants/GameScreen";
 
 const animDurationAtLastMomemt = 250;
 
@@ -11,9 +12,16 @@ export default useAnimatedHandshake = (playerType, { duration = 7000, y1 = 0, y2
   const positionX = useRef(new Animated.Value(0)).current;
   const opacity = useRef(new Animated.Value(0.6)).current;
   useEffect(() => {
-    if (globalState.showWalkthrough === true) return;
+    //console.log("sssss", globalState.hasPlayStarted);
+    if (globalState.hasPlayStarted !== true || globalState.showWalkthrough !== false) {
+      return;
+    }
+    positionY.setValue(y1);
+    positionX.setValue(0);
+    opacity.setValue(0.6);
+    //console.log("mhmmmmm", globalState.hasPlayStarted);
     startAnimation(playerType, duration, opacity, { positionY, y1, y2 }, { positionX, x2 });
-  }, [globalState.showWalkthrough]);
+  }, [globalState.showWalkthrough, globalState.hasPlayStarted]);
   return { values: { positionY, opacity, positionX } };
 };
 
@@ -51,6 +59,7 @@ function startAnimation(playerType, duration, opacity, { positionY, y1, y2 }, { 
       // x2 = x2 * globalState.selectedHandshake.translateX;
       y2 = y2 - globalState.selectedHandshake.translateY;
     }
+    //console.log("isAnimmmmmm", y2, x2, 1);
     // if (anim.finished === false) {
     Animated.parallel([
       Animated.timing(positionY, {
