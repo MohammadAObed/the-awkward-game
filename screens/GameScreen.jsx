@@ -58,6 +58,7 @@ const GameScreen = () => {
 };
 
 const GameComponent = () => {
+  //#region Global variables initialization
   const { gameType, personId } = useRoute().params;
   globalState.gameType = gameType || GameType.Normal;
   initialState.initialPerson = personId ? persons.find((p) => p.id === personId) : initialState.initialPerson;
@@ -65,7 +66,8 @@ const GameComponent = () => {
   globalState.dispatch = dispatch;
   const navigation = useNavigation();
   globalState.navigation = navigation;
-  //dispatch(walkthroughReset({}));
+  //#endregion
+  //#region use Global State
   useGlobalState(globalState, useState, [initialState.initialPerson], nGlobalState.person, nGlobalState.setPerson);
   useGlobalState(globalState, useWalkthroughShow, [globalState, { ...initialState.showWalkthrough }], null, null, true);
   useGlobalState(globalState, useState, [initialState.hasShakeStarted], nGlobalState.hasShakeStarted, nGlobalState.setHasShakeStarted);
@@ -74,14 +76,15 @@ const GameComponent = () => {
   useGlobalState(globalState, useState, [initialState.timesPlayed], nGlobalState.timesPlayed, nGlobalState.setTimesPlayed);
   useGlobalState(globalState, useState, [initialState.hasPlayStarted], nGlobalState.hasPlayStarted, nGlobalState.setHasPlayStarted);
   useGlobalState(globalState, useModal, [], null, null, true);
-
+  //dispatch(walkthroughReset({}));
+  //#endregion
+  //#region Functions
   function leaveScreen() {
     globalState.navigation.reset({
       index: 0,
       routes: [{ name: ScreenNames.HomeScreen }],
     });
   }
-
   function shakeAgain() {
     globalState.setSelectedPersonHandshake(handshakes[getRandomNumber(handshakes.length)]);
     globalState.setHasPlayStarted(true);
@@ -89,7 +92,6 @@ const GameComponent = () => {
     globalState.setHasShakeEnded(false);
     globalState.setHasShakeStarted(false);
   }
-
   function handleShakeEnded() {
     if (globalState.hasShakeEnded == false) return;
     globalState.setTimesPlayed((prev) => prev + 1);
@@ -105,26 +107,32 @@ const GameComponent = () => {
     }
     return null;
   }
-
+  //#endregion
+  //#region useEffect
+  useEffect(() => {
+    if (timer > 0) return;
+    globalState.setHasPlayStarted((prev) => false);
+    globalState.setHasShakeStarted((prev) => true);
+    const delayTimeout = setTimeout(() => {
+      globalState.setHasShakeEnded((prev) => true);
+    }, HandshakeDuration);
+    return () => {
+      clearTimeout(delayTimeout);
+    };
+  }, [timer]);
   useEffect(() => {
     const finishMsgTimeout = handleShakeEnded();
     return () => {
       clearTimeout(finishMsgTimeout);
     };
   }, [globalState.hasShakeEnded]);
-
   useEffect(() => {
     if (globalState.showWalkthrough !== false) return;
     globalState.setHasPlayStarted(true);
   }, [globalState.showWalkthrough]);
+  //#endregion
   return (
     <SafeAreaView className="relative flex-1 px-5 bg-black-700 flex items-center justify-between">
-      {/* {globalState.gameType === GameType.Normal && (
-        <TouchableOpacity className="absolute left-5 top-9" onPress={leaveScreen}>
-          <ArrowLeftCircleIcon size={40} color="#111111aa" />
-        </TouchableOpacity>
-      )} */}
-
       <View className="mt-1">
         <TimerComponent />
       </View>

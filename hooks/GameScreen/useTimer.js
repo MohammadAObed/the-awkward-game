@@ -9,7 +9,6 @@ export default useTimer = () => {
   const [timer, setTimer] = useState(TimerStartValue);
   const [timerInterval, setTimerInterval] = useState(null); //So When Timer Stops, I Clear Interval
   useEffect(() => {
-    console.log("showWalkthroughwwww", globalState.showWalkthrough);
     if (globalState.hasPlayStarted !== true || globalState.showWalkthrough !== false) return;
     const interval = setInterval(() => {
       setTimer((count) => {
@@ -28,14 +27,6 @@ export default useTimer = () => {
   useEffect(() => {
     if (timer > 0) return;
     clearInterval(timerInterval);
-    globalState.setHasPlayStarted((prev) => false);
-    globalState.setHasShakeStarted((prev) => true);
-    const delayTimeout = setTimeout(() => {
-      globalState.setHasShakeEnded((prev) => true);
-    }, HandshakeDuration);
-    return () => {
-      clearTimeout(delayTimeout);
-    };
   }, [timer]);
   return [timer, setTimer];
 };

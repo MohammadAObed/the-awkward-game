@@ -6,6 +6,10 @@
 
 2. When changing a screen name, check walkthroughSlice initial state
 
+## Conventions:
+
+1. In custom hooks, don't mutate any state that is not created in the hook, only use state variables not modify them, mutation must be in the main component using the custom hook
+
 ## Folders:
 
 ### Whats libraries Folder?:
