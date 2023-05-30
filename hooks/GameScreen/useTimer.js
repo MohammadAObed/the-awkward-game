@@ -27,6 +27,14 @@ export default useTimer = () => {
   useEffect(() => {
     if (timer > 0) return;
     clearInterval(timerInterval);
+    globalState.setHasPlayStarted((prev) => false);
+    globalState.setHasShakeStarted((prev) => true);
+    const delayTimeout = setTimeout(() => {
+      globalState.setHasShakeEnded((prev) => true);
+    }, HandshakeDuration);
+    return () => {
+      clearTimeout(delayTimeout);
+    };
   }, [timer]);
   return [timer, setTimer];
 };

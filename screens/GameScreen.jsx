@@ -110,17 +110,6 @@ const GameComponent = () => {
   //#endregion
   //#region useEffect
   useEffect(() => {
-    if (timer > 0) return;
-    globalState.setHasPlayStarted((prev) => false);
-    globalState.setHasShakeStarted((prev) => true);
-    const delayTimeout = setTimeout(() => {
-      globalState.setHasShakeEnded((prev) => true);
-    }, HandshakeDuration);
-    return () => {
-      clearTimeout(delayTimeout);
-    };
-  }, [timer]);
-  useEffect(() => {
     const finishMsgTimeout = handleShakeEnded();
     return () => {
       clearTimeout(finishMsgTimeout);
@@ -141,16 +130,15 @@ const GameComponent = () => {
       </View>
       <View className="flex-row items-center">
         {!globalState.isFirstTime && globalState.hasShakeEnded && !globalState.personHadEnough && (
-          <ShakeEndedBtnComponent handlePress={shakeAgain} btnText="Shake" />
+          <ShakeEndedBtnComponent handlePress={leaveScreen} btnText="Leave" />
         )}
-
         {!globalState.showWalkthrough && (
           <View className="z-0 boder -mx-7">
             <MovingHandshakesComponent />
           </View>
         )}
         {!globalState.isFirstTime && globalState.hasShakeEnded && !globalState.personHadEnough && (
-          <ShakeEndedBtnComponent handlePress={leaveScreen} btnText="Leave" />
+          <ShakeEndedBtnComponent handlePress={shakeAgain} btnText="Shake" />
         )}
       </View>
 
