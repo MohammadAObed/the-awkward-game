@@ -7,7 +7,13 @@ import MovingHandshakeComponent from "./MovingHandshakeComponent";
 import { initialState } from "../../initials/GameScreen";
 
 const MovingHandshakesComponent = () => {
-  useGlobalState(globalState, useState, [initialState.initialHandshake], nGlobalState.selectedHandshake, nGlobalState.setSelectedHandshake);
+  useGlobalState(
+    globalState,
+    useState,
+    [initialState.initialHandshake],
+    nGlobalState.selectedPlayerHandshake,
+    nGlobalState.setSelectedPlayerHandshake
+  );
   useGlobalState(
     globalState,
     useState,

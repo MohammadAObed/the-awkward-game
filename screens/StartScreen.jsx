@@ -59,7 +59,7 @@ const ContentComponent = () => {
         onPress={() => {
           navigation.reset({
             index: 0,
-            routes: [{ name: ScreenNames.GameScreen, params: { gameType: GameType.Quick } }], //helps performance, bcz it kills this screen so the video won't keep playing in the background when on the GameScreen,
+            routes: [{ name: ScreenNames.GameScreen, params: { gameType: GameType.QUICK } }], //helps performance, bcz it kills this screen so the video won't keep playing in the background when on the GameScreen,
           });
           //navigation.navigate(ScreenNames.GameScreen);
         }}

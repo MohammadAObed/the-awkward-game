@@ -10,7 +10,7 @@ import { ScreenNames } from "./constants/ScreenNames";
 import PersonsScreen from "./screens/PersonsScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { HomeIcon, HomeModernIcon, StarIcon } from "react-native-heroicons/solid";
-import ProgressScreen from "./screens/ProgressScreen";
+import AchievementsScreen from "./screens/AchievementsScreen";
 import { View } from "react-native";
 const Stack = createNativeStackNavigator();
 
@@ -60,8 +60,8 @@ function HomeScreenWithTabs() {
         }}
       />
       <Tab.Screen
-        name={ScreenNames.ProgressScreen}
-        component={ProgressScreen}
+        name={ScreenNames.AchievementsScreen}
+        component={AchievementsScreen}
         options={{
           title: "",
           tabBarIcon: ({ size, color }) => <StarIcon size={size} color={color} />,

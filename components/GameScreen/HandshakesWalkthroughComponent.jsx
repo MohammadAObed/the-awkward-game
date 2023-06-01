@@ -37,10 +37,10 @@ const HandshakesComponent = () => {
 };
 
 const HandshakeComponent = ({ handshake = new Handshake() }) => {
-  const isSelected = globalState.selectedHandshake.id === handshake.id;
+  const isSelected = globalState.selectedPlayerHandshake.id === handshake.id;
   const style = `text-4xl rounded-md p-3 ${handshake.rotation} ${isSelected && `bg-black-700`} ${globalState.timer <= 0 && `opacity-70`}`;
   return (
-    <TouchableOpacity onPress={() => globalState.timer > 0 && globalState.setSelectedHandshake(handshake)}>
+    <TouchableOpacity onPress={() => globalState.timer > 0 && globalState.setSelectedPlayerHandshake(handshake)}>
       <Text className={style}>{handshake.symbol}</Text>
     </TouchableOpacity>
   );

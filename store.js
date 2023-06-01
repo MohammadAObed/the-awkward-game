@@ -3,6 +3,8 @@ import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 // import storage from "redux-persist/lib/storage"; //dont uncomment this, gives an err just by importing it
 import walkthroughReducer from "./features/walkthroughSlice";
+import meterReducer from "./features/PersonMeterSlice";
+import playerAchievementReducer from "./features/PlayerAchievementSlice";
 
 const persistConfig = {
   key: "root",
@@ -12,7 +14,9 @@ const persistConfig = {
 };
 
 const reducers = combineReducers({
-  walkthrough: walkthroughReducer, //can be more than one slice, duh!
+  walkthrough: walkthroughReducer,
+  meter: meterReducer,
+  playerAchievement: playerAchievementReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducers);

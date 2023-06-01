@@ -7,7 +7,7 @@ const PersonLineComponent = () => {
     <View className="h-fit mb-6 space-y-2 flex items-center bg-black-600 p-5 pt-7">
       <Text className="text-xl text-white text-center">
         {globalState.person.name}:
-        {globalState.selectedHandshake.id !== globalState.selectedPersonHandshake.id
+        {globalState.selectedPlayerHandshake.id !== globalState.selectedPersonHandshake.id
           ? ` Haha, that was awkward! don't worry about it, `
           : ` Nice grip you got there! `}
       </Text>

@@ -15,4 +15,5 @@ export const initialState = {
   initialPerson: persons[getRandomNumber(persons.length)] || new Person(),
   initialHandshake: handshakes[0] || new Handshake(),
   initialPersonHandshake: handshakes[getRandomNumber(handshakes.length)] || new Handshake(),
+  gifVisible: false,
 };

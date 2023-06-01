@@ -29,7 +29,7 @@ const PersonWalkthroughComponent = ({ person = new Person(), isWalkthrough = fal
 
 const PersonComponent = ({ person = new Person(), isWalkthrough }) => {
   const navigateToGame = () => {
-    globalState.navigation.navigate(ScreenNames.GameScreen, { gameType: GameType.Normal, personId: person.id });
+    globalState.navigation.navigate(ScreenNames.GameScreen, { gameType: GameType.NORMAL, personId: person.id });
   };
   return (
     <TouchableOpacity className="p-2 rounded-xl bg-black-500 mt-5 flex-row justify-between items-center" onPress={navigateToGame}>

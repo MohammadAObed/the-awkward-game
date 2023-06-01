@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { WalkthroughProvider, WalkthroughTooltip } from "../libraries/walkthrough";
 import handshakes from "../data/Handshake";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import useTimer from "../hooks/GameScreen/useTimer";
 import useWalkthroughShow from "../hooks/common/useWalkthroughShow";
 import useAnimatedHandshake from "../hooks/GameScreen/useAnimatedHandshake";
@@ -37,6 +37,11 @@ import PersonLineComponent from "../components/GameScreen/PersonLineComponent";
 import LeaveMsgComponent from "../components/GameScreen/LeaveMsgComponent";
 import ShakeEndedBtnComponent from "../components/GameScreen/ShakeEndedBtnComponent";
 import TimerComponent from "../components/GameScreen/TimerComponent";
+import { meterUpdate } from "../features/PersonMeterSlice";
+import { playerAchievementReset, selectPlayerAchievementsByPersonId } from "../features/PlayerAchievementSlice";
+import { generateMoodValue, handlePlayerAchievements } from "../utils/GameScreen";
+import { Result } from "../utils/PlayerAchievementFunctions";
+import GifComponent from "../components/GameScreen/GifComponent";
 
 const GameScreen = () => {
   return (
@@ -60,12 +65,16 @@ const GameScreen = () => {
 const GameComponent = () => {
   //#region Global variables initialization
   const { gameType, personId } = useRoute().params;
-  globalState.gameType = gameType || GameType.Normal;
+  globalState.gameType = gameType || GameType.NORMAL;
   initialState.initialPerson = personId ? persons.find((p) => p.id === personId) : initialState.initialPerson;
+  //#endregion
+  //#region Global State
   const dispatch = useDispatch();
   globalState.dispatch = dispatch;
   const navigation = useNavigation();
   globalState.navigation = navigation;
+  const playerPersonAchievements = useSelector((state) => selectPlayerAchievementsByPersonId(state, globalState.person.id));
+  globalState.playerPersonAchievements = playerPersonAchievements;
   //#endregion
   //#region use Global State
   useGlobalState(globalState, useState, [initialState.initialPerson], nGlobalState.person, nGlobalState.setPerson);
@@ -75,14 +84,21 @@ const GameComponent = () => {
   useGlobalState(globalState, useState, [initialState.personHadEnough], nGlobalState.personHadEnough, nGlobalState.setPersonHadEnough);
   useGlobalState(globalState, useState, [initialState.timesPlayed], nGlobalState.timesPlayed, nGlobalState.setTimesPlayed);
   useGlobalState(globalState, useState, [initialState.hasPlayStarted], nGlobalState.hasPlayStarted, nGlobalState.setHasPlayStarted);
+  useGlobalState(globalState, useState, [initialState.gifVisible], nGlobalState.gifVisible, nGlobalState.setGifVisible);
   useGlobalState(globalState, useModal, [], null, null, true);
   //dispatch(walkthroughReset({}));
+  //dispatch(playerAchievementReset({}));
   //#endregion
   //#region Functions
-  function leaveScreen() {
+  function leaveScreen(screenName = ScreenNames.PersonsScreen) {
     globalState.navigation.reset({
       index: 0,
-      routes: [{ name: ScreenNames.HomeScreen }],
+      routes: [
+        {
+          name: ScreenNames.HomeScreen,
+          state: { routes: [{ name: screenName }] },
+        },
+      ],
     });
   }
   function shakeAgain() {
@@ -92,20 +108,38 @@ const GameComponent = () => {
     globalState.setHasShakeEnded(false);
     globalState.setHasShakeStarted(false);
   }
-  function handleShakeEnded() {
-    if (globalState.hasShakeEnded == false) return;
+  function _updateMoodValue(achievementValue = 0) {
+    let value = achievementValue;
+    value += generateMoodValue({ ...globalState });
+
+    dispatch(meterUpdate({ personId: globalState.person.id, meterValue: value }));
+  }
+  function _handlePlayerAchievements() {
+    let result = Result;
+    result = handlePlayerAchievements({ ...globalState });
+    return result;
+  }
+  function _shakeEndedTimeout(result = Result) {
+    let finishMsgTimeout;
     globalState.setTimesPlayed((prev) => prev + 1);
-    if (globalState.isFirstTime || globalState.timesPlayed >= MaxTimesPlayed || gameType === GameType.Quick) {
+    if (result.showAchievement || globalState.isFirstTime || globalState.timesPlayed >= MaxTimesPlayed || gameType === GameType.QUICK) {
       globalState.setPersonHadEnough((prev) => true);
-      const finishMsgTimeout = setTimeout(
+      finishMsgTimeout = setTimeout(
         () => {
+          if (result.showAchievement) globalState.setGifVisible((prev) => true);
           globalState.showModal();
         },
         globalState.isFirstTime ? FinishMsgTimeout : FinishMsgTimeout / 2
       );
-      return finishMsgTimeout;
     }
-    return null;
+    return finishMsgTimeout;
+  }
+  function handleShakeEnded() {
+    if (globalState.hasShakeEnded == false) return;
+    let result = Result;
+    result = _handlePlayerAchievements();
+    _updateMoodValue(result.showAchievement ? 5 : 0);
+    return _shakeEndedTimeout(result);
   }
   //#endregion
   //#region useEffect
@@ -130,7 +164,7 @@ const GameComponent = () => {
       </View>
       <View className="flex-row items-center">
         {!globalState.isFirstTime && globalState.hasShakeEnded && !globalState.personHadEnough && (
-          <ShakeEndedBtnComponent handlePress={leaveScreen} btnText="Leave" />
+          <ShakeEndedBtnComponent handlePress={leaveScreen} btnText="Leave 👋" />
         )}
         {!globalState.showWalkthrough && (
           <View className="z-0 boder -mx-7">
@@ -138,7 +172,7 @@ const GameComponent = () => {
           </View>
         )}
         {!globalState.isFirstTime && globalState.hasShakeEnded && !globalState.personHadEnough && (
-          <ShakeEndedBtnComponent handlePress={shakeAgain} btnText="Shake" />
+          <ShakeEndedBtnComponent handlePress={shakeAgain} btnText="Shake 🤝" />
         )}
       </View>
 
@@ -152,7 +186,11 @@ const GameComponent = () => {
 
       {globalState.modalVisible && ( //for faster performance
         <EmptyModal hideModal={() => {}} modalVisible={globalState.modalVisible}>
-          <LeaveMsgComponent leaveScreen={leaveScreen} />
+          {globalState.gifVisible === true ? (
+            <GifComponent leaveScreen={() => leaveScreen(ScreenNames.AchievementsScreen)}></GifComponent>
+          ) : (
+            <LeaveMsgComponent leaveScreen={leaveScreen} />
+          )}
         </EmptyModal>
       )}
     </SafeAreaView>

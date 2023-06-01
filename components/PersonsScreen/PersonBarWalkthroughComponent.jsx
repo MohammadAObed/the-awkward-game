@@ -1,9 +1,14 @@
 import { View, Text } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { WalkthroughStep, walkthroughable } from "../../libraries/walkthrough";
 import { Person } from "../../models/Person";
+import { useDispatch, useSelector } from "react-redux";
+import { meterReset, selectMeterByPersonId } from "../../features/PersonMeterSlice";
+import { PersonMeter } from "../../models/PersonMeter";
 
 const WalkthroughView = walkthroughable(View);
+
+const extraDisplayedWidth = 1.2;
 
 const PersonBarWalkthroughComponent = ({ isWalkthrough = false, person = new Person() }) => {
   return (
@@ -15,16 +20,20 @@ const PersonBarWalkthroughComponent = ({ isWalkthrough = false, person = new Per
           </WalkthroughView>
         </WalkthroughStep>
       ) : (
-        <PersonBarComponent />
+        <PersonBarComponent person={person} />
       )}
     </>
   );
 };
 
-const PersonBarComponent = () => {
+const PersonBarComponent = ({ person = new Person() }) => {
+  let meter = new PersonMeter();
+  meter = useSelector((state) => selectMeterByPersonId(state, person.id));
+  // const dispatch = useDispatch();
+  // dispatch(meterReset({}));
   return (
-    <View className="w-32 h-2.5 border border-black-700 overflow-hidden">
-      <View className="bg-yellow-500 w-10 h-full"></View>
+    <View className="h-2.5 border border-black-700 overflow-hidden" style={{ width: 100 * extraDisplayedWidth }}>
+      <View className="bg-yellow-500 h-full" style={{ width: meter.meterValue * extraDisplayedWidth }}></View>
     </View>
   );
 };

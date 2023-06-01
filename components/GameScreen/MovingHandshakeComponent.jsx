@@ -6,12 +6,12 @@ import { HandshakeSpaceX } from "../../constants/GameScreen";
 import { globalState } from "../../global/GameScreen";
 
 const MovingHandshakeComponent = ({ playerType = PlayerType.PLAYER }) => {
-  const selectedHandshake = playerType === PlayerType.PLAYER ? globalState.selectedHandshake : globalState.selectedPersonHandshake;
-  const handshakeRotation = playerType === PlayerType.PLAYER ? selectedHandshake.rotation : selectedHandshake.personRotation;
+  const selectedPlayerHandshake = playerType === PlayerType.PLAYER ? globalState.selectedPlayerHandshake : globalState.selectedPersonHandshake;
+  const handshakeRotation = playerType === PlayerType.PLAYER ? selectedPlayerHandshake.rotation : selectedPlayerHandshake.personRotation;
   const handshakeAnimationValues =
     playerType === PlayerType.PLAYER ? globalState.playerHandshakeAnimation.values : globalState.personHandshakeAnimation.values;
   const { positionY, positionX, opacity } = handshakeAnimationValues;
-
+  const splittedSymbol = selectedPlayerHandshake.symbol.split(" ");
   return (
     <Animated.View
       style={{
@@ -23,10 +23,12 @@ const MovingHandshakeComponent = ({ playerType = PlayerType.PLAYER }) => {
         zIndex: 0,
       }}
     >
-      <View>
-        <Text className="text-4xl" style={{ transform: [{ rotate: `${handshakeRotation}deg` }] }}>
-          {selectedHandshake.symbol}
-        </Text>
+      <View className="flex-row">
+        {splittedSymbol.map((s, index) => (
+          <Text key={index} className="text-4xl" style={{ transform: [{ rotate: `${handshakeRotation}deg` }] }}>
+            {s}
+          </Text>
+        ))}
       </View>
     </Animated.View>
   );

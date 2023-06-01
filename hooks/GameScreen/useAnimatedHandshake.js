@@ -56,8 +56,8 @@ function startAnimation(playerType, duration, opacity, { positionY, y1, y2 }, { 
       x2 = x2 * globalState.selectedPersonHandshake.translateX;
     }
     if (playerType == PlayerType.PLAYER) {
-      // x2 = x2 * globalState.selectedHandshake.translateX;
-      y2 = y2 - globalState.selectedHandshake.translateY;
+      // x2 = x2 * globalState.selectedPlayerHandshake.translateX;
+      y2 = y2 - globalState.selectedPlayerHandshake.translateY;
     }
     //console.log("isAnimmmmmm", y2, x2, 1);
     // if (anim.finished === false) {

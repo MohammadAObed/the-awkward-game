@@ -22,7 +22,7 @@ export const MaxTimesPlayed = 1;
 
 //#region Enums
 export const GameType = {
-  Normal: 1,
-  Quick: 2,
+  NORMAL: 1,
+  QUICK: 2,
 };
 //#endregion

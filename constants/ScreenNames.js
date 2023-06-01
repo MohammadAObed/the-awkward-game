@@ -4,5 +4,5 @@ export const ScreenNames = {
   GameScreen: "GameScreen",
   HomeScreen: "HomeScreen",
   PersonsScreen: "PersonsScreen",
-  ProgressScreen: "ProgressScreen",
+  AchievementsScreen: "AchievementsScreen",
 };

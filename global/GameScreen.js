@@ -1,10 +1,12 @@
 import { GameType } from "../constants/GameScreen";
 import { Handshake } from "../models/Handshake";
 import { Person } from "../models/Person";
+import { PlayerAchievement } from "../models/PlayerAchievement";
 export const globalState = {
   navigation: {},
   dispatch: function () {},
-  gameType: GameType.Normal,
+  playerPersonAchievements: [new PlayerAchievement()],
+  gameType: GameType.NORMAL,
   playerHandshakeAnimation: { values: {} },
   personHandshakeAnimation: { values: {} },
   showWalkthrough: false,
@@ -15,8 +17,8 @@ export const globalState = {
   setHasShakeStarted: function () {},
   hasShakeEnded: false,
   setHasShakeEnded: function () {},
-  selectedHandshake: new Handshake(),
-  setSelectedHandshake: function () {},
+  selectedPlayerHandshake: new Handshake(),
+  setSelectedPlayerHandshake: function () {},
   selectedPersonHandshake: new Handshake(),
   setSelectedPersonHandshake: function () {},
   person: new Person(),
@@ -31,10 +33,13 @@ export const globalState = {
   setHasPlayStarted: function () {},
   modalVisible: false,
   showModal: function () {},
+  gifVisible: false,
+  setGifVisible: function () {},
 };
 export const nGlobalState = {
   navigation: "navigation",
   dispatch: "dispatch",
+  playerPersonAchievements: "playerPersonAchievements",
   playerHandshakeAnimation: "playerHandshakeAnimation",
   personHandshakeAnimation: "personHandshakeAnimation",
   startWalkthrough: "startWalkthrough",
@@ -45,8 +50,8 @@ export const nGlobalState = {
   setHasShakeStarted: "setHasShakeStarted",
   hasShakeEnded: "hasShakeEnded",
   setHasShakeEnded: "setHasShakeEnded",
-  selectedHandshake: "selectedHandshake",
-  setSelectedHandshake: "setSelectedHandshake",
+  selectedPlayerHandshake: "selectedPlayerHandshake",
+  setSelectedPlayerHandshake: "setSelectedPlayerHandshake",
   selectedPersonHandshake: "selectedPersonHandshake",
   setSelectedPersonHandshake: "setSelectedPersonHandshake",
   person: "person",
@@ -61,5 +66,7 @@ export const nGlobalState = {
   setHasPlayStarted: "setHasPlayStarted",
   modalVisible: "modalVisible",
   showModal: "showModal",
+  gifVisible: "gifVisible",
+  setGifVisible: "setGifVisible",
   // gameType: "gameType",
 };
