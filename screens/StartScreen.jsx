@@ -7,8 +7,18 @@ import AppModal from "../components/common/TabsModal";
 import { useNavigation, useIsFocused } from "@react-navigation/native";
 import { ScreenNames } from "../constants/ScreenNames";
 import { GameType } from "../constants/GameScreen";
+import { useDispatch } from "react-redux";
+import { walkthroughReset } from "../features/walkthroughSlice";
+import { meterReset } from "../features/PersonMeterSlice";
+import { playerAchievementReset } from "../features/PlayerAchievementSlice";
 
 const StartScreen = () => {
+  //Temp
+  const dispatch = useDispatch();
+  dispatch(walkthroughReset({}));
+  dispatch(meterReset({}));
+  dispatch(playerAchievementReset({}));
+  //
   const [videoLoaded, setVideoLoaded] = useState(false);
   const { modalVisible, showModal, hideModal } = useModal();
   const screenIsFocused = useIsFocused();

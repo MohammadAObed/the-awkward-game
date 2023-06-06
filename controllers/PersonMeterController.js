@@ -1,9 +1,12 @@
+import persons from "../data/Person";
+
 export function MeterUpdate(state, action) {
   const { meterValue, personId } = action.payload;
+  let person = persons.find((p) => p.id == personId);
   if (meterValue == 0) return;
   let metersUpdated = state.meters.map((m) => {
     if (m.personId !== personId) return m;
-    if (m.meterValue + meterValue <= 0) return m;
+    if (m.meterValue + meterValue <= person.moodBreakpoints.DEFAULT) return m;
     m.meterValue += meterValue;
     return m;
   });

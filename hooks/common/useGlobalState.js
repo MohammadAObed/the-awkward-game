@@ -6,7 +6,7 @@ import React from "react";
 const useGlobalState = (globalState, cb, args, valueName, setValueName, isObjReturned = false) => {
   //mostly for custom hooks that return objects
   if (isObjReturned === true) {
-    var obj = cb(...args);
+    let obj = cb(...args);
     const keys = Object.keys(obj);
     keys.forEach((key, index) => {
       globalState[key] = obj[key];

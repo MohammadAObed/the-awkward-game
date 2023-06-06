@@ -30,8 +30,8 @@ function checkAchievement(param = PlayerAchievementMethods.Param) {
   return result;
 }
 function getHandshake(ids = []) {
-  var randIndex = getRandomNumber(ids.length);
-  var handShakeId = ids[randIndex];
+  let randIndex = getRandomNumber(ids.length);
+  let handShakeId = ids[randIndex];
   return handshakes.find((h) => h.id === handShakeId) || new Handshake();
 }
 function generateMoodValue({ selectedPersonHandshake = new Handshake(), selectedPlayerHandshake = new Handshake(), person = new Person() }) {
@@ -72,6 +72,20 @@ function generateMoodValue({ selectedPersonHandshake = new Handshake(), selected
 function mUpdateMoodValue(achievementValue = 0) {
   let value = achievementValue;
   value += generateMoodValue({ ...globalState });
+  if (globalState.isFirstTime && globalState.hasShakeEnded) {
+    value = globalState.person.moodBreakpoints.NORMAL + 1;
+  } else if (
+    !globalState.isFirstTime &&
+    globalState.hasShakeEnded &&
+    globalState.meter.meterValue == globalState.person.moodBreakpoints.DEFAULT
+  ) {
+    if (globalState.selectedPersonHandshake.id === globalState.selectedPlayerHandshake.id) {
+      value = globalState.person.moodBreakpoints.NORMAL + 1;
+    }
+    if (globalState.selectedPersonHandshake.id !== globalState.selectedPlayerHandshake.id) {
+      value = globalState.person.moodBreakpoints.ANGRY - 1;
+    }
+  }
 
   globalState.dispatch(meterUpdate({ personId: globalState.person.id, meterValue: value }));
 }

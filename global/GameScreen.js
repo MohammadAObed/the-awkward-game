@@ -1,6 +1,7 @@
 import { GameType } from "../constants/GameScreen";
 import { Handshake } from "../models/Handshake";
 import { Person } from "../models/Person";
+import { PersonMeter } from "../models/PersonMeter";
 import { PlayerAchievement } from "../models/PlayerAchievement";
 export const globalState = {
   navigation: {},
@@ -11,6 +12,7 @@ export const globalState = {
   personHandshakeAnimation: { values: {} },
   showWalkthrough: false,
   startWalkthrough: function () {},
+  meter: new PersonMeter(),
   //#region value, setValue
   timer: 0,
   setTimer: function () {},

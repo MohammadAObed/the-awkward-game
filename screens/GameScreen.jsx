@@ -37,7 +37,7 @@ import PersonLineComponent from "../components/GameScreen/PersonLineComponent";
 import LeaveMsgComponent from "../components/GameScreen/LeaveMsgComponent";
 import ShakeEndedBtnComponent from "../components/GameScreen/ShakeEndedBtnComponent";
 import TimerComponent from "../components/GameScreen/TimerComponent";
-import { meterUpdate } from "../features/PersonMeterSlice";
+import { meterReset, selectMeterByPersonId } from "../features/PersonMeterSlice";
 import { playerAchievementReset, selectPlayerAchievementsByPersonId } from "../features/PlayerAchievementSlice";
 import { handlePlayerAchievements, handleShakeEnded, leaveScreen, mShakeAgain } from "../helpers/GameScreen";
 import GifComponent from "../components/GameScreen/GifComponent";
@@ -75,6 +75,8 @@ const GameComponent = () => {
   globalState.navigation = navigation;
   const playerPersonAchievementList = useSelector((state) => selectPlayerAchievementsByPersonId(state, globalState.person.id));
   globalState.playerPersonAchievementList = playerPersonAchievementList;
+  let meter = useSelector((state) => selectMeterByPersonId(state, globalState.person.id));
+  globalState.meter = meter;
   //#endregion
   //#region use Global State
   useGlobalState(globalState, useState, [initialState.initialPerson], nGlobalState.person, nGlobalState.setPerson);
@@ -86,8 +88,6 @@ const GameComponent = () => {
   useGlobalState(globalState, useState, [initialState.hasPlayStarted], nGlobalState.hasPlayStarted, nGlobalState.setHasPlayStarted);
   useGlobalState(globalState, useState, [initialState.gifVisible], nGlobalState.gifVisible, nGlobalState.setGifVisible);
   useGlobalState(globalState, useModal, [], null, null, true);
-  //dispatch(walkthroughReset({}));
-  //dispatch(playerAchievementReset({}));
   //#endregion
   //#region useEffect
   useEffect(() => {

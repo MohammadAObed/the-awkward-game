@@ -5,6 +5,7 @@ import { globalState } from "../../global/GameScreen";
 import { PersonMeter } from "../../models/PersonMeter";
 import { useDispatch, useSelector } from "react-redux";
 import { meterReset, selectMeterByPersonId } from "../../features/PersonMeterSlice";
+import { getMeterAndImage } from "../../helpers/common/getMeter";
 
 const WalkthroughView = walkthroughable(View);
 
@@ -22,14 +23,15 @@ const PersonImageWalkthroughComponent = () => {
 
 const PersonImageComponent = () => {
   // This Won't Work Somehow: useEffect(() => { start();}, []);
+  let { image, meter } = getMeterAndImage(globalState.person, globalState.isFirstTime);
   return (
     <View className="relative w-64 h-64 bg-black-600 rounded-full flex items-center justify-center overflow-hidden">
-      <PersonBarComponent />
+      <PersonBarComponent meter={meter} />
       <View className="w-60 h-60 rounded-full mt-5">
         <Image
           className="w-full h-full"
           style={{ opacity: globalState.modalVisible ? 0.2 : 1 }}
-          source={globalState.hasShakeEnded ? globalState.person.images.Happy : globalState.person.images.Normal}
+          source={image}
           onLoad={() => globalState.showWalkthrough === true && globalState.startWalkthrough()}
         />
       </View>
@@ -39,9 +41,7 @@ const PersonImageComponent = () => {
 
 const extraDisplayedWidth = 2.6;
 
-const PersonBarComponent = () => {
-  let meter = new PersonMeter();
-  meter = useSelector((state) => selectMeterByPersonId(state, globalState.person.id));
+const PersonBarComponent = ({ meter = 0 }) => {
   //const dispatch = useDispatch();
   //dispatch(meterReset({}));
   return (
