@@ -5,12 +5,13 @@ import { PlayerAchievement } from "../models/PlayerAchievement";
 export const globalState = {
   navigation: {},
   dispatch: function () {},
-  playerPersonAchievements: [new PlayerAchievement()],
+  playerPersonAchievementList: [new PlayerAchievement()],
   gameType: GameType.NORMAL,
   playerHandshakeAnimation: { values: {} },
   personHandshakeAnimation: { values: {} },
   showWalkthrough: false,
   startWalkthrough: function () {},
+  //#region value, setValue
   timer: 0,
   setTimer: function () {},
   hasShakeStarted: false,
@@ -28,22 +29,23 @@ export const globalState = {
   timesPlayed: 0,
   setTimesPlayed: function () {},
   isFirstTime: true,
-  setIsFirstTime: function () {},
   hasPlayStarted: false,
   setHasPlayStarted: function () {},
   modalVisible: false,
   showModal: function () {},
   gifVisible: false,
   setGifVisible: function () {},
+  //#endregion
 };
 export const nGlobalState = {
   navigation: "navigation",
   dispatch: "dispatch",
-  playerPersonAchievements: "playerPersonAchievements",
+  playerPersonAchievementList: "playerPersonAchievementList",
   playerHandshakeAnimation: "playerHandshakeAnimation",
   personHandshakeAnimation: "personHandshakeAnimation",
   startWalkthrough: "startWalkthrough",
   showWalkthrough: "showWalkthrough",
+  //#region value, setValue
   timer: "timer",
   setTimer: "setTimer",
   hasShakeStarted: "hasShakeStarted",
@@ -61,12 +63,12 @@ export const nGlobalState = {
   timesPlayed: "timesPlayed",
   setTimesPlayed: "setTimesPlayed",
   isFirstTime: "isFirstTime",
-  setIsFirstTime: "setIsFirstTime",
   hasPlayStarted: "hasPlayStarted",
   setHasPlayStarted: "setHasPlayStarted",
   modalVisible: "modalVisible",
   showModal: "showModal",
   gifVisible: "gifVisible",
   setGifVisible: "setGifVisible",
-  // gameType: "gameType",
+  gameType: "gameType",
+  //#endregion
 };

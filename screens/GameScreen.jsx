@@ -39,9 +39,9 @@ import ShakeEndedBtnComponent from "../components/GameScreen/ShakeEndedBtnCompon
 import TimerComponent from "../components/GameScreen/TimerComponent";
 import { meterUpdate } from "../features/PersonMeterSlice";
 import { playerAchievementReset, selectPlayerAchievementsByPersonId } from "../features/PlayerAchievementSlice";
-import { generateMoodValue, handlePlayerAchievements } from "../utils/GameScreen";
-import { Result } from "../utils/PlayerAchievementFunctions";
+import { handlePlayerAchievements, handleShakeEnded, leaveScreen, mShakeAgain } from "../helpers/GameScreen";
 import GifComponent from "../components/GameScreen/GifComponent";
+import { PlayerAchievementMethods } from "../models/PlayerAchievement";
 
 const GameScreen = () => {
   return (
@@ -73,8 +73,8 @@ const GameComponent = () => {
   globalState.dispatch = dispatch;
   const navigation = useNavigation();
   globalState.navigation = navigation;
-  const playerPersonAchievements = useSelector((state) => selectPlayerAchievementsByPersonId(state, globalState.person.id));
-  globalState.playerPersonAchievements = playerPersonAchievements;
+  const playerPersonAchievementList = useSelector((state) => selectPlayerAchievementsByPersonId(state, globalState.person.id));
+  globalState.playerPersonAchievementList = playerPersonAchievementList;
   //#endregion
   //#region use Global State
   useGlobalState(globalState, useState, [initialState.initialPerson], nGlobalState.person, nGlobalState.setPerson);
@@ -88,59 +88,6 @@ const GameComponent = () => {
   useGlobalState(globalState, useModal, [], null, null, true);
   //dispatch(walkthroughReset({}));
   //dispatch(playerAchievementReset({}));
-  //#endregion
-  //#region Functions
-  function leaveScreen(screenName = ScreenNames.PersonsScreen) {
-    globalState.navigation.reset({
-      index: 0,
-      routes: [
-        {
-          name: ScreenNames.HomeScreen,
-          state: { routes: [{ name: screenName }] },
-        },
-      ],
-    });
-  }
-  function shakeAgain() {
-    globalState.setSelectedPersonHandshake(handshakes[getRandomNumber(handshakes.length)]);
-    globalState.setHasPlayStarted(true);
-    globalState.setTimer(TimerStartValue);
-    globalState.setHasShakeEnded(false);
-    globalState.setHasShakeStarted(false);
-  }
-  function _updateMoodValue(achievementValue = 0) {
-    let value = achievementValue;
-    value += generateMoodValue({ ...globalState });
-
-    dispatch(meterUpdate({ personId: globalState.person.id, meterValue: value }));
-  }
-  function _handlePlayerAchievements() {
-    let result = Result;
-    result = handlePlayerAchievements({ ...globalState });
-    return result;
-  }
-  function _shakeEndedTimeout(result = Result) {
-    let finishMsgTimeout;
-    globalState.setTimesPlayed((prev) => prev + 1);
-    if (result.showAchievement || globalState.isFirstTime || globalState.timesPlayed >= MaxTimesPlayed || gameType === GameType.QUICK) {
-      globalState.setPersonHadEnough((prev) => true);
-      finishMsgTimeout = setTimeout(
-        () => {
-          if (result.showAchievement) globalState.setGifVisible((prev) => true);
-          globalState.showModal();
-        },
-        globalState.isFirstTime ? FinishMsgTimeout : FinishMsgTimeout / 2
-      );
-    }
-    return finishMsgTimeout;
-  }
-  function handleShakeEnded() {
-    if (globalState.hasShakeEnded == false) return;
-    let result = Result;
-    result = _handlePlayerAchievements();
-    _updateMoodValue(result.showAchievement ? 5 : 0);
-    return _shakeEndedTimeout(result);
-  }
   //#endregion
   //#region useEffect
   useEffect(() => {
@@ -172,7 +119,7 @@ const GameComponent = () => {
           </View>
         )}
         {!globalState.isFirstTime && globalState.hasShakeEnded && !globalState.personHadEnough && (
-          <ShakeEndedBtnComponent handlePress={shakeAgain} btnText="Shake 🤝" />
+          <ShakeEndedBtnComponent handlePress={mShakeAgain} btnText="Shake 🤝" />
         )}
       </View>
 

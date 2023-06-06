@@ -1,0 +1,143 @@
+import { FinishMsgTimeout, GameType, MaxTimesPlayed, TimerStartValue } from "../constants/GameScreen";
+import { ScreenNames } from "../constants/ScreenNames";
+import handshakes from "../data/Handshake";
+import { meterUpdate } from "../features/PersonMeterSlice";
+import { globalState } from "../global/GameScreen";
+import { Handshake } from "../models/Handshake";
+import { Person } from "../models/Person";
+import { PlayerAchievement, PlayerAchievementMethods } from "../models/PlayerAchievement";
+import { getRandomNumber } from "../utils/common/getRandomNumber";
+
+//? Look for export keyword to know which functions are used outside
+
+//#region private
+function handlePlayerAchievements(param = PlayerAchievementMethods.Param) {
+  let result = PlayerAchievementMethods.Result;
+  for (const playerAchievement of param.playerPersonAchievementList) {
+    if (playerAchievement.hasUnlocked) continue;
+    param.playerPersonAchievement = playerAchievement;
+    result = checkAchievement(param);
+    console.log("🚀 ~ file: GameScreen.js:84 ~ result:", result);
+    if (result.showAchievement === true) return result;
+  }
+  return result;
+}
+function checkAchievement(param = PlayerAchievementMethods.Param) {
+  let result =
+    typeof PlayerAchievementMethods[param.playerPersonAchievement.methodName]?.execute == "function"
+      ? PlayerAchievementMethods[param.playerPersonAchievement.methodName]?.execute(param)
+      : PlayerAchievementMethods.Result;
+  return result;
+}
+function getHandshake(ids = []) {
+  var randIndex = getRandomNumber(ids.length);
+  var handShakeId = ids[randIndex];
+  return handshakes.find((h) => h.id === handShakeId) || new Handshake();
+}
+function generateMoodValue({ selectedPersonHandshake = new Handshake(), selectedPlayerHandshake = new Handshake(), person = new Person() }) {
+  let value = 0;
+  const { specialChance, highChance, lowChance, medChance } = person.handshakesOccurance;
+  console.log("🚀 ~ file: GameScreen.js:52 ~ selectedPlayerHandshake:", selectedPlayerHandshake);
+  console.log("🚀 ~ file: GameScreen.js:52 ~ selectedPersonHandshake:", selectedPersonHandshake);
+
+  if (selectedPersonHandshake.id === selectedPlayerHandshake.id) {
+    value += 1;
+    if (selectedPersonHandshake.id === person.signatureHandshake.id) {
+      value += 2;
+    } else if (highChance.ids.includes(selectedPersonHandshake.id)) {
+      value += 1;
+    } else if (medChance.ids.includes(selectedPersonHandshake.id)) {
+      value += 2;
+    } else if (lowChance.ids.includes(selectedPersonHandshake.id)) {
+      value += 3;
+    }
+    if (specialChance.ids.includes(selectedPersonHandshake.id)) {
+      //do special stuff
+    }
+  } else {
+    value -= 1;
+    if (selectedPersonHandshake.id === person.signatureHandshake.id) {
+      value -= 2;
+    }
+    if (specialChance.ids.includes(selectedPersonHandshake.id)) {
+      //do special stuff
+    }
+  }
+
+  return value;
+}
+//#endregion
+
+//#region (m) Mutative Functions
+function mUpdateMoodValue(achievementValue = 0) {
+  let value = achievementValue;
+  value += generateMoodValue({ ...globalState });
+
+  globalState.dispatch(meterUpdate({ personId: globalState.person.id, meterValue: value }));
+}
+function mShakeEndedTimeout(result = PlayerAchievementMethods.Result) {
+  let finishMsgTimeout;
+  globalState.setTimesPlayed((prev) => prev + 1);
+  if (
+    result.showAchievement ||
+    globalState.isFirstTime ||
+    globalState.timesPlayed >= MaxTimesPlayed ||
+    globalState.gameType === GameType.QUICK
+  ) {
+    globalState.setPersonHadEnough((prev) => true);
+    finishMsgTimeout = setTimeout(
+      () => {
+        if (result.showAchievement) globalState.setGifVisible((prev) => true);
+        globalState.showModal();
+      },
+      globalState.isFirstTime ? FinishMsgTimeout : FinishMsgTimeout / 2
+    );
+  }
+  return finishMsgTimeout;
+}
+//#endregion
+
+//#region Public methods
+export function generateRandomHandshake({ person = new Person() }) {
+  let randChance = getRandomNumber(person.chanceRange.max);
+  let randIndex = 0;
+  let handShakeId = 1;
+  let handShake = handshakes[0];
+  const { specialChance, highChance, lowChance, medChance } = person.handshakesOccurance;
+  if (specialChance.ids.length > 0 && randChance <= specialChance.value) {
+    handShake = getHandshake(specialChance.ids);
+  } else if (randChance <= lowChance.value) {
+    handShake = getHandshake(lowChance.ids);
+  } else if (randChance <= medChance.value) {
+    handShake = getHandshake(medChance.ids);
+  } else if (randChance <= highChance.value) {
+    handShake = getHandshake(highChance.ids);
+  }
+  return handShake || new Handshake();
+}
+export function handleShakeEnded() {
+  if (globalState.hasShakeEnded == false) return;
+  let result = PlayerAchievementMethods.Result;
+  result = handlePlayerAchievements({ ...globalState });
+  mUpdateMoodValue(result.showAchievement ? 5 : 0);
+  return mShakeEndedTimeout(result);
+}
+export function mShakeAgain() {
+  globalState.setSelectedPersonHandshake(handshakes[getRandomNumber(handshakes.length)]);
+  globalState.setHasPlayStarted(true);
+  globalState.setTimer(TimerStartValue);
+  globalState.setHasShakeEnded(false);
+  globalState.setHasShakeStarted(false);
+}
+export function leaveScreen(screenName = ScreenNames.PersonsScreen) {
+  globalState.navigation.reset({
+    index: 0,
+    routes: [
+      {
+        name: ScreenNames.HomeScreen,
+        state: { routes: [{ name: screenName }] },
+      },
+    ],
+  });
+}
+//#endregion

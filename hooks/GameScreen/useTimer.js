@@ -4,7 +4,7 @@ import { Handshake } from "../../models/Handshake";
 import { getRandomNumber } from "../../utils/common/getRandomNumber";
 import { globalState } from "../../global/GameScreen";
 import { HandshakeDuration, TimerIntervalValue, TimerStartValue } from "../../constants/GameScreen";
-import { generateRandomHandshake } from "../../utils/GameScreen";
+import { generateRandomHandshake } from "../../helpers/GameScreen";
 
 export default useTimer = () => {
   const [timer, setTimer] = useState(TimerStartValue);

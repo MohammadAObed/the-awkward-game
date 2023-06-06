@@ -1,14 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 import persons from "../data/Person";
-import { PlayerAchievement } from "../models/PlayerAchievement";
+import { PlayerAchievement, PlayerAchievementMethods } from "../models/PlayerAchievement";
 import { PlayerAchievementReset, PlayerAchievementUpdate } from "../controllers/PlayerAchievementController";
-import { PlayerAchievementFunctionName } from "../utils/PlayerAchievementFunctions";
 
 const [TheRock, Trump, Tate] = persons;
 
 export const initialState = {
   playerAchievements: [
-    new PlayerAchievement(1, TheRock, PlayerAchievementFunctionName.TheEyebrow).serialize(),
+    new PlayerAchievement(1, TheRock, PlayerAchievementMethods.TheEyebrow.Name).serialize(),
     // new PlayerAchievement(2, Trump).serialize(),
     // new PlayerAchievement(3, Tate).serialize(),
   ],
