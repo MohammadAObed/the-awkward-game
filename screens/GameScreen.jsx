@@ -88,6 +88,7 @@ const GameComponent = () => {
   useGlobalState(globalState, useState, [initialState.hasPlayStarted], nGlobalState.hasPlayStarted, nGlobalState.setHasPlayStarted);
   useGlobalState(globalState, useState, [initialState.gifVisible], nGlobalState.gifVisible, nGlobalState.setGifVisible);
   useGlobalState(globalState, useModal, [], null, null, true);
+  useGlobalState(globalState, useState, [initialState.achievementResult], nGlobalState.achievementResult, nGlobalState.setAchievementResult);
   //#endregion
   //#region useEffect
   useEffect(() => {

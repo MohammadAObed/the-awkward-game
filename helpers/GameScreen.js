@@ -133,6 +133,7 @@ export function handleShakeEnded() {
   if (globalState.hasShakeEnded == false) return;
   let result = PlayerAchievementMethods.Result;
   result = handlePlayerAchievements({ ...globalState });
+  globalState.setAchievementResult((prev) => result);
   mUpdateMoodValue(result.showAchievement ? 5 : 0);
   return mShakeEndedTimeout(result);
 }

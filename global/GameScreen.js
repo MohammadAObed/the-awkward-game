@@ -2,7 +2,7 @@ import { GameType } from "../constants/GameScreen";
 import { Handshake } from "../models/Handshake";
 import { Person } from "../models/Person";
 import { PersonMeter } from "../models/PersonMeter";
-import { PlayerAchievement } from "../models/PlayerAchievement";
+import { PlayerAchievement, PlayerAchievementMethods } from "../models/PlayerAchievement";
 export const globalState = {
   navigation: {},
   dispatch: function () {},
@@ -37,6 +37,8 @@ export const globalState = {
   showModal: function () {},
   gifVisible: false,
   setGifVisible: function () {},
+  achievementResult: PlayerAchievementMethods.Result,
+  setAchievementResult: function () {},
   //#endregion
 };
 export const nGlobalState = {
@@ -47,6 +49,7 @@ export const nGlobalState = {
   personHandshakeAnimation: "personHandshakeAnimation",
   startWalkthrough: "startWalkthrough",
   showWalkthrough: "showWalkthrough",
+  gameType: "gameType",
   //#region value, setValue
   timer: "timer",
   setTimer: "setTimer",
@@ -71,6 +74,7 @@ export const nGlobalState = {
   showModal: "showModal",
   gifVisible: "gifVisible",
   setGifVisible: "setGifVisible",
-  gameType: "gameType",
+  achievementResult: "achievementResult",
+  setAchievementResult: "setAchievementResult",
   //#endregion
 };
