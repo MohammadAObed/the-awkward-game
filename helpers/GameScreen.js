@@ -2,6 +2,7 @@ import { FinishMsgTimeout, GameType, MaxTimesPlayed, TimerStartValue } from "../
 import { ScreenNames } from "../constants/ScreenNames";
 import handshakes from "../data/Handshake";
 import { meterUpdate } from "../features/PersonMeterSlice";
+import { playerAchievementUpdate } from "../features/PlayerAchievementSlice";
 import { globalState } from "../global/GameScreen";
 import { Handshake } from "../models/Handshake";
 import { Person } from "../models/Person";
@@ -11,14 +12,17 @@ import { getRandomNumber } from "../utils/common/getRandomNumber";
 //? Look for export keyword to know which functions are used outside
 
 //#region private
-function handlePlayerAchievements(param = PlayerAchievementMethods.Param) {
+function mHandlePlayerAchievements(param = PlayerAchievementMethods.Param) {
   let result = PlayerAchievementMethods.Result;
   for (const playerAchievement of param.playerPersonAchievementList) {
     if (playerAchievement.hasUnlocked) continue;
     param.playerPersonAchievement = playerAchievement;
     result = checkAchievement(param);
-    console.log("🚀 ~ file: GameScreen.js:84 ~ result:", result);
-    if (result.showAchievement === true) return result;
+    if (result.showAchievement === true) {
+      globalState.dispatch(playerAchievementUpdate({ id: playerAchievement.id, hasUnlocked: true }));
+      console.log("🚀 ~ file: GameScreen.js:24 ~ mHandlePlayerAchievements ~ playerAchievement:", playerAchievement);
+      return result;
+    }
   }
   return result;
 }
@@ -37,8 +41,6 @@ function getHandshake(ids = []) {
 function generateMoodValue({ selectedPersonHandshake = new Handshake(), selectedPlayerHandshake = new Handshake(), person = new Person() }) {
   let value = 0;
   const { specialChance, highChance, lowChance, medChance } = person.handshakesOccurance;
-  console.log("🚀 ~ file: GameScreen.js:52 ~ selectedPlayerHandshake:", selectedPlayerHandshake);
-  console.log("🚀 ~ file: GameScreen.js:52 ~ selectedPersonHandshake:", selectedPersonHandshake);
 
   if (selectedPersonHandshake.id === selectedPlayerHandshake.id) {
     value += 1;
@@ -132,7 +134,7 @@ export function generateRandomHandshake({ person = new Person() }) {
 export function handleShakeEnded() {
   if (globalState.hasShakeEnded == false) return;
   let result = PlayerAchievementMethods.Result;
-  result = handlePlayerAchievements({ ...globalState });
+  result = mHandlePlayerAchievements({ ...globalState });
   globalState.setAchievementResult((prev) => result);
   mUpdateMoodValue(result.showAchievement ? 5 : 0);
   return mShakeEndedTimeout(result);
@@ -150,7 +152,9 @@ export function leaveScreen(screenName = ScreenNames.PersonsScreen) {
     routes: [
       {
         name: ScreenNames.HomeScreen,
-        state: { routes: [{ name: screenName }] },
+        state: {
+          routes: [{ name: screenName, params: { personId: globalState.person.id, methodName: globalState.achievementResult.methodName } }],
+        },
       },
     ],
   });

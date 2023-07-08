@@ -30,6 +30,10 @@ export const selectPlayerAchievementsByPersonId = (state, personId) => {
   return state.playerAchievement.playerAchievements.filter((item) => item.personId === personId) || [new PlayerAchievement()];
 };
 
+export const selectPlayerAchievementByMethodName = (state, methodName) => {
+  return state.playerAchievement.playerAchievements.find((item) => item.methodName === methodName) || new PlayerAchievement();
+};
+
 export const { playerAchievementUpdate, playerAchievementReset } = PlayerAchievementSlice.actions;
 
 export default PlayerAchievementSlice.reducer;

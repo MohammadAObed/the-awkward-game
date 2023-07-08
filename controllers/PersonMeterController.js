@@ -7,6 +7,10 @@ export function MeterUpdate(state, action) {
   let metersUpdated = state.meters.map((m) => {
     if (m.personId !== personId) return m;
     if (m.meterValue + meterValue <= person.moodBreakpoints.DEFAULT) return m;
+    if (m.meterValue + meterValue > person.moodBreakpoints.HAPPY) {
+      m.meterValue == 100;
+      return m;
+    }
     m.meterValue += meterValue;
     return m;
   });

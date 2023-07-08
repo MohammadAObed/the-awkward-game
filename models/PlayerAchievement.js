@@ -24,16 +24,17 @@ class PlayerAchievementMethods {
     msg: "",
     showAchievement: false,
     image: null,
+    methodName: "",
   };
 
   //#region Methods
   static TheEyebrow = {
     Name: "TheEyebrow",
     DisplayedMsg: "Something's cooking and its suspecious 🤨",
-    image: require("../assets/waStickers/TheEyebrow.webp"),
+    image: require("../assets/awkwardstickers/TheEyebrow.gif"),
     execute: function (param = PlayerAchievementMethods.Param) {
       if (param.selectedPersonHandshake.id === param.person.signatureHandshake.id) {
-        return { msg: this.DisplayedMsg, showAchievement: true, image: this.image };
+        return { msg: this.DisplayedMsg, showAchievement: true, image: this.image, methodName: this.Name };
       }
       return PlayerAchievementMethods.Result;
     },
