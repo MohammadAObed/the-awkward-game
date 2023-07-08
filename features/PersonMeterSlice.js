@@ -4,11 +4,7 @@ import persons from "../data/Person";
 import { MeterReset, MeterUpdate } from "../controllers/PersonMeterController";
 //containing all items
 export const initialState = {
-  meters: [
-    new PersonMeter(1, persons[0], persons[0].moodBreakpoints.DEFAULT).serialize(),
-    new PersonMeter(2, persons[1], persons[1].moodBreakpoints.DEFAULT).serialize(),
-    new PersonMeter(3, persons[2], persons[2].moodBreakpoints.DEFAULT).serialize(),
-  ],
+  meters: persons.map((p, index) => new PersonMeter(index + 1, p, p.moodBreakpoints.DEFAULT).serialize()),
 };
 
 export const PersonMeterSlice = createSlice({

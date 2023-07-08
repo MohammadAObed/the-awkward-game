@@ -17,7 +17,7 @@ export const personHandshakeAnimationValues = {
   x2: HandshakeSpaceX / 2,
 };
 export const FinishMsgTimeout = 2000;
-export const MaxTimesPlayed = 15;
+export const MaxTimesPlayed = 12;
 //#endregion
 
 //#region Enums

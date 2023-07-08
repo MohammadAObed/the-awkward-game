@@ -23,6 +23,7 @@ class Person {
     signatureLine = "",
     signatureHandshake = new Handshake(),
     handshakesOccurance = defaultHandshakesOccurance,
+    greetings = { positive: [], negative: [] },
     moodBreakpoints = { DEFAULT: 0, ANGRY: 30, NORMAL: 60, HAPPY: 100 }
   ) {
     this.id = id;
@@ -33,6 +34,7 @@ class Person {
     this.handshakesOccurance = handshakesOccurance;
     this.handshakesOccurance.highChance.ids.push(this.signatureHandshake.id, this.signatureHandshake.id);
     this.moodBreakpoints = moodBreakpoints;
+    this.greetings = greetings;
   }
   chanceRange = { min: 0, max: 100 };
 }

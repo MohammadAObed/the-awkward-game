@@ -20,7 +20,7 @@ function mHandlePlayerAchievements(param = PlayerAchievementMethods.Param) {
     result = checkAchievement(param);
     if (result.showAchievement === true) {
       globalState.dispatch(playerAchievementUpdate({ id: playerAchievement.id, hasUnlocked: true }));
-      console.log("🚀 ~ file: GameScreen.js:24 ~ mHandlePlayerAchievements ~ playerAchievement:", playerAchievement);
+      //console.log("🚀 ~ file: GameScreen.js:24 ~ mHandlePlayerAchievements ~ playerAchievement:", playerAchievement);
       return result;
     }
   }
@@ -74,10 +74,10 @@ function generateMoodValue({ selectedPersonHandshake = new Handshake(), selected
 function mUpdateMoodValue(achievementValue = 0) {
   let value = achievementValue;
   value += generateMoodValue({ ...globalState });
-  if (globalState.isFirstTime && globalState.hasShakeEnded) {
+  if (globalState.isFirstEncounterEver && globalState.hasShakeEnded) {
     value = globalState.person.moodBreakpoints.NORMAL + 1;
   } else if (
-    !globalState.isFirstTime &&
+    !globalState.isFirstEncounterEver &&
     globalState.hasShakeEnded &&
     globalState.meter.meterValue == globalState.person.moodBreakpoints.DEFAULT
   ) {
@@ -93,10 +93,11 @@ function mUpdateMoodValue(achievementValue = 0) {
 }
 function mShakeEndedTimeout(result = PlayerAchievementMethods.Result) {
   let finishMsgTimeout;
-  globalState.setTimesPlayed((prev) => prev + 1);
+  let increaseTimesPlayedNum = globalState.selectedPersonHandshake.id !== globalState.selectedPlayerHandshake.id ? 2 : 1;
+  globalState.setTimesPlayed((prev) => prev + increaseTimesPlayedNum);
   if (
     result.showAchievement ||
-    globalState.isFirstTime ||
+    globalState.isFirstEncounterEver ||
     globalState.timesPlayed >= MaxTimesPlayed ||
     globalState.gameType === GameType.QUICK
   ) {
@@ -106,7 +107,7 @@ function mShakeEndedTimeout(result = PlayerAchievementMethods.Result) {
         if (result.showAchievement) globalState.setGifVisible((prev) => true);
         globalState.showModal();
       },
-      globalState.isFirstTime ? FinishMsgTimeout : FinishMsgTimeout / 2
+      globalState.isFirstEncounterEver ? FinishMsgTimeout : FinishMsgTimeout / 2
     );
   }
   return finishMsgTimeout;
@@ -146,7 +147,8 @@ export function mShakeAgain() {
   globalState.setHasShakeEnded(false);
   globalState.setHasShakeStarted(false);
 }
-export function leaveScreen(screenName = ScreenNames.PersonsScreen) {
+export function leaveScreen(e, screenName = ScreenNames.PersonsScreen) {
+  //console.log("🚀 ~ file: GameScreen.js:151 ~ leaveScreen ~ screenName:", screenName);
   globalState.navigation.reset({
     index: 0,
     routes: [

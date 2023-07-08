@@ -8,9 +8,9 @@ import { ScreenNames } from "../../constants/ScreenNames";
 export default useWalkthroughShow = (globalState, { screenName = "", listOrder = 1 }) => {
   const { start, stop, walkthroughEvents, currentStep } = useWalkthrough();
   const walkthroughObj = useSelector((state) => selectWalkthroughSliceByScreenNameAndListOrder(state, screenName, listOrder));
-  // console.log("walkthroughObj", walkthroughObj);
+  // //console.log("walkthroughObj", walkthroughObj);
   const [showWalkthrough, setShowWalkthrough] = useState(walkthroughObj?.show || false); //change true to the state in the storage
-  const [isFirstTime] = useState(walkthroughObj?.show || false);
+  const [isFirstEncounterEver] = useState(walkthroughObj?.show || false);
 
   useEffect(() => {
     const walkthroughOnStop = () => {
@@ -34,7 +34,7 @@ export default useWalkthroughShow = (globalState, { screenName = "", listOrder =
     showWalkthrough,
     // setShowWalkthrough,
     startWalkthrough: start,
-    isFirstTime,
+    isFirstEncounterEver,
     // stopWalkthrough: stop,
   };
 };

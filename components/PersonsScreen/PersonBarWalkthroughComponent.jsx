@@ -16,7 +16,7 @@ const PersonBarWalkthroughComponent = ({ isWalkthrough = false, person = new Per
       {isWalkthrough ? (
         <WalkthroughStep text={`Bar indicates how much you're friends with ${person.name}`} order={2} name="Second">
           <WalkthroughView>
-            <PersonBarComponent />
+            <PersonBarComponent person={person} />
           </WalkthroughView>
         </WalkthroughStep>
       ) : (
@@ -28,9 +28,8 @@ const PersonBarWalkthroughComponent = ({ isWalkthrough = false, person = new Per
 
 const PersonBarComponent = ({ person = new Person() }) => {
   let meter = new PersonMeter();
+
   meter = useSelector((state) => selectMeterByPersonId(state, person.id));
-  // const dispatch = useDispatch();
-  // dispatch(meterReset({}));
   return (
     <View className="h-2.5 border border-black-700 overflow-hidden" style={{ width: 100 * extraDisplayedWidth }}>
       <View className="bg-yellow-500 h-full" style={{ width: meter.meterValue * extraDisplayedWidth }}></View>

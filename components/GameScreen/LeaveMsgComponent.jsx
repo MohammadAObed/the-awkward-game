@@ -5,7 +5,7 @@ import { GameType } from "../../constants/GameScreen";
 
 const LeaveMsgComponent = ({ leaveScreen = function () {} }) => {
   const msg = `${globalState.person.name} ${
-    globalState.isFirstTime && globalState.personHadEnough
+    globalState.isFirstEncounterEver && globalState.personHadEnough
       ? `enjoyed that!, you can contact with him later...`
       : globalState.gameType == GameType.QUICK && globalState.personHadEnough
       ? `was just passing by and left...`

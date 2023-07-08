@@ -111,7 +111,7 @@ const GameComponent = () => {
         <PersonImageWalkthroughComponent />
       </View>
       <View className="flex-row items-center">
-        {!globalState.isFirstTime && globalState.hasShakeEnded && !globalState.personHadEnough && (
+        {!globalState.isFirstEncounterEver && globalState.hasShakeEnded && !globalState.personHadEnough && (
           <ShakeEndedBtnComponent handlePress={leaveScreen} btnText="Leave 👋" />
         )}
         {!globalState.showWalkthrough && (
@@ -119,7 +119,7 @@ const GameComponent = () => {
             <MovingHandshakesComponent />
           </View>
         )}
-        {!globalState.isFirstTime && globalState.hasShakeEnded && !globalState.personHadEnough && (
+        {!globalState.isFirstEncounterEver && globalState.hasShakeEnded && !globalState.personHadEnough && (
           <ShakeEndedBtnComponent handlePress={mShakeAgain} btnText="Shake 🤝" />
         )}
       </View>
@@ -135,7 +135,7 @@ const GameComponent = () => {
       {globalState.modalVisible && ( //for faster performance
         <EmptyModal hideModal={() => {}} modalVisible={globalState.modalVisible}>
           {globalState.gifVisible === true ? (
-            <GifComponent leaveScreen={() => leaveScreen(ScreenNames.AchievementsScreen)}></GifComponent>
+            <GifComponent leaveScreen={(e) => leaveScreen(e, ScreenNames.AchievementsScreen)}></GifComponent>
           ) : (
             <LeaveMsgComponent leaveScreen={leaveScreen} />
           )}

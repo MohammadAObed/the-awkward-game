@@ -3,12 +3,11 @@ import persons from "../data/Person";
 import { PlayerAchievement, PlayerAchievementMethods } from "../models/PlayerAchievement";
 import { PlayerAchievementReset, PlayerAchievementUpdate } from "../controllers/PlayerAchievementController";
 
-const [TheRock, Trump, Tate] = persons;
+const [TheRock, Trump] = persons;
 
 export const initialState = {
   playerAchievements: [
     new PlayerAchievement(1, TheRock, PlayerAchievementMethods.TheEyebrow.Name).serialize(),
-    // new PlayerAchievement(2, Trump).serialize(),
     // new PlayerAchievement(3, Tate).serialize(),
   ],
 };

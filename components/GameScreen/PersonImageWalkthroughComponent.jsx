@@ -23,7 +23,7 @@ const PersonImageWalkthroughComponent = () => {
 
 const PersonImageComponent = () => {
   // This Won't Work Somehow: useEffect(() => { start();}, []);
-  let { image, meter } = getMeterAndImage(globalState.person, globalState.isFirstTime);
+  let { image, meter } = getMeterAndImage(globalState.person, globalState.isFirstEncounterEver);
   return (
     <View className="relative w-64 h-64 bg-black-600 rounded-full flex items-center justify-center overflow-hidden">
       <PersonBarComponent meter={meter} />

@@ -40,7 +40,7 @@ const AchievementsScreen = () => {
   useEffect(() => {
     const showModalTimeout = setTimeout(() => {
       if (params) showModal();
-    }, 1000);
+    }, 500);
 
     return () => {
       clearTimeout(showModalTimeout);
