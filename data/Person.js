@@ -4,14 +4,14 @@ import handshakes from "./Handshake";
 //i guess unfortantly this initializes these values evverytime we open the app, try cms or store in storage or other stuff or leave it
 
 const TheRockImages = new PersonImages(
-  require("../assets/images/persons/RockHappy.png"),
-  require("../assets/images/persons/RockAngry.png"),
-  require("../assets/images/persons/RockNormal.png")
+  require("../assets/images/persons/RockHappyMulti.png"),
+  require("../assets/images/persons/RockAngryMulti.png"),
+  require("../assets/images/persons/RockNormalMulti.png")
 );
 const TrumpImages = new PersonImages(
-  require("../assets/images/persons/TrumpHappy.png"),
-  require("../assets/images/persons/TrumpAngry.png"),
-  require("../assets/images/persons/TrumpNormal.png")
+  require("../assets/images/persons/TrumpHappyMulti.png"),
+  require("../assets/images/persons/TrumpAngryMulti.png"),
+  require("../assets/images/persons/TrumpNormalMulti.png")
 );
 
 const lowValue = 15;

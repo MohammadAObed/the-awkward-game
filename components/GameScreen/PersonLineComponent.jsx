@@ -15,13 +15,16 @@ const PersonLineComponent = () => {
   );
 
   return (
-    <View className="h-fit mb-6 space-y-2 flex items-center bg-black-600 p-5 pt-7">
-      <Text className="text-xl text-white text-center">
-        {!hasHandshakeMatched && globalState.isFirstEncounterEver && "No Problem! "} {greeting}
-      </Text>
-      {(globalState.isFirstEncounterEver || globalState.personHadEnough) && (
-        <Text className="text-center text-xl text-yellow-500">{globalState.person.signatureLine}!</Text>
-      )}
+    <View className="h-40 mb-2 flex justify-center">
+      <View className="h-fit space-y-2 flex items-center bg-black-600 p-5 pt-7">
+        <Text className="text-xl text-white text-center">
+          {!hasHandshakeMatched && (globalState.isFirstEncounterEver || globalState.achievementResult.showAchievement) && "No Problem! "}{" "}
+          {greeting}
+        </Text>
+        {(globalState.isFirstEncounterEver || globalState.personHadEnough) && (
+          <Text className="text-center text-xl text-yellow-500">{globalState.person.signatureLine}!</Text>
+        )}
+      </View>
     </View>
   );
 };
