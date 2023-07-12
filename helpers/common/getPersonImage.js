@@ -2,7 +2,6 @@ import { Person } from "../../models/Person";
 import { getRandomNumber } from "../../utils/common/getRandomNumber";
 
 export function getPersonImage(meterValue, person = new Person()) {
-  //let randNormalImgIndex = getRandomNumber(2);
   let image =
     meterValue == person.moodBreakpoints.DEFAULT
       ? person.images.Normal[0]
@@ -25,25 +24,46 @@ export function getImageBasedOnHandshake(
   showAchievment = false,
   oldImage = null
 ) {
-  let randNormalImgIndex = getRandomNumber(2);
-  if (meterValue == person.moodBreakpoints.DEFAULT) {
-    image = person.images.Normal[randNormalImgIndex];
-  } else if (isFirstEncounterEver === true || showAchievment === true) {
+  let image = null;
+
+  if (isFirstEncounterEver === true || showAchievment === true) {
     image = person.images.Happy;
-  } else if (hasHandshakeMatched && meterValue <= person.moodBreakpoints.ANGRY) {
-    image = person.images.Normal[randNormalImgIndex];
-  } else if (hasHandshakeMatched && meterValue <= person.moodBreakpoints.HAPPY) {
+  } else if (hasHandshakeMatched && oldImage === person.images.Angry) {
+    image = generateRandomNormalImg(image, person);
+  } else if (hasHandshakeMatched && person.images.Normal.includes(oldImage)) {
     image = person.images.Happy;
-  } else if (!hasHandshakeMatched && meterValue <= person.moodBreakpoints.ANGRY) {
+  } else if (hasHandshakeMatched && oldImage === person.images.Happy) {
+    image = person.images.Happy;
+  } else if (!hasHandshakeMatched && oldImage === person.images.Angry) {
     image = person.images.Angry;
-  } else if (!hasHandshakeMatched && meterValue <= person.moodBreakpoints.HAPPY) {
-    image = person.images.Normal[randNormalImgIndex];
+  } else if (!hasHandshakeMatched && person.images.Normal.includes(oldImage)) {
+    image = person.images.Angry;
+  } else if (!hasHandshakeMatched && oldImage === person.images.Happy) {
+    image = generateRandomNormalImg(image, person);
   } else {
-    image = person.images.Normal[randNormalImgIndex];
+    image = generateRandomNormalImg(image, person);
   }
-  while (oldImage === image) {
-    randNormalImgIndex = getRandomNumber(2);
-    image = person.images.Normal[randNormalImgIndex];
+
+  return { newPersonImage: image };
+}
+
+export function getInitialImage(meterValue, person = new Person()) {
+  let image = null;
+  if (meterValue == person.moodBreakpoints.DEFAULT) {
+    image = generateRandomNormalImg(image, person);
+  } else if (meterValue <= person.moodBreakpoints.ANGRY) {
+    image = person.images.Angry;
+  } else if (meterValue <= person.moodBreakpoints.NORMAL) {
+    image = generateRandomNormalImg(image, person);
+  } else if (meterValue <= person.moodBreakpoints.HAPPY) {
+    image = person.images.Happy;
+  } else {
+    image = generateRandomNormalImg(image, person);
   }
   return image;
+}
+
+function generateRandomNormalImg(image, person = new Person()) {
+  let randNormalImgIndex = getRandomNumber(2);
+  return person.images.Normal[randNormalImgIndex];
 }

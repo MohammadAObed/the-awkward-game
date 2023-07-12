@@ -5,7 +5,7 @@ import { globalState } from "../../global/GameScreen";
 import { PersonMeter } from "../../models/PersonMeter";
 import { useDispatch, useSelector } from "react-redux";
 import { meterReset, selectMeterByPersonId } from "../../features/PersonMeterSlice";
-import { getImageBasedOnHandshake } from "../../helpers/common/getPersonImage";
+import { getImageBasedOnHandshake, getInitialImage } from "../../helpers/common/getPersonImage";
 
 const WalkthroughView = walkthroughable(View);
 
@@ -22,21 +22,25 @@ const PersonImageWalkthroughComponent = () => {
 };
 
 const PersonImageComponent = () => {
-  const [img, setImg] = useState(null);
   let meter = new PersonMeter();
   meter = useSelector((state) => selectMeterByPersonId(state, globalState.person.id));
-  let personImage = useMemo(() => {
-    let newPersonImage = getImageBasedOnHandshake(
-      meter.meterValue,
-      globalState.person,
-      globalState.selectedPersonHandshake.id === globalState.selectedPlayerHandshake.id,
-      globalState.isFirstEncounterEver,
-      globalState.achievementResult.showAchievement,
-      img
-    );
-    setImg(newPersonImage);
-    return newPersonImage;
-  }, [globalState.timesPlayed, globalState.hasShakeEnded]);
+  const [img, setImg] = useState(getInitialImage(meter.meterValue, globalState.person));
+  useEffect(() => {
+    if (globalState.hasShakeEnded == false) {
+      return;
+    }
+    if (globalState.hasShakeEnded == true || img == null || globalState.isFirstEncounterEver || globalState.achievementResult.showAchievement) {
+      let { newPersonImage } = getImageBasedOnHandshake(
+        meter.meterValue,
+        globalState.person,
+        globalState.selectedPersonHandshake.id === globalState.selectedPlayerHandshake.id,
+        globalState.isFirstEncounterEver,
+        globalState.achievementResult.showAchievement,
+        img
+      );
+      setImg(newPersonImage);
+    }
+  }, [globalState.hasShakeEnded]);
   return (
     <View className="relative w-64 h-64 bg-black-600 rounded-full flex items-center justify-center overflow-hidden">
       <PersonBarComponent meter={meter} />
@@ -44,7 +48,7 @@ const PersonImageComponent = () => {
         <Image
           className="w-full h-full"
           style={{ opacity: globalState.modalVisible ? 0.2 : 1 }}
-          source={personImage}
+          source={img}
           onLoad={() => globalState.showWalkthrough === true && globalState.startWalkthrough()}
         />
       </View>

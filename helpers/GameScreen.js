@@ -142,10 +142,10 @@ export function handleShakeEnded() {
 }
 export function mShakeAgain() {
   globalState.setSelectedPersonHandshake(handshakes[getRandomNumber(handshakes.length)]);
-  globalState.setHasPlayStarted(true);
-  globalState.setTimer(TimerStartValue);
-  globalState.setHasShakeEnded(false);
-  globalState.setHasShakeStarted(false);
+  globalState.setHasPlayStarted((prev) => true);
+  globalState.setTimer((prev) => TimerStartValue);
+  globalState.setHasShakeEnded((prev) => false);
+  globalState.setHasShakeStarted((prev) => false);
 }
 export function leaveScreen(e, screenName = ScreenNames.PersonsScreen) {
   //console.log("🚀 ~ file: GameScreen.js:151 ~ leaveScreen ~ screenName:", screenName);
