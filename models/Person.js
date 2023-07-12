@@ -1,7 +1,7 @@
 import { Handshake } from "./Handshake";
 
 class PersonImages {
-  constructor(Happy, Angry, Normal) {
+  constructor(Happy, Angry, Normal = []) {
     this.Happy = Happy;
     this.Angry = Angry;
     this.Normal = Normal;

@@ -30,7 +30,7 @@ class PlayerAchievementMethods {
   //#region Methods
   static TheEyebrow = {
     Name: "TheEyebrow",
-    DisplayedMsg: "Something's cooking and its suspecious 🤨",
+    DisplayedMsg: "The Sus Detector 🤨",
     image: require("../assets/awkwardstickers/TheEyebrow.gif"),
     execute: function (param = PlayerAchievementMethods.Param) {
       if (param.selectedPersonHandshake.id === param.person.signatureHandshake.id) {

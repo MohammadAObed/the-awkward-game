@@ -29,7 +29,7 @@ const PersonImageComponent = ({ person = new Person() }) => {
   let image = getPersonImage(meter.meterValue, person);
   return (
     <View className="w-16 h-16 bg-black-600 rounded-full flex items-center justify-center overflow-hidden">
-      <View className="bg-black-600 rounded-full mt-1 mr-2" style={{ width: 80, height: 80 }}>
+      <View className="w-16 h-16 bg-black-600 rounded-full mt-1">
         <Image className="w-full h-full" source={image} onLoad={() => globalState.showWalkthrough === true && globalState.startWalkthrough()} />
       </View>
     </View>
