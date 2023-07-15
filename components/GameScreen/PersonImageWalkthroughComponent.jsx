@@ -40,11 +40,11 @@ const PersonImageComponent = () => {
       );
       setImg(newPersonImage);
     }
-  }, [globalState.hasShakeEnded]);
+  }, [globalState.hasShakeEnded, globalState.achievementResult.showAchievement]);
   return (
     <View className="relative w-64 h-64 bg-black-600 rounded-full flex items-center justify-center overflow-hidden">
       <PersonBarComponent meter={meter} />
-      <View className="w-60 h-60 rounded-full mt-5">
+      <View className="w-64 h-60 rounded-full mt-5">
         <Image
           className="w-full h-full"
           style={{ opacity: globalState.modalVisible ? 0.2 : 1 }}

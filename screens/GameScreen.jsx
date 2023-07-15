@@ -13,7 +13,6 @@ import { PlayerType } from "../constants/PlayerType";
 import HandshakesWalkthroughComponent from "../components/GameScreen/HandshakesWalkthroughComponent";
 import PersonImageWalkthroughComponent from "../components/GameScreen/PersonImageWalkthroughComponent";
 import { initialState } from "../initials/GameScreen";
-const { initialPersonHandshake, initialPerson, initialHandshake } = initialState;
 import { globalState, nGlobalState } from "../global/GameScreen";
 import { ScreenNames } from "../constants/ScreenNames";
 import {

@@ -1,4 +1,4 @@
-import { View, Text, Image, TouchableOpacity } from "react-native";
+import { View, Text, Image, TouchableOpacity, ScrollView } from "react-native";
 import React, { useEffect } from "react";
 import { WalkthroughProvider, WalkthroughStep, WalkthroughTooltip } from "../libraries/walkthrough";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -39,7 +39,7 @@ const PersonsComponent = () => {
   useGlobalState(globalState, useWalkthroughShow, [globalState, { ...initialState.showWalkthrough }], null, null, true);
   return (
     <SafeAreaView className="flex-1 px-5 bg-black-700">
-      <View className="mt-5">
+      <View className="mt-5 mb-5">
         <PersonsListComponent />
       </View>
     </SafeAreaView>
@@ -50,6 +50,7 @@ const PersonsListComponent = () => {
   const params = useRoute().params;
   const p = persons.find((p) => p.id === params?.personId ?? 0);
   const pIndex = persons.findIndex((p) => p.id === params?.personId ?? 0);
+  //! if meter value is bigger, then its first, etc....
   let ps = [...persons];
   // if (index > -1) {
   if (pIndex > -1) {
@@ -57,11 +58,11 @@ const PersonsListComponent = () => {
     ps.unshift(p);
   }
   return (
-    <View className="">
+    <ScrollView className="h-full">
       {ps.map((p, index) => {
         return <PersonWalkthroughComponent key={p.id} person={p} isWalkthrough={index === 0 ? true : false} />;
       })}
-    </View>
+    </ScrollView>
   );
 };
 

@@ -123,11 +123,11 @@ export function generateRandomHandshake({ person = new Person() }) {
   const { specialChance, highChance, lowChance, medChance } = person.handshakesOccurance;
   if (specialChance.ids.length > 0 && randChance <= specialChance.value) {
     handShake = getHandshake(specialChance.ids);
-  } else if (randChance <= lowChance.value) {
+  } else if (lowChance.ids.length > 0 && randChance <= lowChance.value) {
     handShake = getHandshake(lowChance.ids);
-  } else if (randChance <= medChance.value) {
+  } else if (medChance.ids.length > 0 && randChance <= medChance.value) {
     handShake = getHandshake(medChance.ids);
-  } else if (randChance <= highChance.value) {
+  } else if (highChance.ids.length > 0 && randChance <= highChance.value) {
     handShake = getHandshake(highChance.ids);
   }
   return handShake || new Handshake();
@@ -141,7 +141,8 @@ export function handleShakeEnded() {
   return mShakeEndedTimeout(result);
 }
 export function mShakeAgain() {
-  globalState.setSelectedPersonHandshake(handshakes[getRandomNumber(handshakes.length)]);
+  //globalState.setSelectedPersonHandshake(handshakes[getRandomNumber(handshakes.length)]);
+  globalState.setSelectedPersonHandshake((prev) => generateRandomHandshake({ person: globalState.person }) || new Handshake());
   globalState.setHasPlayStarted((prev) => true);
   globalState.setTimer((prev) => TimerStartValue);
   globalState.setHasShakeEnded((prev) => false);

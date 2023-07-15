@@ -15,7 +15,7 @@ export const initialState = {
   showWalkthrough: { screenName: ScreenNames.GameScreen, listOrder: 1 },
   initialPerson: persons[getRandomNumber(persons.length)] || new Person(),
   initialHandshake: handshakes[0] || new Handshake(),
-  initialPersonHandshake: handshakes[getRandomNumber(handshakes.length)] || new Handshake(),
+  initialPersonHandshake: handshakes[1] || new Handshake(),
   gifVisible: false,
   achievementResult: PlayerAchievementMethods.Result,
 };

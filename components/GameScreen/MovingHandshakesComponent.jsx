@@ -5,8 +5,11 @@ import { PlayerType } from "../../constants/PlayerType";
 import { personHandshakeAnimationValues, playerHandshakeAnimationValues } from "../../constants/GameScreen";
 import MovingHandshakeComponent from "./MovingHandshakeComponent";
 import { initialState } from "../../initials/GameScreen";
+import { generateRandomHandshake } from "../../helpers/GameScreen";
 
 const MovingHandshakesComponent = () => {
+  initialState.initialPersonHandshake = generateRandomHandshake({ person: initialState.initialPerson }) || initialState.initialHandshake;
+
   useGlobalState(
     globalState,
     useState,
