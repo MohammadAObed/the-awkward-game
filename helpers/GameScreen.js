@@ -1,11 +1,12 @@
-import { FinishMsgTimeout, GameType, MaxTimesPlayed, TimerStartValue } from "../constants/GameScreen";
+import { Audio } from "expo-av";
+import { FinishMsgTimeout, GameType, MaxTimesPlayed, PersonMood, TimerStartValue } from "../constants/GameScreen";
 import { ScreenNames } from "../constants/ScreenNames";
 import handshakes from "../data/Handshake";
 import { meterUpdate } from "../features/PersonMeterSlice";
 import { playerAchievementUpdate } from "../features/PlayerAchievementSlice";
 import { globalState } from "../global/GameScreen";
 import { Handshake } from "../models/Handshake";
-import { Person } from "../models/Person";
+import { Person, PersonAudio } from "../models/Person";
 import { PlayerAchievement, PlayerAchievementMethods } from "../models/PlayerAchievement";
 import { getRandomNumber } from "../utils/common/getRandomNumber";
 
@@ -67,6 +68,50 @@ function generateMoodValue({ selectedPersonHandshake = new Handshake(), selected
   }
 
   return value;
+}
+async function handlePlayAudio(mood = { mood: PersonMood.NORMAL, imageIndex: 0, audioIndex: 0 }, personAudio = new PersonAudio()) {
+  try {
+    const asset = personAudio[mood.mood.name]()[mood.audioIndex];
+    if (asset) {
+      const { sound } = await Audio.Sound.createAsync(asset, { shouldPlay: true });
+    }
+  } catch (error) {
+    console.log("Error playing audio:", error);
+  }
+}
+
+export function getMoodBasedOnHandshake() {
+  let hasHandshakeMatched = globalState.selectedPersonHandshake.id === globalState.selectedPlayerHandshake.id;
+  let oldMood = globalState.personMood.mood;
+  let person = globalState.person;
+
+  let mood = PersonMood.NORMAL;
+  let imageIndex = 0;
+  let audioIndex = 0;
+
+  if (globalState.isFirstEncounterEver === true || globalState.achievementResult.showAchievement === true) {
+    mood = PersonMood.HAPPY;
+    imageIndex = person.images.Happy;
+  } else if (hasHandshakeMatched && oldMood.value === PersonMood.ANGRY.value) {
+    mood = PersonMood.NORMAL;
+    imageIndex = getRandomNumber(person.images.Normal.length);
+  } else if (hasHandshakeMatched && (oldMood.value === PersonMood.NORMAL.value || oldMood.value === PersonMood.HAPPY.value)) {
+    mood = PersonMood.HAPPY;
+    imageIndex = person.images.Happy;
+  } else if (!hasHandshakeMatched && (oldMood.value === PersonMood.ANGRY.value || oldMood.value === PersonMood.NORMAL.value)) {
+    mood = PersonMood.ANGRY;
+    imageIndex = person.images.Angry;
+  } else if (!hasHandshakeMatched && oldMood.value === PersonMood.HAPPY.value) {
+    mood = PersonMood.NORMAL;
+    imageIndex = getRandomNumber(person.images.Normal.length);
+  } else {
+    mood = PersonMood.NORMAL;
+    imageIndex = getRandomNumber(person.images.Normal.length);
+  }
+  let length = person.audio[mood.name]().length;
+  audioIndex = oldMood.value == mood.value ? getRandomNumber(length, 0, length > 1 ? globalState.personMood.audioIndex : -1) : audioIndex;
+
+  return { mood, imageIndex, audioIndex };
 }
 //#endregion
 
@@ -134,6 +179,9 @@ export function generateRandomHandshake({ person = new Person() }) {
 }
 export function handleShakeEnded() {
   if (globalState.hasShakeEnded == false) return;
+  let newMood = getMoodBasedOnHandshake();
+  globalState.setPersonMood((prev) => ({ ...newMood }));
+  handlePlayAudio(newMood, globalState.person.audio);
   let result = PlayerAchievementMethods.Result;
   result = mHandlePlayerAchievements({ ...globalState });
   globalState.setAchievementResult((prev) => result);

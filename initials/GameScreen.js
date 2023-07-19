@@ -5,6 +5,7 @@ import persons from "../data/Person";
 import { getRandomNumber } from "../utils/common/getRandomNumber";
 import { ScreenNames } from "../constants/ScreenNames";
 import { PlayerAchievementMethods } from "../models/PlayerAchievement";
+import { getInitialMoodAndImage } from "../helpers/common/getPersonMood";
 
 export const initialState = {
   hasShakeStarted: false,
@@ -18,4 +19,5 @@ export const initialState = {
   initialPersonHandshake: handshakes[1] || new Handshake(),
   gifVisible: false,
   achievementResult: PlayerAchievementMethods.Result,
+  getPersonMood: (meterValue, person) => getInitialMoodAndImage(meterValue, person),
 };

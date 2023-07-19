@@ -1,7 +1,16 @@
+import { PersonMood } from "../constants/GameScreen";
 import { Handshake } from "./Handshake";
 
 class PersonImages {
   constructor(Happy, Angry, Normal = []) {
+    this.Happy = Happy;
+    this.Angry = Angry;
+    this.Normal = Normal;
+  }
+}
+
+class PersonAudio {
+  constructor(Happy = () => [], Normal = () => [], Angry = () => []) {
     this.Happy = Happy;
     this.Angry = Angry;
     this.Normal = Normal;
@@ -20,6 +29,7 @@ class Person {
     id = 1,
     name = "",
     images = new PersonImages(),
+    audio = new PersonAudio(),
     signatureLine = "",
     signatureHandshake = new Handshake(),
     handshakesOccurance = defaultHandshakesOccurance,
@@ -29,6 +39,7 @@ class Person {
     this.id = id;
     this.name = name;
     this.images = images;
+    this.audio = audio;
     this.signatureLine = signatureLine;
     this.signatureHandshake = signatureHandshake;
     this.handshakesOccurance = handshakesOccurance;
@@ -39,4 +50,4 @@ class Person {
   chanceRange = { min: 0, max: 100 };
 }
 
-export { PersonImages, Person };
+export { PersonImages, PersonAudio, Person };

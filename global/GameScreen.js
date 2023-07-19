@@ -1,4 +1,4 @@
-import { GameType } from "../constants/GameScreen";
+import { GameType, PersonMood } from "../constants/GameScreen";
 import { Handshake } from "../models/Handshake";
 import { Person } from "../models/Person";
 import { PersonMeter } from "../models/PersonMeter";
@@ -39,6 +39,8 @@ export const globalState = {
   setGifVisible: function () {},
   achievementResult: PlayerAchievementMethods.Result,
   setAchievementResult: function () {},
+  personMood: { mood: PersonMood.NORMAL, imageIndex: 0, audioIndex: 0 },
+  setPersonMood: function () {},
   //#endregion
 };
 export const nGlobalState = {
@@ -76,5 +78,7 @@ export const nGlobalState = {
   setGifVisible: "setGifVisible",
   achievementResult: "achievementResult",
   setAchievementResult: "setAchievementResult",
+  personMood: "personMood",
+  setPersonMood: "setPersonMood",
   //#endregion
 };

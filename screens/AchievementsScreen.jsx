@@ -9,7 +9,6 @@ import EmptyModal from "../components/common/EmptyModal";
 import useModal from "../hooks/common/useModal";
 import { Person } from "../models/Person";
 import { ArrowRightIcon, ChevronDownIcon, ChevronRightIcon, PhoneIcon } from "react-native-heroicons/solid";
-import * as FileSystem from "expo-file-system";
 import * as MediaLibrary from "expo-media-library";
 import { Asset } from "expo-asset";
 import { useRoute } from "@react-navigation/native";

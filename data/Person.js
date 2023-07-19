@@ -1,4 +1,4 @@
-import { Person, PersonHandshakeOccurance, PersonImages } from "../models/Person";
+import { Person, PersonAudio, PersonImages } from "../models/Person";
 import handshakes from "./Handshake";
 
 //i guess unfortantly this initializes these values evverytime we open the app, try cms or store in storage or other stuff or leave it
@@ -53,6 +53,12 @@ const SpongeBobImages = new PersonImages(
   [require("../assets/images/persons/SpongeBobNormal.png"), require("../assets/images/persons/SpongeBobNormal2.png")]
 );
 
+const TheRockAudio = new PersonAudio(
+  () => [require("../assets/audio/persons/RockHappy.mp3")],
+  () => [require("../assets/audio/persons/RockNormal.mp3")],
+  () => [require("../assets/audio/persons/RockAngry.mp3"), require("../assets/audio/persons/RockAngry2.mp3")]
+);
+
 const lowValue = 15;
 const medValue = 45;
 const highValue = 100;
@@ -62,6 +68,7 @@ const TheRock = new Person(
   1,
   "The Rock",
   TheRockImages,
+  TheRockAudio,
   "Lookin Rock Solid",
   handshakes.find((h) => h.id === 13),
   {
@@ -107,6 +114,7 @@ const Trump = new Person(
   2,
   "Trump",
   TrumpImages,
+  new PersonAudio(),
   "Let's Make America Great Again!",
   handshakes.find((h) => h.id === 17),
   {
@@ -153,6 +161,7 @@ const Cat = new Person(
   3,
   "Cat",
   CatImages,
+  new PersonAudio(),
   "Meow!",
   handshakes.find((h) => h.id === 5),
   {
@@ -171,6 +180,7 @@ const Ronaldo = new Person(
   4,
   "Ronaldo",
   RonaldoImages,
+  new PersonAudio(),
   "Meow!",
   handshakes.find((h) => h.id === 16),
   {
@@ -189,6 +199,7 @@ const DiCaprio = new Person(
   5,
   "DiCaprio",
   DiCaprioImages,
+  new PersonAudio(),
   "Meow!",
   handshakes.find((h) => h.id === 18),
   {
@@ -207,6 +218,7 @@ const ElonMusk = new Person(
   6,
   "Elon Musk",
   ElonMuskImages,
+  new PersonAudio(),
   "Meow!",
   handshakes.find((h) => h.id === 19),
   {
@@ -225,6 +237,7 @@ const JohnCena = new Person(
   7,
   "John Cena",
   JohnCenaImages,
+  new PersonAudio(),
   "Meow!",
   handshakes.find((h) => h.id === 20),
   {
@@ -243,6 +256,7 @@ const Khaby = new Person(
   8,
   "Khaby",
   KhabyImages,
+  new PersonAudio(),
   "Meow!",
   handshakes.find((h) => h.id === 21),
   {
@@ -261,6 +275,7 @@ const Mark = new Person(
   9,
   "Mark",
   MarkImages,
+  new PersonAudio(),
   "Meow!",
   handshakes.find((h) => h.id === 22),
   {
@@ -279,6 +294,7 @@ const Speed = new Person(
   10,
   "Speed",
   SpeedImages,
+  new PersonAudio(),
   "Meow!",
   handshakes.find((h) => h.id === 23),
   {
@@ -297,6 +313,7 @@ const SpongeBob = new Person(
   11,
   "SpongeBob",
   SpongeBobImages,
+  new PersonAudio(),
   "Meow!",
   handshakes.find((h) => h.id === 24),
   {

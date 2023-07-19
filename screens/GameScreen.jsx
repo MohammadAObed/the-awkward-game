@@ -88,6 +88,13 @@ const GameComponent = () => {
   useGlobalState(globalState, useState, [initialState.gifVisible], nGlobalState.gifVisible, nGlobalState.setGifVisible);
   useGlobalState(globalState, useModal, [], null, null, true);
   useGlobalState(globalState, useState, [initialState.achievementResult], nGlobalState.achievementResult, nGlobalState.setAchievementResult);
+  useGlobalState(
+    globalState,
+    useState,
+    [initialState.getPersonMood(meter.meterValue, globalState.person)],
+    nGlobalState.personMood,
+    nGlobalState.setPersonMood
+  );
   //#endregion
   //#region useEffect
   useEffect(() => {

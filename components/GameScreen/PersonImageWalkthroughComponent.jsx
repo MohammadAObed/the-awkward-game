@@ -5,7 +5,7 @@ import { globalState } from "../../global/GameScreen";
 import { PersonMeter } from "../../models/PersonMeter";
 import { useDispatch, useSelector } from "react-redux";
 import { meterReset, selectMeterByPersonId } from "../../features/PersonMeterSlice";
-import { getImageBasedOnHandshake, getInitialImage } from "../../helpers/common/getPersonImage";
+import { PersonMood } from "../../constants/GameScreen";
 
 const WalkthroughView = walkthroughable(View);
 
@@ -24,23 +24,14 @@ const PersonImageWalkthroughComponent = () => {
 const PersonImageComponent = () => {
   let meter = new PersonMeter();
   meter = useSelector((state) => selectMeterByPersonId(state, globalState.person.id));
-  const [img, setImg] = useState(getInitialImage(meter.meterValue, globalState.person));
-  useEffect(() => {
-    if (globalState.hasShakeEnded == false) {
-      return;
-    }
-    if (globalState.hasShakeEnded == true || img == null || globalState.isFirstEncounterEver || globalState.achievementResult.showAchievement) {
-      let { newPersonImage } = getImageBasedOnHandshake(
-        meter.meterValue,
-        globalState.person,
-        globalState.selectedPersonHandshake.id === globalState.selectedPlayerHandshake.id,
-        globalState.isFirstEncounterEver,
-        globalState.achievementResult.showAchievement,
-        img
-      );
-      setImg(newPersonImage);
-    }
-  }, [globalState.hasShakeEnded, globalState.achievementResult.showAchievement]);
+  const img = useMemo(
+    () =>
+      globalState.personMood.mood.value == PersonMood.NORMAL.value
+        ? globalState.person.images[globalState.personMood.mood.name][globalState.personMood.imageIndex]
+        : globalState.person.images[globalState.personMood.mood.name],
+    [globalState.personMood.mood.value, globalState.personMood.imageIndex]
+  );
+
   return (
     <View className="relative w-64 h-64 bg-black-600 rounded-full flex items-center justify-center overflow-hidden">
       <PersonBarComponent meter={meter} />
