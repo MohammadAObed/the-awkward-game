@@ -1,4 +1,5 @@
-import { GameType, PersonMood } from "../constants/GameScreen";
+import { GameType } from "../constants/GameScreen";
+import { PersonMood } from "../constants/Person";
 import { Handshake } from "../models/Handshake";
 import { Person } from "../models/Person";
 import { PersonMeter } from "../models/PersonMeter";

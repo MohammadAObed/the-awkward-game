@@ -1,19 +1,19 @@
-import { PersonMood } from "../constants/GameScreen";
+import { PersonMood } from "../constants/Person";
 import { Handshake } from "./Handshake";
 
 class PersonImages {
-  constructor(Happy, Angry, Normal = []) {
-    this.Happy = Happy;
-    this.Angry = Angry;
-    this.Normal = Normal;
+  constructor(Happy = () => [], Angry = () => [], Normal = () => []) {
+    this[PersonMood.HAPPY.name] = Happy;
+    this[PersonMood.ANGRY.name] = Angry;
+    this[PersonMood.NORMAL.name] = Normal;
   }
 }
 
 class PersonAudio {
   constructor(Happy = () => [], Normal = () => [], Angry = () => []) {
-    this.Happy = Happy;
-    this.Angry = Angry;
-    this.Normal = Normal;
+    this[PersonMood.HAPPY.name] = Happy;
+    this[PersonMood.ANGRY.name] = Angry;
+    this[PersonMood.NORMAL.name] = Normal;
   }
 }
 

@@ -7,7 +7,6 @@ import { PersonMeter } from "../../models/PersonMeter";
 import { useSelector } from "react-redux";
 import { selectMeterByPersonId } from "../../features/PersonMeterSlice";
 import { getInitialMoodAndImage } from "../../helpers/common/getPersonMood";
-import { PersonMood } from "../../constants/GameScreen";
 
 const WalkthroughView = walkthroughable(View);
 
@@ -28,7 +27,7 @@ const PersonImageComponent = ({ person = new Person() }) => {
   let meter = new PersonMeter();
   meter = useSelector((state) => selectMeterByPersonId(state, person.id));
   let mood = getInitialMoodAndImage(meter.meterValue, person);
-  const img = mood.mood.value == PersonMood.NORMAL.value ? person.images[mood.mood.name][mood.imageIndex] : person.images[mood.mood.name];
+  const img = person.images[mood.mood.name]()[mood.imageIndex];
   return (
     <View className="w-16 h-16 bg-black-600 rounded-full flex items-center justify-center overflow-hidden">
       <View className="w-16 h-16 bg-black-600 rounded-full mt-1">

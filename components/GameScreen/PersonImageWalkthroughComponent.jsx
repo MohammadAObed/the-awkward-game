@@ -5,7 +5,6 @@ import { globalState } from "../../global/GameScreen";
 import { PersonMeter } from "../../models/PersonMeter";
 import { useDispatch, useSelector } from "react-redux";
 import { meterReset, selectMeterByPersonId } from "../../features/PersonMeterSlice";
-import { PersonMood } from "../../constants/GameScreen";
 
 const WalkthroughView = walkthroughable(View);
 
@@ -25,10 +24,7 @@ const PersonImageComponent = () => {
   let meter = new PersonMeter();
   meter = useSelector((state) => selectMeterByPersonId(state, globalState.person.id));
   const img = useMemo(
-    () =>
-      globalState.personMood.mood.value == PersonMood.NORMAL.value
-        ? globalState.person.images[globalState.personMood.mood.name][globalState.personMood.imageIndex]
-        : globalState.person.images[globalState.personMood.mood.name],
+    () => globalState.person.images[globalState.personMood.mood.name]()[globalState.personMood.imageIndex],
     [globalState.personMood.mood.value, globalState.personMood.imageIndex]
   );
 

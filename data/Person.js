@@ -3,54 +3,60 @@ import handshakes from "./Handshake";
 
 //i guess unfortantly this initializes these values evverytime we open the app, try cms or store in storage or other stuff or leave it
 
-const TheRockImages = new PersonImages(require("../assets/images/persons/RockHappy.png"), require("../assets/images/persons/RockAngry.png"), [
-  require("../assets/images/persons/RockNormal.png"),
-  require("../assets/images/persons/RockNormal2.png"),
-]);
-const TrumpImages = new PersonImages(require("../assets/images/persons/TrumpHappy.png"), require("../assets/images/persons/TrumpAngry.png"), [
-  require("../assets/images/persons/TrumpNormal.png"),
-  require("../assets/images/persons/TrumpNormal2.png"),
-]);
-const CatImages = new PersonImages(require("../assets/images/persons/CatHappy.png"), require("../assets/images/persons/CatAngry.png"), [
-  require("../assets/images/persons/CatNormal.png"),
-  require("../assets/images/persons/CatNormal2.png"),
-]);
+const TheRockImages = new PersonImages(
+  () => [require("../assets/images/persons/RockHappy.png")],
+  () => [require("../assets/images/persons/RockAngry.png")],
+  () => [require("../assets/images/persons/RockNormal.png"), require("../assets/images/persons/RockNormal2.png")]
+);
+const TrumpImages = new PersonImages(
+  () => [require("../assets/images/persons/TrumpHappy.png")],
+  () => [require("../assets/images/persons/TrumpAngry.png")],
+  () => [require("../assets/images/persons/TrumpNormal.png"), require("../assets/images/persons/TrumpNormal2.png")]
+);
+const CatImages = new PersonImages(
+  () => [require("../assets/images/persons/CatHappy.png")],
+  () => [require("../assets/images/persons/CatAngry.png")],
+  () => [require("../assets/images/persons/CatNormal.png"), require("../assets/images/persons/CatNormal2.png")]
+);
 const RonaldoImages = new PersonImages(
-  require("../assets/images/persons/RonaldoHappy.png"),
-  require("../assets/images/persons/RonaldoAngry.png"),
-  [require("../assets/images/persons/RonaldoNormal.png"), require("../assets/images/persons/RonaldoNormal2.png")]
+  () => [require("../assets/images/persons/RonaldoHappy.png")],
+  () => [require("../assets/images/persons/RonaldoAngry.png")],
+  () => [require("../assets/images/persons/RonaldoNormal.png"), require("../assets/images/persons/RonaldoNormal2.png")]
 );
 const DiCaprioImages = new PersonImages(
-  require("../assets/images/persons/DiCaprioHappy.png"),
-  require("../assets/images/persons/DiCaprioAngry.png"),
-  [require("../assets/images/persons/DiCaprioNormal.png"), require("../assets/images/persons/DiCaprioNormal2.png")]
+  () => [require("../assets/images/persons/DiCaprioHappy.png")],
+  () => [require("../assets/images/persons/DiCaprioAngry.png")],
+  () => [require("../assets/images/persons/DiCaprioNormal.png"), require("../assets/images/persons/DiCaprioNormal2.png")]
 );
 const ElonMuskImages = new PersonImages(
-  require("../assets/images/persons/ElonMuskHappy.png"),
-  require("../assets/images/persons/ElonMuskAngry.png"),
-  [require("../assets/images/persons/ElonMuskNormal.png"), require("../assets/images/persons/ElonMuskNormal2.png")]
+  () => [require("../assets/images/persons/ElonMuskHappy.png")],
+  () => [require("../assets/images/persons/ElonMuskAngry.png")],
+  () => [require("../assets/images/persons/ElonMuskNormal.png"), require("../assets/images/persons/ElonMuskNormal2.png")]
 );
 const JohnCenaImages = new PersonImages(
-  require("../assets/images/persons/JohnCenaHappy.png"),
-  require("../assets/images/persons/JohnCenaAngry.png"),
-  [require("../assets/images/persons/JohnCenaNormal.png"), require("../assets/images/persons/JohnCenaNormal2.png")]
+  () => [require("../assets/images/persons/JohnCenaHappy.png")],
+  () => [require("../assets/images/persons/JohnCenaAngry.png")],
+  () => [require("../assets/images/persons/JohnCenaNormal.png"), require("../assets/images/persons/JohnCenaNormal2.png")]
 );
-const KhabyImages = new PersonImages(require("../assets/images/persons/KhabyHappy.png"), require("../assets/images/persons/KhabyAngry.png"), [
-  require("../assets/images/persons/KhabyNormal.png"),
-  require("../assets/images/persons/KhabyNormal2.png"),
-]);
-const MarkImages = new PersonImages(require("../assets/images/persons/MarkHappy.png"), require("../assets/images/persons/MarkAngry.png"), [
-  require("../assets/images/persons/MarkNormal.png"),
-  require("../assets/images/persons/MarkNormal2.png"),
-]);
-const SpeedImages = new PersonImages(require("../assets/images/persons/SpeedHappy.png"), require("../assets/images/persons/SpeedAngry.png"), [
-  require("../assets/images/persons/SpeedNormal.png"),
-  require("../assets/images/persons/SpeedNormal2.png"),
-]);
+const KhabyImages = new PersonImages(
+  () => [require("../assets/images/persons/KhabyHappy.png")],
+  () => [require("../assets/images/persons/KhabyAngry.png")],
+  () => [require("../assets/images/persons/KhabyNormal.png"), require("../assets/images/persons/KhabyNormal2.png")]
+);
+const MarkImages = new PersonImages(
+  () => [require("../assets/images/persons/MarkHappy.png")],
+  () => [require("../assets/images/persons/MarkAngry.png")],
+  () => [require("../assets/images/persons/MarkNormal.png"), require("../assets/images/persons/MarkNormal2.png")]
+);
+const SpeedImages = new PersonImages(
+  () => [require("../assets/images/persons/SpeedHappy.png")],
+  () => [require("../assets/images/persons/SpeedAngry.png")],
+  () => [require("../assets/images/persons/SpeedNormal.png"), require("../assets/images/persons/SpeedNormal2.png")]
+);
 const SpongeBobImages = new PersonImages(
-  require("../assets/images/persons/SpongeBobHappy.png"),
-  require("../assets/images/persons/SpongeBobAngry.png"),
-  [require("../assets/images/persons/SpongeBobNormal.png"), require("../assets/images/persons/SpongeBobNormal2.png")]
+  () => [require("../assets/images/persons/SpongeBobHappy.png")],
+  () => [require("../assets/images/persons/SpongeBobAngry.png")],
+  () => [require("../assets/images/persons/SpongeBobNormal.png"), require("../assets/images/persons/SpongeBobNormal2.png")]
 );
 
 const TheRockAudio = new PersonAudio(

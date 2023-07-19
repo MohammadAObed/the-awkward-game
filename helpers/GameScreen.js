@@ -1,5 +1,5 @@
 import { Audio } from "expo-av";
-import { FinishMsgTimeout, GameType, MaxTimesPlayed, PersonMood, TimerStartValue } from "../constants/GameScreen";
+import { FinishMsgTimeout, GameType, MaxTimesPlayed, TimerStartValue } from "../constants/GameScreen";
 import { ScreenNames } from "../constants/ScreenNames";
 import handshakes from "../data/Handshake";
 import { meterUpdate } from "../features/PersonMeterSlice";
@@ -9,6 +9,7 @@ import { Handshake } from "../models/Handshake";
 import { Person, PersonAudio } from "../models/Person";
 import { PlayerAchievement, PlayerAchievementMethods } from "../models/PlayerAchievement";
 import { getRandomNumber } from "../utils/common/getRandomNumber";
+import { PersonMood } from "../constants/Person";
 
 //? Look for export keyword to know which functions are used outside
 
@@ -72,6 +73,7 @@ function generateMoodValue({ selectedPersonHandshake = new Handshake(), selected
 async function handlePlayAudio(mood = { mood: PersonMood.NORMAL, imageIndex: 0, audioIndex: 0 }, personAudio = new PersonAudio()) {
   try {
     const asset = personAudio[mood.mood.name]()[mood.audioIndex];
+    console.log("🚀 ~ file: GameScreen.js:76 ~ handlePlayAudio ~ asset:", asset);
     if (asset) {
       const { sound } = await Audio.Sound.createAsync(asset, { shouldPlay: true });
     }
@@ -91,25 +93,23 @@ export function getMoodBasedOnHandshake() {
 
   if (globalState.isFirstEncounterEver === true || globalState.achievementResult.showAchievement === true) {
     mood = PersonMood.HAPPY;
-    imageIndex = person.images.Happy;
   } else if (hasHandshakeMatched && oldMood.value === PersonMood.ANGRY.value) {
     mood = PersonMood.NORMAL;
-    imageIndex = getRandomNumber(person.images.Normal.length);
   } else if (hasHandshakeMatched && (oldMood.value === PersonMood.NORMAL.value || oldMood.value === PersonMood.HAPPY.value)) {
     mood = PersonMood.HAPPY;
-    imageIndex = person.images.Happy;
   } else if (!hasHandshakeMatched && (oldMood.value === PersonMood.ANGRY.value || oldMood.value === PersonMood.NORMAL.value)) {
     mood = PersonMood.ANGRY;
-    imageIndex = person.images.Angry;
   } else if (!hasHandshakeMatched && oldMood.value === PersonMood.HAPPY.value) {
     mood = PersonMood.NORMAL;
-    imageIndex = getRandomNumber(person.images.Normal.length);
   } else {
     mood = PersonMood.NORMAL;
-    imageIndex = getRandomNumber(person.images.Normal.length);
   }
-  let length = person.audio[mood.name]().length;
-  audioIndex = oldMood.value == mood.value ? getRandomNumber(length, 0, length > 1 ? globalState.personMood.audioIndex : -1) : audioIndex;
+  let imageLength = person.images[mood.name]().length;
+  let audioLength = person.audio[mood.name]().length;
+  imageIndex =
+    oldMood.value == mood.value ? getRandomNumber(imageLength, 0, imageLength > 1 ? globalState.personMood.imageIndex : -1) : imageIndex;
+  audioIndex =
+    oldMood.value == mood.value ? getRandomNumber(audioLength, 0, audioLength > 1 ? globalState.personMood.audioIndex : -1) : audioIndex;
 
   return { mood, imageIndex, audioIndex };
 }
