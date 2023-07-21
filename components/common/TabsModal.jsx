@@ -24,7 +24,7 @@ export function TabsModal({ modalVisible, hideModal, children, showFooter, extra
         <View className={`bg-black-600 z-50 flex rounded-sm ${extraStyle}`}>
           <ExitButtonComponent hideModal={hideModal} />
           {children || <TabsComponent />}
-          {showFooter && <FooterComponent />}
+          <FooterComponent showFooter={showFooter} />
         </View>
       </View>
     </Modal>
@@ -73,18 +73,21 @@ const TabComponenet = ({ id, title, isSelected = false, setSelectedTab }) => {
 
 const AboutTabContentComponent = () => {
   return (
-    <View>
+    <View className="pb-4">
       <View className="bg-black-500 px-2 py-2 w-full mb-4">
         <Text className="text-white leading-6" style={{ fontSize: 15 }}>
-          <Text className="font-bold text-yellow-500">Remember</Text> the last time you awkwardly shook hands with someone, it was so embarrassing, and you might thought about
-          it after, well, lets experience this a thousand times more. Haha don't worry, you'll laugh about it...
+          <Text className="font-bold text-yellow-500">Remember</Text> the last time you awkwardly shook hands with someone, it was so
+          embarrassing, and you might thought about it after, well, lets experience this a thousand times more. Haha don't worry, you'll laugh
+          about it...
         </Text>
       </View>
       <View className="bg-black-500 px-2 py-2 w-full">
         <Text className="text-yellow-500 leading-6 font-bold" style={{ fontSize: 15 }}>
           How To Play?
         </Text>
-        <Text className="text-gray-700 leading-6 mt-2" style={{ fontSize: 15 }}></Text>
+        <Text className="text-white leading-6 mt-1" style={{ fontSize: 15 }}>
+          Choose a character, handshake! if you snooze you lose, if you match you cruise
+        </Text>
       </View>
     </View>
   );
@@ -98,20 +101,26 @@ const HintsTabContentComponent = () => {
           Characters
         </Text>
         <Text className="text-white leading-6 mt-2" style={{ fontSize: 15 }}>
-          - Each Character Has A higher occurance of a specific handshake
+          - Each character has a signature handshake 🤝
         </Text>
         <Text className="text-white leading-6 mt-2" style={{ fontSize: 15 }}>
-          - You will get rewards for unlocking handhshakes
+          - If you match certain conditions, you get an achievment with a sticker 🌟
+        </Text>
+        <Text className="text-white leading-6 mt-2" style={{ fontSize: 15 }}>
+          - The bar indicates level of friendship with the character 🤝‍🧑
+        </Text>
+        <Text className="text-white leading-6 mt-2" style={{ fontSize: 15 }}>
+          - Bar decreases or increses by matching a handshake or unlocking an achievment 📏
         </Text>
       </View>
     </View>
   );
 };
 
-const FooterComponent = ({ showModal }) => {
+const FooterComponent = ({ showFooter }) => {
   return (
     <View className="items-center justify-center px-5 mt-5 mb-3">
-      <Text className="text-sm opacity-70 text-yellow-500">By Mohammad Obed &#169;</Text>
+      {showFooter === true && <Text className="text-sm opacity-70 text-yellow-500">By Mohammad Obed &#169;</Text>}
     </View>
   );
 };

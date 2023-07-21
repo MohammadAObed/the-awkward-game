@@ -13,7 +13,7 @@ export default useTimer = () => {
     if (globalState.hasPlayStarted !== true || globalState.showWalkthrough !== false) return;
     const interval = setInterval(() => {
       setTimer((count) => {
-        return count - TimerIntervalValue / 1000000; //must use () => bcz it will get stuck at 7, won't add bcz its inside an interval, (common problem with (stale closures (useMemo, useEffect,etc...) or async) inside useeffect and setState)
+        return count - TimerIntervalValue / 1000; //must use () => bcz it will get stuck at 7, won't add bcz its inside an interval, (common problem with (stale closures (useMemo, useEffect,etc...) or async) inside useeffect and setState)
       });
       //globalState.setSelectedPersonHandshake((prev) => generateRandomHandshake({ person: globalState.person }) || new Handshake());
       globalState.setSelectedPersonHandshake((prev) => globalState.person.signatureHandshake);

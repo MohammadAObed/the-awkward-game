@@ -17,9 +17,9 @@ const StartScreen = () => {
   //Temp
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  //dispatch(walkthroughReset({}));
-  //dispatch(meterReset({}));
-  //dispatch(playerAchievementReset({}));
+  dispatch(walkthroughReset({}));
+  dispatch(meterReset({}));
+  dispatch(playerAchievementReset({}));
   //
   const [videoLoaded, setVideoLoaded] = useState(false);
   const { modalVisible, showModal, hideModal } = useModal();
@@ -59,7 +59,7 @@ const StartScreen = () => {
       <ContentComponent shakeBtnOnClick={shakeBtnOnClick} />
       <FooterComponent showModal={showModal} />
       {modalVisible && ( //for faster performance
-        <AppModal hideModal={hideModal} modalVisible={modalVisible} showFooter={true} />
+        <AppModal hideModal={hideModal} modalVisible={modalVisible} />
       )}
       <EmptyModal hideModal={() => {}} modalVisible={isFirstEncounterEver && volumeModalVisible} shadeOpacity={0.9}>
         <VolumeUpComponent leaveScreen={leaveScreen}></VolumeUpComponent>

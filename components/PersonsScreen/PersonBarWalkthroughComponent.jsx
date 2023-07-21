@@ -14,7 +14,7 @@ const PersonBarWalkthroughComponent = ({ isWalkthrough = false, person = new Per
   return (
     <>
       {isWalkthrough ? (
-        <WalkthroughStep text={`Bar indicates how much you're friends with ${person.name}`} order={2} name="Second">
+        <WalkthroughStep text={`Bar indicates level of friendship with ${person.name}`} order={2} name="Second">
           <WalkthroughView>
             <PersonBarComponent person={person} />
           </WalkthroughView>

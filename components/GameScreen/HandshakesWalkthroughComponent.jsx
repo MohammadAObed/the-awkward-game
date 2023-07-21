@@ -11,7 +11,7 @@ const WalkthroughView = walkthroughable(View);
 
 const HandshakesWalkthroughComponent = () => {
   return (
-    <WalkthroughStep text="Pick your handshake fast or it'll get awkward" order={2} name="Second">
+    <WalkthroughStep text="Choose your handshake fast or it'll get awkward" order={2} name="Second">
       <WalkthroughView>
         <HandshakesComponent />
       </WalkthroughView>
