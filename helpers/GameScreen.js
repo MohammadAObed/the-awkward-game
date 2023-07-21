@@ -7,16 +7,16 @@ import { playerAchievementUpdate } from "../features/PlayerAchievementSlice";
 import { globalState } from "../global/GameScreen";
 import { Handshake } from "../models/Handshake";
 import { Person, PersonAudio } from "../models/Person";
-import { PlayerAchievement, PlayerAchievementMethods } from "../models/PlayerAchievement";
 import { getRandomNumber } from "../utils/common/getRandomNumber";
 import { PersonMood } from "../constants/Person";
+import { PlayerAchievementMethods } from "../models/PlayerAchievementMethods";
 
 //? Look for export keyword to know which functions are used outside
 
 //#region private
 function mHandlePlayerAchievements(param = PlayerAchievementMethods.Param) {
   let result = PlayerAchievementMethods.Result;
-  for (const playerAchievement of param.playerPersonAchievementList) {
+  for (const playerAchievement of globalState.playerPersonAchievementList) {
     if (playerAchievement.hasUnlocked) continue;
     param.playerPersonAchievement = playerAchievement;
     result = checkAchievement(param);
@@ -82,7 +82,7 @@ async function handlePlayAudio(mood = { mood: PersonMood.NORMAL, imageIndex: 0, 
   }
 }
 
-export function getMoodBasedOnHandshake() {
+function getMoodBasedOnHandshake() {
   let hasHandshakeMatched = globalState.selectedPersonHandshake.id === globalState.selectedPlayerHandshake.id;
   let oldMood = globalState.personMood.mood;
   let person = globalState.person;
@@ -183,7 +183,7 @@ export function handleShakeEnded() {
   globalState.setPersonMood((prev) => ({ ...newMood }));
   handlePlayAudio(newMood, globalState.person.audio);
   let result = PlayerAchievementMethods.Result;
-  result = mHandlePlayerAchievements({ ...globalState });
+  result = mHandlePlayerAchievements();
   globalState.setAchievementResult((prev) => result);
   mUpdateMoodValue(result.showAchievement ? 5 : 0);
   return mShakeEndedTimeout(result);

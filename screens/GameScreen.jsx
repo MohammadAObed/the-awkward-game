@@ -40,7 +40,6 @@ import { meterReset, selectMeterByPersonId } from "../features/PersonMeterSlice"
 import { playerAchievementReset, selectPlayerAchievementsByPersonId } from "../features/PlayerAchievementSlice";
 import { handlePlayerAchievements, handleShakeEnded, leaveScreen, mShakeAgain } from "../helpers/GameScreen";
 import GifComponent from "../components/GameScreen/GifComponent";
-import { PlayerAchievementMethods } from "../models/PlayerAchievement";
 
 const GameScreen = () => {
   return (

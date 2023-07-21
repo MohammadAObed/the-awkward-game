@@ -4,8 +4,8 @@ import { Person } from "../models/Person";
 import persons from "../data/Person";
 import { getRandomNumber } from "../utils/common/getRandomNumber";
 import { ScreenNames } from "../constants/ScreenNames";
-import { PlayerAchievementMethods } from "../models/PlayerAchievement";
 import { getInitialMoodAndImage } from "../helpers/common/getPersonMood";
+import { PlayerAchievementMethods } from "../models/PlayerAchievementMethods";
 
 export const initialState = {
   hasShakeStarted: false,

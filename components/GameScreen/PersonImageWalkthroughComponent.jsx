@@ -5,6 +5,7 @@ import { globalState } from "../../global/GameScreen";
 import { PersonMeter } from "../../models/PersonMeter";
 import { useDispatch, useSelector } from "react-redux";
 import { meterReset, selectMeterByPersonId } from "../../features/PersonMeterSlice";
+import { initialState } from "../../initials/GameScreen";
 
 const WalkthroughView = walkthroughable(View);
 
@@ -23,11 +24,19 @@ const PersonImageWalkthroughComponent = () => {
 const PersonImageComponent = () => {
   let meter = new PersonMeter();
   meter = useSelector((state) => selectMeterByPersonId(state, globalState.person.id));
-  const img = useMemo(
-    () => globalState.person.images[globalState.personMood.mood.name]()[globalState.personMood.imageIndex],
-    [globalState.personMood.mood.value, globalState.personMood.imageIndex]
+  const [img, setImg] = useState(
+    globalState.person.images[initialState.getPersonMood(meter.meterValue, globalState.person).mood.name]()[
+      initialState.getPersonMood(meter.meterValue, globalState.person).imageIndex
+    ]
   );
-
+  const [isInitial, setIsInitial] = useState(true);
+  useEffect(() => {
+    if (isInitial == true) {
+      setIsInitial((prev) => false);
+    }
+    if (isInitial == true) return;
+    setImg((prev) => globalState.person.images[globalState.personMood.mood.name]()[globalState.personMood.imageIndex]);
+  }, [globalState.personMood.mood.value, globalState.personMood.imageIndex]);
   return (
     <View className="relative w-64 h-64 bg-black-600 rounded-full flex items-center justify-center overflow-hidden">
       <PersonBarComponent meter={meter} />

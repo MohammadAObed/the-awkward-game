@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useSelector } from "react-redux";
 import { selectPlayerAchievementByMethodName, selectPlayerAchievements } from "../features/PlayerAchievementSlice";
-import { PlayerAchievement, PlayerAchievementMethods } from "../models/PlayerAchievement";
+import { PlayerAchievement } from "../models/PlayerAchievement";
 import persons from "../data/Person";
 import EmptyModal from "../components/common/EmptyModal";
 import useModal from "../hooks/common/useModal";
@@ -12,6 +12,7 @@ import { ArrowRightIcon, ChevronDownIcon, ChevronRightIcon, PhoneIcon } from "re
 import * as MediaLibrary from "expo-media-library";
 import { Asset } from "expo-asset";
 import { useRoute } from "@react-navigation/native";
+import { PlayerAchievementMethods } from "../models/PlayerAchievementMethods";
 
 const globalState = {
   showModal: function () {},

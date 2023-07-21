@@ -3,7 +3,7 @@ import { PersonMood } from "../constants/Person";
 import { Handshake } from "../models/Handshake";
 import { Person } from "../models/Person";
 import { PersonMeter } from "../models/PersonMeter";
-import { PlayerAchievement, PlayerAchievementMethods } from "../models/PlayerAchievement";
+import { PlayerAchievement } from "../models/PlayerAchievement";
 export const globalState = {
   navigation: {},
   dispatch: function () {},
@@ -38,7 +38,7 @@ export const globalState = {
   showModal: function () {},
   gifVisible: false,
   setGifVisible: function () {},
-  achievementResult: PlayerAchievementMethods.Result,
+  achievementResult: { msg: "", showAchievement: false, image: null, methodName: "" },
   setAchievementResult: function () {},
   personMood: { mood: PersonMood.NORMAL, imageIndex: 0, audioIndex: 0 },
   setPersonMood: function () {},

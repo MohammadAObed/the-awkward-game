@@ -11,7 +11,7 @@ const WalkthroughView = walkthroughable(View);
 
 const HandshakesWalkthroughComponent = () => {
   return (
-    <WalkthroughStep text="Pick your handshake fast or he'll be upset" order={2} name="Second">
+    <WalkthroughStep text="Pick your handshake fast or it'll get awkward" order={2} name="Second">
       <WalkthroughView>
         <HandshakesComponent />
       </WalkthroughView>
@@ -23,7 +23,7 @@ const HandshakesComponent = () => {
   // This Won't Work Somehow: useEffect(() => { start();}, []);
   const filteredHandshakes = useMemo(() => sortHandshakes(globalState.person, handshakes), []);
   const [selectedHandshakeId, setSelectedHandshakeId] = useState(globalState.selectedPlayerHandshake.id);
-  const test = (handshake = new Handshake()) => {
+  const selectHandshake = (handshake = new Handshake()) => {
     if (globalState.timer <= 0) return;
     setSelectedHandshakeId(handshake.id);
     globalState.setSelectedPlayerHandshake((prev) => handshake);
@@ -36,7 +36,12 @@ const HandshakesComponent = () => {
       <ScrollView horizontal className="relative w-full flex-1 py-1">
         <View className="w-full h-full flex-row justify-center items-center space-x-4">
           {filteredHandshakes.map((handshake) => (
-            <HandshakeComponent key={handshake.id} handshake={handshake} test={test} isSelected={handshake.id === selectedHandshakeId} />
+            <HandshakeComponent
+              key={handshake.id}
+              handshake={handshake}
+              selectHandshake={selectHandshake}
+              isSelected={handshake.id === selectedHandshakeId}
+            />
           ))}
         </View>
       </ScrollView>
@@ -44,10 +49,10 @@ const HandshakesComponent = () => {
   );
 };
 
-const HandshakeComponent = ({ handshake = new Handshake(), isSelected, test }) => {
+const HandshakeComponent = ({ handshake = new Handshake(), isSelected, selectHandshake }) => {
   const style = `flex rounded-md p-3 ${isSelected && `bg-black-700`} ${globalState.timer <= 0 && `opacity-70`}`;
   return (
-    <TouchableOpacity className={style + "space-y-3"} onPress={() => test(handshake)}>
+    <TouchableOpacity className={style + "space-y-3"} onPress={() => selectHandshake(handshake)}>
       <Text className="text-3xl" style={{ transform: [{ rotate: `${handshake.rotation}deg` }, { scaleX: handshake.invert }] }}>
         {handshake.symbol}
       </Text>
