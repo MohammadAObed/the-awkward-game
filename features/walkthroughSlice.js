@@ -9,6 +9,7 @@ export const initialState = {
     new Walkthrough(ScreenNames.GameScreen, 2).serialize(),
     new Walkthrough(ScreenNames.PersonsScreen, 1).serialize(),
     new Walkthrough(ScreenNames.PersonsScreen, 2).serialize(),
+    new Walkthrough(ScreenNames.StartScreen, 1).serialize(),
   ],
 };
 
