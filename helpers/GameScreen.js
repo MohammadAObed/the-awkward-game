@@ -70,10 +70,10 @@ function generateMoodValue({ selectedPersonHandshake = new Handshake(), selected
 
   return value;
 }
-async function handlePlayAudio(mood = { mood: PersonMood.NORMAL, imageIndex: 0, audioIndex: 0 }, personAudio = new PersonAudio()) {
+async function handlePlayAudio(mood = { ...PersonMood.NORMAL, imageIndex: 0, audioIndex: 0 }, personAudio = new PersonAudio()) {
   try {
-    const asset = personAudio[mood.mood.name]()[mood.audioIndex];
-    console.log("🚀 ~ file: GameScreen.js:76 ~ handlePlayAudio ~ asset:", asset);
+    const asset = personAudio[mood.name]()[mood.audioIndex];
+    //console.log("🚀 ~ file: GameScreen.js:76 ~ handlePlayAudio ~ asset:", asset);
     if (asset) {
       const { sound } = await Audio.Sound.createAsync(asset, { shouldPlay: true });
     }
@@ -84,7 +84,7 @@ async function handlePlayAudio(mood = { mood: PersonMood.NORMAL, imageIndex: 0, 
 
 function getMoodBasedOnHandshake() {
   let hasHandshakeMatched = globalState.selectedPersonHandshake.id === globalState.selectedPlayerHandshake.id;
-  let oldMood = globalState.personMood.mood;
+  let oldMoodValue = globalState.personMood.value;
   let person = globalState.person;
 
   let mood = PersonMood.NORMAL;
@@ -93,13 +93,13 @@ function getMoodBasedOnHandshake() {
 
   if (globalState.isFirstEncounterEver === true || globalState.achievementResult.showAchievement === true) {
     mood = PersonMood.HAPPY;
-  } else if (hasHandshakeMatched && oldMood.value === PersonMood.ANGRY.value) {
+  } else if (hasHandshakeMatched && oldMoodValue === PersonMood.ANGRY.value) {
     mood = PersonMood.NORMAL;
-  } else if (hasHandshakeMatched && (oldMood.value === PersonMood.NORMAL.value || oldMood.value === PersonMood.HAPPY.value)) {
+  } else if (hasHandshakeMatched && (oldMoodValue === PersonMood.NORMAL.value || oldMoodValue === PersonMood.HAPPY.value)) {
     mood = PersonMood.HAPPY;
-  } else if (!hasHandshakeMatched && (oldMood.value === PersonMood.ANGRY.value || oldMood.value === PersonMood.NORMAL.value)) {
+  } else if (!hasHandshakeMatched && (oldMoodValue === PersonMood.ANGRY.value || oldMoodValue === PersonMood.NORMAL.value)) {
     mood = PersonMood.ANGRY;
-  } else if (!hasHandshakeMatched && oldMood.value === PersonMood.HAPPY.value) {
+  } else if (!hasHandshakeMatched && oldMoodValue === PersonMood.HAPPY.value) {
     mood = PersonMood.NORMAL;
   } else {
     mood = PersonMood.NORMAL;
@@ -107,11 +107,11 @@ function getMoodBasedOnHandshake() {
   let imageLength = person.images[mood.name]().length;
   let audioLength = person.audio[mood.name]().length;
   imageIndex =
-    oldMood.value == mood.value ? getRandomNumber(imageLength, 0, imageLength > 1 ? globalState.personMood.imageIndex : -1) : imageIndex;
+    oldMoodValue == mood.value ? getRandomNumber(imageLength, 0, imageLength > 1 ? globalState.personMood.imageIndex : -1) : imageIndex;
   audioIndex =
-    oldMood.value == mood.value ? getRandomNumber(audioLength, 0, audioLength > 1 ? globalState.personMood.audioIndex : -1) : audioIndex;
+    oldMoodValue == mood.value ? getRandomNumber(audioLength, 0, audioLength > 1 ? globalState.personMood.audioIndex : -1) : audioIndex;
 
-  return { mood, imageIndex, audioIndex };
+  return { ...mood, imageIndex, audioIndex };
 }
 //#endregion
 
@@ -180,7 +180,13 @@ export function generateRandomHandshake({ person = new Person() }) {
 export function handleShakeEnded() {
   if (globalState.hasShakeEnded == false) return;
   let newMood = getMoodBasedOnHandshake();
-  globalState.setPersonMood((prev) => ({ ...newMood }));
+  //console.log("🚀 ~ " + globalState.person.name + "file: GameScreen.js:183 ~ handleShakeEnded ~ newMood:", newMood);
+  globalState.setPersonMood((prev) => ({
+    name: newMood.name,
+    value: newMood.value,
+    imageIndex: newMood.imageIndex,
+    audioIndex: newMood.audioIndex,
+  }));
   handlePlayAudio(newMood, globalState.person.audio);
   let result = PlayerAchievementMethods.Result;
   result = mHandlePlayerAchievements();

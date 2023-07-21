@@ -20,5 +20,5 @@ export function getInitialMoodAndImage(meterValue, person = new Person()) {
   let imageLength = person.images[mood.name]().length;
   imageIndex = getRandomNumber(imageLength);
 
-  return { mood, imageIndex, audioIndex };
+  return { ...mood, imageIndex, audioIndex };
 }

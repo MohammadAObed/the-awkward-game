@@ -1,9 +1,10 @@
 //- Works With globalState object (gs)
 //- Order Of useGlobalState Call is important! bcz a custom hook may be using a state that is defined after that hook
-import React from "react";
+import React, { useEffect } from "react";
+import { nGlobalState } from "../../global/GameScreen";
 
 //! 1-for later: try put useMemo for global state property variable assignment
-const useGlobalState = (globalState, cb, args, valueName, setValueName, isObjReturned = false) => {
+const useGlobalState = (globalState, cb, args, valueName, setValueName, isObjReturned = false, stateIsObj = false) => {
   //mostly for custom hooks that return objects
   if (isObjReturned === true) {
     let obj = cb(...args);
@@ -13,7 +14,7 @@ const useGlobalState = (globalState, cb, args, valueName, setValueName, isObjRet
     });
     //mostly for useState or any hook that returns an array of two
   } else {
-    const [val, setVal] = cb(...args);
+    const [val, setVal] = stateIsObj ? cb(Object.assign({}, ...args)) : cb(...args);
     globalState[valueName] = val;
     globalState[setValueName] = setVal;
   }

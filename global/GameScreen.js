@@ -40,7 +40,7 @@ export const globalState = {
   setGifVisible: function () {},
   achievementResult: { msg: "", showAchievement: false, image: null, methodName: "" },
   setAchievementResult: function () {},
-  personMood: { mood: PersonMood.NORMAL, imageIndex: 0, audioIndex: 0 },
+  personMood: { ...PersonMood.NORMAL, imageIndex: 0, audioIndex: 0 },
   setPersonMood: function () {},
   //#endregion
 };

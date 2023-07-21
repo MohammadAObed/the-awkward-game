@@ -24,19 +24,15 @@ const PersonImageWalkthroughComponent = () => {
 const PersonImageComponent = () => {
   let meter = new PersonMeter();
   meter = useSelector((state) => selectMeterByPersonId(state, globalState.person.id));
-  const [img, setImg] = useState(
-    globalState.person.images[initialState.getPersonMood(meter.meterValue, globalState.person).mood.name]()[
-      initialState.getPersonMood(meter.meterValue, globalState.person).imageIndex
-    ]
-  );
+  const [img, setImg] = useState(globalState.person.images[initialState.getPersonMood.name]()[initialState.getPersonMood.imageIndex]);
   const [isInitial, setIsInitial] = useState(true);
   useEffect(() => {
     if (isInitial == true) {
       setIsInitial((prev) => false);
     }
     if (isInitial == true) return;
-    setImg((prev) => globalState.person.images[globalState.personMood.mood.name]()[globalState.personMood.imageIndex]);
-  }, [globalState.personMood.mood.value, globalState.personMood.imageIndex]);
+    setImg((prev) => globalState.person.images[globalState.personMood.name]()[globalState.personMood.imageIndex]);
+  }, [globalState.personMood.value, globalState.personMood.imageIndex]);
   return (
     <View className="relative w-64 h-64 bg-black-600 rounded-full flex items-center justify-center overflow-hidden">
       <PersonBarComponent meter={meter} />

@@ -27,7 +27,7 @@ const PersonImageComponent = ({ person = new Person() }) => {
   let meter = new PersonMeter();
   meter = useSelector((state) => selectMeterByPersonId(state, person.id));
   let mood = useMemo(() => getInitialMoodAndImage(meter.meterValue, person), []);
-  const img = person.images[mood.mood.name]()[mood.imageIndex];
+  const img = person.images[mood.name]()[mood.imageIndex];
   return (
     <View className="w-16 h-16 bg-black-600 rounded-full flex items-center justify-center overflow-hidden">
       <View className="w-16 h-16 bg-black-600 rounded-full mt-1">

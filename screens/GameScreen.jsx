@@ -1,4 +1,4 @@
-import { View, Text, Image, TouchableOpacity, Button, ScrollView, Pressable, Animated, Easing } from "react-native";
+import { View, BackHandler } from "react-native";
 import React, { useEffect, useRef, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { WalkthroughProvider, WalkthroughTooltip } from "../libraries/walkthrough";
@@ -40,6 +40,7 @@ import { meterReset, selectMeterByPersonId } from "../features/PersonMeterSlice"
 import { playerAchievementReset, selectPlayerAchievementsByPersonId } from "../features/PlayerAchievementSlice";
 import { handlePlayerAchievements, handleShakeEnded, leaveScreen, mShakeAgain } from "../helpers/GameScreen";
 import GifComponent from "../components/GameScreen/GifComponent";
+import { getInitialMoodAndImage } from "../helpers/common/getPersonMood";
 
 const GameScreen = () => {
   return (
@@ -71,9 +72,9 @@ const GameComponent = () => {
   globalState.dispatch = dispatch;
   const navigation = useNavigation();
   globalState.navigation = navigation;
-  const playerPersonAchievementList = useSelector((state) => selectPlayerAchievementsByPersonId(state, globalState.person.id));
+  const playerPersonAchievementList = useSelector((state) => selectPlayerAchievementsByPersonId(state, initialState.initialPerson.id));
   globalState.playerPersonAchievementList = playerPersonAchievementList;
-  let meter = useSelector((state) => selectMeterByPersonId(state, globalState.person.id));
+  let meter = useSelector((state) => selectMeterByPersonId(state, initialState.initialPerson.id));
   globalState.meter = meter;
   //#endregion
   //#region use Global State
@@ -87,13 +88,8 @@ const GameComponent = () => {
   useGlobalState(globalState, useState, [initialState.gifVisible], nGlobalState.gifVisible, nGlobalState.setGifVisible);
   useGlobalState(globalState, useModal, [], null, null, true);
   useGlobalState(globalState, useState, [initialState.achievementResult], nGlobalState.achievementResult, nGlobalState.setAchievementResult);
-  useGlobalState(
-    globalState,
-    useState,
-    [initialState.getPersonMood(meter.meterValue, globalState.person)],
-    nGlobalState.personMood,
-    nGlobalState.setPersonMood
-  );
+  initialState.getPersonMood = getInitialMoodAndImage(meter.meterValue, initialState.initialPerson) || initialState.getPersonMood;
+  useGlobalState(globalState, useState, [initialState.getPersonMood], nGlobalState.personMood, nGlobalState.setPersonMood, false, true);
   //#endregion
   //#region useEffect
   useEffect(() => {
@@ -106,6 +102,10 @@ const GameComponent = () => {
     if (globalState.showWalkthrough !== false) return;
     globalState.setHasPlayStarted(true);
   }, [globalState.showWalkthrough]);
+  useEffect(() => {
+    const backHandler = BackHandler.addEventListener("hardwareBackPress", () => true);
+    return () => backHandler.remove();
+  }, []);
   //#endregion
   return (
     <SafeAreaView className="relative flex-1 px-5 bg-black-700 flex items-center justify-between">

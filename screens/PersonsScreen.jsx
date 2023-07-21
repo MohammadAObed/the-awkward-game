@@ -1,5 +1,5 @@
 import { View, Text, Image, TouchableOpacity, ScrollView } from "react-native";
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { WalkthroughProvider, WalkthroughStep, WalkthroughTooltip } from "../libraries/walkthrough";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation, useRoute } from "@react-navigation/native";
@@ -47,19 +47,24 @@ const PersonsComponent = () => {
 };
 
 const PersonsListComponent = () => {
-  const params = useRoute().params;
-  const p = persons.find((p) => p.id === params?.personId ?? 0);
-  const pIndex = persons.findIndex((p) => p.id === params?.personId ?? 0);
   //! if meter value is bigger, then its first, etc....
-  let ps = [...persons];
-  // if (index > -1) {
-  if (pIndex > -1) {
-    ps.splice(pIndex, 1);
-    ps.unshift(p);
-  }
+  const params = useRoute().params;
+
+  let personsList = useMemo(() => {
+    return [...persons];
+  }, []);
+  useEffect(() => {
+    const p = persons.find((p) => p.id === params?.personId ?? 0);
+    const pIndex = persons.findIndex((p) => p.id === params?.personId ?? 0);
+    if (pIndex > -1) {
+      personsList.splice(pIndex, 1);
+      personsList.unshift(p);
+    }
+  }, []);
+
   return (
     <ScrollView className="h-full">
-      {ps.map((p, index) => {
+      {personsList.map((p, index) => {
         return <PersonWalkthroughComponent key={p.id} person={p} isWalkthrough={index === 0 ? true : false} />;
       })}
     </ScrollView>

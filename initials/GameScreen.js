@@ -19,5 +19,5 @@ export const initialState = {
   initialPersonHandshake: handshakes[1] || new Handshake(),
   gifVisible: false,
   achievementResult: PlayerAchievementMethods.Result,
-  getPersonMood: (meterValue, person) => getInitialMoodAndImage(meterValue, person),
+  getPersonMood: { value: 2, name: "Normal", imageIndex: 0, audioIndex: 0 },
 };
