@@ -8,6 +8,9 @@ const ShakeBtnComponent = () => {
     //   (prev) => handshakes[getRandomNumber(handshakes.length, 0, prev)] || new Handshake()
     //   // handshakes[0] || new Handshake()
     // );
+    if (globalState.showWalkthrough === true) {
+      return;
+    }
     globalState.setTimer((prev) => 0);
     globalState.personHandshakeAnimation.values.opacity.stopAnimation(); //(opacity, positionY, etc... just one will stop all (bcz parallel))
     globalState.playerHandshakeAnimation.values.opacity.stopAnimation();

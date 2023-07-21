@@ -29,6 +29,9 @@ const PersonWalkthroughComponent = ({ person = new Person(), isWalkthrough = fal
 
 const PersonComponent = ({ person = new Person(), isWalkthrough }) => {
   const navigateToGame = () => {
+    if (globalState.showWalkthrough === true) {
+      return;
+    }
     globalState.navigation.reset({
       index: 0,
       routes: [{ name: ScreenNames.GameScreen, params: { gameType: GameType.NORMAL, personId: person.id } }], //testing bcs personmood is funky, and when console logging here in this screen, and update some state in my gamescreen, the log here is called, wtf bitch

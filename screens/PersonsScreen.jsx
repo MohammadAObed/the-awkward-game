@@ -1,4 +1,4 @@
-import { View, Text, Image, TouchableOpacity, ScrollView } from "react-native";
+import { View, FlatList } from "react-native";
 import React, { useEffect, useMemo } from "react";
 import { WalkthroughProvider, WalkthroughStep, WalkthroughTooltip } from "../libraries/walkthrough";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -63,11 +63,13 @@ const PersonsListComponent = () => {
   }, []);
 
   return (
-    <ScrollView className="h-full">
-      {personsList.map((p, index) => {
-        return <PersonWalkthroughComponent key={p.id} person={p} isWalkthrough={index === 0 ? true : false} />;
-      })}
-    </ScrollView>
+    <>
+      <FlatList
+        data={personsList}
+        renderItem={({ item, index }) => <PersonWalkthroughComponent person={item} isWalkthrough={index === 0 ? true : false} />}
+        keyExtractor={(item) => item.id}
+      />
+    </>
   );
 };
 

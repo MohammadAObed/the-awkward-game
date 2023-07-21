@@ -15,9 +15,9 @@ import { playerAchievementReset } from "../features/PlayerAchievementSlice";
 const StartScreen = () => {
   //Temp
   const dispatch = useDispatch();
-  //dispatch(walkthroughReset({}));
-  //dispatch(meterReset({}));
-  //dispatch(playerAchievementReset({}));
+  dispatch(walkthroughReset({}));
+  dispatch(meterReset({}));
+  dispatch(playerAchievementReset({}));
   //
   const [videoLoaded, setVideoLoaded] = useState(false);
   const { modalVisible, showModal, hideModal } = useModal();
