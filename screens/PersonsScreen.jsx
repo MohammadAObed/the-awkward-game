@@ -46,6 +46,8 @@ const PersonsComponent = () => {
   );
 };
 
+const HelpIndex = 2;
+
 const PersonsListComponent = () => {
   //! if meter value is bigger, then its first, etc....
   const params = useRoute().params;
@@ -66,7 +68,9 @@ const PersonsListComponent = () => {
     <>
       <FlatList
         data={personsList}
-        renderItem={({ item, index }) => <PersonWalkthroughComponent person={item} isWalkthrough={index === 0 ? true : false} />}
+        renderItem={({ item, index }) => (
+          <PersonWalkthroughComponent person={item} isWalkthrough={index === 0 ? true : false} isHelp={index === HelpIndex} />
+        )}
         keyExtractor={(item) => item.id}
       />
     </>

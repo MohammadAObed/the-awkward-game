@@ -14,8 +14,8 @@ const LeaveMsgComponent = ({ leaveScreen = function () {} }) => {
   return (
     <View className="mt-52 flex items-center">
       <Text className="text-white w-72 text-center text-lg">{msg}</Text>
-      <TouchableOpacity className="bg-yellow-500 py-2 px-9 rounded-md mt-2" onPress={leaveScreen}>
-        <Text className=" text-black-500 text-center">Leave 👋</Text>
+      <TouchableOpacity className="bg-yellow-500 py-3 px-16 rounded-md mt-2" onPress={leaveScreen}>
+        <Text className=" text-black-500 text-center text-lg">Leave 👋</Text>
       </TouchableOpacity>
     </View>
   );

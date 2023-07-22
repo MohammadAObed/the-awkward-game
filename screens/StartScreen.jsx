@@ -3,7 +3,6 @@ import { Video, ResizeMode } from "expo-av";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useEffect, useState } from "react";
 import useModal from "../hooks/common/useModal";
-import AppModal from "../components/common/TabsModal";
 import { useNavigation, useIsFocused } from "@react-navigation/native";
 import { ScreenNames } from "../constants/ScreenNames";
 import { GameType } from "../constants/GameScreen";
@@ -12,14 +11,15 @@ import { selectWalkthroughSliceByScreenNameAndListOrder, walkthroughReset, walkt
 import { meterReset } from "../features/PersonMeterSlice";
 import { playerAchievementReset } from "../features/PlayerAchievementSlice";
 import EmptyModal from "../components/common/EmptyModal";
+import TabsModal from "../components/common/TabsModal";
 
 const StartScreen = () => {
   //Temp
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  dispatch(walkthroughReset({}));
-  dispatch(meterReset({}));
-  dispatch(playerAchievementReset({}));
+  //dispatch(walkthroughReset({}));
+  //dispatch(meterReset({}));
+  //dispatch(playerAchievementReset({}));
   //
   const [videoLoaded, setVideoLoaded] = useState(false);
   const { modalVisible, showModal, hideModal } = useModal();
@@ -59,7 +59,7 @@ const StartScreen = () => {
       <ContentComponent shakeBtnOnClick={shakeBtnOnClick} />
       <FooterComponent showModal={showModal} />
       {modalVisible && ( //for faster performance
-        <AppModal hideModal={hideModal} modalVisible={modalVisible} />
+        <TabsModal hideModal={hideModal} modalVisible={modalVisible} />
       )}
       <EmptyModal hideModal={() => {}} modalVisible={isFirstEncounterEver && volumeModalVisible} shadeOpacity={0.9}>
         <VolumeUpComponent leaveScreen={leaveScreen}></VolumeUpComponent>
@@ -117,7 +117,7 @@ const FooterComponent = ({ showModal }) => {
 
 const VolumeUpComponent = ({ leaveScreen = function () {} }) => {
   return (
-    <View className=" flex items-center justify-end -mt-32">
+    <View className=" flex items-center justify-end -mt-16">
       <Image className="w-72 h-40" source={require("../assets/images/volumeUp.gif")} />
       <Text className="mt-5 text-white w-72 text-center text-lg">
         Volume up for better <Text className="line-through">experience</Text> <Text className="text-yellow-500">awkwardness</Text>

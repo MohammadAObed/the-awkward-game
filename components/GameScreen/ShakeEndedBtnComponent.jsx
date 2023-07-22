@@ -17,7 +17,7 @@ const ShakeEndedBtnComponent = ({ handlePress, btnText = "" }) => {
       {visible && (
         <TouchableOpacity
           onPress={handlePress}
-          className="-mr-1 -ml-1 z-50 py-2 px-9 bg-yellow-500 rounded-md flex-row items-center justify-center"
+          className="-mr-1 -ml-1 z-50 py-3 px-11 bg-yellow-500 rounded-md flex-row items-center justify-center"
         >
           <Text className="to-black-700">{btnText}</Text>
         </TouchableOpacity>

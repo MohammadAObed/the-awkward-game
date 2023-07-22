@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { Modal, Pressable, ScrollView, Text, TouchableOpacity, TouchableWithoutFeedback, View } from "react-native";
 import { XMarkIcon } from "react-native-heroicons/solid";
 
-const TabsEnum = { ABOUT: 1, HINT: 2 };
+export const TabsEnum = { ABOUT: 1, HINT: 2, CREDITS: 3 };
 const Tabs = [
   {
     id: TabsEnum.ABOUT,
@@ -14,16 +14,29 @@ const Tabs = [
     title: "Hints",
     ContentComponenet: () => <HintsTabContentComponent />,
   },
+  {
+    id: TabsEnum.CREDITS,
+    title: "Credits",
+    ContentComponenet: () => <CreditsTabContentComponent />,
+  },
 ];
 
-export function TabsModal({ modalVisible, hideModal, children, showFooter, extraStyle = "" }) {
+export function TabsModal({
+  modalVisible,
+  hideModal,
+  children,
+  showFooter,
+  extraStyle = "",
+  selectedTab = TabsEnum.ABOUT,
+  showCredits = false,
+}) {
   return (
     <Modal visible={modalVisible} animationType="none" onRequestClose={hideModal} transparent statusBarTranslucent={true}>
       <View className="relative flex-1 flex-row items-center justify-center">
         <ShadeComponent hideModal={hideModal} />
         <View className={`bg-black-600 z-50 flex rounded-sm ${extraStyle}`}>
           <ExitButtonComponent hideModal={hideModal} />
-          {children || <TabsComponent />}
+          {children || <TabsComponent selected={selectedTab} showCredits={showCredits} />}
           <FooterComponent showFooter={showFooter} />
         </View>
       </View>
@@ -39,20 +52,21 @@ const ShadeComponent = ({ hideModal }) => {
 
 const ExitButtonComponent = ({ hideModal }) => {
   return (
-    <TouchableOpacity className="absolute top-0 right-0 p-3 z-10" onPress={hideModal}>
+    <TouchableOpacity className="absolute top-0 right-0 p-3 z-10 " onPress={hideModal}>
       <XMarkIcon size={32} color="#333" />
     </TouchableOpacity>
   );
 };
 
-const TabsComponent = () => {
-  const [selectedTab, setSelectedTab] = useState(TabsEnum.ABOUT);
+const TabsComponent = ({ selected = TabsEnum.ABOUT, showCredits = false }) => {
+  const [selectedTab, setSelectedTab] = useState(selected);
   const SelectedTab = Tabs.find((tab) => tab.id === selectedTab);
+  const tabsList = showCredits ? Tabs : [Tabs[0], Tabs[1]];
   return (
-    <View className=" h-72 w-80 bg-black-500 shadow-md rounded-sm">
-      <View className="flex-row mt-2.5 z-10 mx-1">
-        {Tabs.map((Tab) => (
-          <TabComponenet key={Tab.id} {...Tab} isSelected={selectedTab == Tab.id && true} setSelectedTab={setSelectedTab} />
+    <View className=" h-72 w-80 bg-black-500 shadow-md rounded-sm ">
+      <View className="flex-row mt-1.5 z-10 border-b-black-700 border-b-8">
+        {tabsList.map((Tab) => (
+          <TabComponenet key={Tab.id} {...Tab} isSelected={selectedTab == Tab.id && true} setSelectedTab={setSelectedTab} resize={showCredits} />
         ))}
       </View>
       <ScrollView className="flex-1 bg-black-700 py-4">{SelectedTab.ContentComponenet()}</ScrollView>
@@ -60,10 +74,11 @@ const TabsComponent = () => {
   );
 };
 
-const TabComponenet = ({ id, title, isSelected = false, setSelectedTab }) => {
+const TabComponenet = ({ id, title, isSelected = false, setSelectedTab, resize = false }) => {
   return (
     <Pressable
-      className={`mr-1 bg-black-700 w-28 rounded-md px-2 py-2 translate-y-1 ${isSelected ? `border-b-black-700 border-b-4` : `bg-transparent`}`}
+      className={`mr-1 bg-black-700 rounded-md px-2 py-2 translate-y-1 ${isSelected ? `border-b-black-700 border-b-4` : `bg-transparent`}`}
+      style={{ width: resize ? 90 : 120 }}
       onPress={() => setSelectedTab(id)}
     >
       <Text className={`text-center text-lg text-white ${!isSelected && `opacity-50`}`}>{title}</Text>
@@ -104,13 +119,13 @@ const HintsTabContentComponent = () => {
           - Each character has a signature handshake 🤝
         </Text>
         <Text className="text-white leading-6 mt-2" style={{ fontSize: 15 }}>
-          - If you match certain conditions, you get an achievment with a sticker 🌟
+          - If you match certain conditions, you get an achievment 🌟 with a sticker
         </Text>
         <Text className="text-white leading-6 mt-2" style={{ fontSize: 15 }}>
-          - The bar indicates level of friendship with the character 🤝‍🧑
+          - The bar indicates level of friendship 🤝‍🧑 with the character
         </Text>
         <Text className="text-white leading-6 mt-2" style={{ fontSize: 15 }}>
-          - Bar decreases or increses by matching a handshake or unlocking an achievment 📏
+          - Bar 📏 decreases or increses by matching a handshake or unlocking an achievment
         </Text>
       </View>
     </View>
@@ -121,6 +136,21 @@ const FooterComponent = ({ showFooter }) => {
   return (
     <View className="items-center justify-center px-5 mt-5 mb-3">
       {showFooter === true && <Text className="text-sm opacity-70 text-yellow-500">By Mohammad Obed &#169;</Text>}
+    </View>
+  );
+};
+
+const CreditsTabContentComponent = () => {
+  return (
+    <View>
+      <View className="bg-black-500 px-2 py-2 w-full mb-4">
+        <Text className="text-yellow-500 leading-6 font-bold" style={{ fontSize: 15 }}>
+          Clout
+        </Text>
+        <Text className="text-white leading-6 mt-2" style={{ fontSize: 15 }}>
+          🗣 Shout out to all the characters in this game
+        </Text>
+      </View>
     </View>
   );
 };

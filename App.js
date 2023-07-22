@@ -9,9 +9,10 @@ import { PersistGate } from "redux-persist/integration/react";
 import { ScreenNames } from "./constants/ScreenNames";
 import PersonsScreen from "./screens/PersonsScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { HomeIcon, HomeModernIcon, StarIcon } from "react-native-heroicons/solid";
+import { AdjustmentsHorizontalIcon, HomeIcon, HomeModernIcon, QuestionMarkCircleIcon, StarIcon } from "react-native-heroicons/solid";
 import AchievementsScreen from "./screens/AchievementsScreen";
 import { View } from "react-native";
+import SettingsScreen from "./screens/SettingsScreen";
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -65,6 +66,16 @@ function HomeScreenWithTabs() {
         options={{
           title: "",
           tabBarIcon: ({ size, color }) => <StarIcon size={size} color={color} />,
+        }}
+      />
+      <Tab.Screen
+        name={ScreenNames.SettingsScreen}
+        component={SettingsScreen}
+        options={{
+          title: "",
+          tabBarIcon: ({ size, color }) => {
+            return <AdjustmentsHorizontalIcon size={size} color={color} />;
+          },
         }}
       />
     </Tab.Navigator>

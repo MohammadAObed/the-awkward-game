@@ -5,4 +5,5 @@ export const ScreenNames = {
   HomeScreen: "HomeScreen",
   PersonsScreen: "PersonsScreen",
   AchievementsScreen: "AchievementsScreen",
+  SettingsScreen: "SettingsScreen",
 };

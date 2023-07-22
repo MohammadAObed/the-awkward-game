@@ -9,7 +9,7 @@ const GifComponent = ({ leaveScreen = function () {} }) => {
     <View className=" flex items-center">
       <Image className="w-64 h-60" source={globalState.achievementResult.image} />
       <Text className="mt-5 text-white w-72 text-center text-lg">{globalState.achievementResult.msg}</Text>
-      <TouchableOpacity className="bg-yellow-500 py-2 px-9 rounded-md mt-5" onPress={leaveScreen}>
+      <TouchableOpacity className="bg-yellow-500 py-3 px-16 rounded-md mt-5" onPress={leaveScreen}>
         <Text className=" text-black-500 text-center">Achievement 👉</Text>
       </TouchableOpacity>
     </View>

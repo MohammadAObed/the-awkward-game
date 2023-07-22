@@ -50,9 +50,11 @@ const AchievementsScreen = () => {
     <SafeAreaView className="flex-1 px-5 bg-black-700">
       <SettingComponent title={"Stickers"}>
         <PersonsComponent />
-        <EmptyModal hideModal={hideModal} modalVisible={modalVisible}>
-          <GifComponent />
-        </EmptyModal>
+        {modalVisible && (
+          <EmptyModal hideModal={hideModal} modalVisible={modalVisible}>
+            <GifComponent />
+          </EmptyModal>
+        )}
       </SettingComponent>
     </SafeAreaView>
   );
@@ -61,7 +63,7 @@ const AchievementsScreen = () => {
 const SettingComponent = ({ title, children }) => {
   return (
     <View className="mt-2 flex space-y-2">
-      <Text className="text-lg text-yellow-500">{title}</Text>
+      <Text className="text-xl text-yellow-500">{title}</Text>
       {children}
     </View>
   );
@@ -71,12 +73,12 @@ const PersonsComponent = () => {
   let achievements = [new PlayerAchievement()];
   achievements = useSelector((state) => selectPlayerAchievements(state));
   return (
-    <View>
+    <ScrollView>
       {persons.map((p) => {
         let personAchievements = achievements.filter((a) => a.personId == p.id);
         return <PersonComponent key={p.id} personAchievements={personAchievements} person={p} />;
       })}
-    </View>
+    </ScrollView>
   );
 };
 
@@ -155,7 +157,7 @@ const GifComponent = () => {
         {PlayerAchievementMethods[globalState.achievement.methodName]?.DisplayedMsg}
       </Text>
       <View className="flex-row space-x-2">
-        <TouchableOpacity className="bg-yellow-500 py-2 px-9 rounded-md mt-5" onPress={() => handleDownload(image)}>
+        <TouchableOpacity className="bg-yellow-500 py-3 px-16 rounded-md mt-5" onPress={() => handleDownload(image)}>
           <Text className=" text-black-500 text-center">Download 👇</Text>
         </TouchableOpacity>
       </View>
