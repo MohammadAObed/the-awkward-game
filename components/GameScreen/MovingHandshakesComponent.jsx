@@ -6,6 +6,7 @@ import { personHandshakeAnimationValues, playerHandshakeAnimationValues } from "
 import MovingHandshakeComponent from "./MovingHandshakeComponent";
 import { initialState } from "../../initials/GameScreen";
 import { generateRandomHandshake } from "../../helpers/GameScreen";
+import useAnimatedHandshake from "../../hooks/GameScreen/useAnimatedHandshake";
 
 const MovingHandshakesComponent = () => {
   initialState.initialPersonHandshake = generateRandomHandshake({ person: initialState.initialPerson }) || initialState.initialHandshake;
@@ -24,7 +25,6 @@ const MovingHandshakesComponent = () => {
     nGlobalState.selectedPersonHandshake,
     nGlobalState.setSelectedPersonHandshake
   );
-
   const personHandshakeAnimation = useAnimatedHandshake(PlayerType.PERSON, personHandshakeAnimationValues);
   const playerHandshakeAnimation = useAnimatedHandshake(PlayerType.PLAYER, playerHandshakeAnimationValues);
   globalState.personHandshakeAnimation = personHandshakeAnimation;

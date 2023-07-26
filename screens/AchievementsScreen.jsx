@@ -116,13 +116,13 @@ const AchievementComponent = ({ personAchievement = new PlayerAchievement() }) =
   }
   return (
     <TouchableOpacity onPress={handleGifOnPress}>
-      <Image className="w-24 h-20 mr-2" source={PlayerAchievementMethods[personAchievement.methodName]?.image} />
+      <Image className="w-24 h-20 mr-2" source={PlayerAchievementMethods[personAchievement.methodName]?.requireImage()} />
     </TouchableOpacity>
   );
 };
 
 const GifComponent = () => {
-  const image = PlayerAchievementMethods[globalState.achievement.methodName]?.image;
+  const image = PlayerAchievementMethods[globalState.achievement.methodName]?.requireImage();
 
   async function handleDownload(image) {
     try {

@@ -36,7 +36,18 @@ const PersonsComponent = () => {
   globalState.navigation = navigation;
   const dispatch = useDispatch();
   globalState.dispatch = dispatch;
-  useGlobalState(globalState, useWalkthroughShow, [globalState, { ...initialState.showWalkthrough }], null, null, true);
+  useGlobalState(
+    globalState,
+    useWalkthroughShow,
+    [
+      globalState,
+      { ...initialState.showWalkthrough },
+      [() => require("../assets/audio/aiadam/ClickOnAContact.mp3"), () => require("../assets/audio/aiadam/barIndicatesLevelOf.mp3")],
+    ],
+    null,
+    null,
+    true
+  );
   return (
     <SafeAreaView className="flex-1 px-5 bg-black-700">
       <View className="mt-5 mb-5">

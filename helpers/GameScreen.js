@@ -10,6 +10,7 @@ import { Person, PersonAudio } from "../models/Person";
 import { getRandomNumber } from "../utils/common/getRandomNumber";
 import { PersonMood } from "../constants/Person";
 import { PlayerAchievementMethods } from "../models/PlayerAchievementMethods";
+import { playAudio } from "../utils/common/playAudio";
 
 //? Look for export keyword to know which functions are used outside
 
@@ -71,15 +72,7 @@ function generateMoodValue({ selectedPersonHandshake = new Handshake(), selected
   return value;
 }
 async function handlePlayAudio(mood = { ...PersonMood.NORMAL, imageIndex: 0, audioIndex: 0 }, personAudio = new PersonAudio()) {
-  try {
-    const asset = personAudio[mood.name]()[mood.audioIndex];
-    //console.log("🚀 ~ file: GameScreen.js:76 ~ handlePlayAudio ~ asset:", asset);
-    if (asset) {
-      const { sound } = await Audio.Sound.createAsync(asset, { shouldPlay: true });
-    }
-  } catch (error) {
-    console.log("Error playing audio:", error);
-  }
+  playAudio(personAudio[mood.name], true, mood.audioIndex);
 }
 
 function getMoodBasedOnHandshake() {

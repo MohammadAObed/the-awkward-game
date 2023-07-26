@@ -4,12 +4,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { WalkthroughProvider, WalkthroughTooltip } from "../libraries/walkthrough";
 import handshakes from "../data/Handshake";
 import { useDispatch, useSelector } from "react-redux";
-import useTimer from "../hooks/GameScreen/useTimer";
 import useWalkthroughShow from "../hooks/common/useWalkthroughShow";
-import useAnimatedHandshake from "../hooks/GameScreen/useAnimatedHandshake";
-import { getRandomNumber } from "../utils/common/getRandomNumber";
-import MovingHandshakeComponent from "../components/GameScreen/MovingHandshakeComponent";
-import { PlayerType } from "../constants/PlayerType";
 import HandshakesWalkthroughComponent from "../components/GameScreen/HandshakesWalkthroughComponent";
 import PersonImageWalkthroughComponent from "../components/GameScreen/PersonImageWalkthroughComponent";
 import { initialState } from "../initials/GameScreen";
@@ -29,7 +24,6 @@ import EmptyModal from "../components/common/EmptyModal";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { walkthroughReset } from "../features/walkthroughSlice";
 import persons from "../data/Person";
-import { ArrowLeftCircleIcon } from "react-native-heroicons/solid";
 import MovingHandshakesComponent from "../components/GameScreen/MovingHandshakesComponent";
 import ShakeBtnComponent from "../components/GameScreen/ShakeBtnComponent";
 import PersonLineComponent from "../components/GameScreen/PersonLineComponent";
@@ -62,6 +56,7 @@ const GameScreen = () => {
 };
 
 const GameComponent = () => {
+  //! all useGlobal state must be before anything (maybe, cuz this happened with meter and images problem (its logical, bcz i should use globalstate.person after the useGlobalState),  we were using the previous person from global state so the meter were not getting the current person meter, so useglobal must be before, i fixed other way but its how it supposed to be)
   //#region Global variables initialization
   const { gameType, personId } = useRoute().params;
   globalState.gameType = gameType || GameType.NORMAL;
@@ -79,7 +74,21 @@ const GameComponent = () => {
   //#endregion
   //#region use Global State
   useGlobalState(globalState, useState, [initialState.initialPerson], nGlobalState.person, nGlobalState.setPerson);
-  useGlobalState(globalState, useWalkthroughShow, [globalState, { ...initialState.showWalkthrough }], null, null, true);
+  useGlobalState(
+    globalState,
+    useWalkthroughShow,
+    [
+      globalState,
+      { ...initialState.showWalkthrough },
+      [
+        () => require("../assets/audio/aiadam/QuickYouAreBeingApproached.mp3"),
+        () => require("../assets/audio/aiadam/ChooseYourHandshakeFast.mp3"),
+      ],
+    ],
+    null,
+    null,
+    true
+  );
   useGlobalState(globalState, useState, [initialState.hasShakeStarted], nGlobalState.hasShakeStarted, nGlobalState.setHasShakeStarted);
   useGlobalState(globalState, useState, [initialState.hasShakeEnded], nGlobalState.hasShakeEnded, nGlobalState.setHasShakeEnded);
   useGlobalState(globalState, useState, [initialState.personHadEnough], nGlobalState.personHadEnough, nGlobalState.setPersonHadEnough);
