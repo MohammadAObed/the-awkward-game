@@ -39,7 +39,7 @@ const PersonImageComponent = () => {
       <View className="w-64 h-60 rounded-full mt-5">
         <Image
           className="w-full h-full"
-          style={{ opacity: globalState.modalVisible ? 0.2 : 1 }}
+          style={{ opacity: globalState.modalVisible && !globalState.isPersonSoundPlaying ? 0.2 : 1 }}
           source={img}
           onLoad={() => globalState.showWalkthrough === true && globalState.startWalkthrough()}
         />

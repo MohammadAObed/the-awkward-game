@@ -4,16 +4,14 @@ import { Person } from "../../models/Person";
 import { WalkthroughStep, walkthroughable } from "../../libraries/walkthrough";
 import PersonImageComponent from "./PersonImageComponent";
 import PersonBarWalkthroughComponent from "./PersonBarWalkthroughComponent";
-import { PhoneIcon, QuestionMarkCircleIcon } from "react-native-heroicons/solid";
+import { PhoneIcon } from "react-native-heroicons/solid";
 import { GameType } from "../../constants/GameScreen";
 import { ScreenNames } from "../../constants/ScreenNames";
 import { globalState } from "../../global/PersonsScreen";
-import useModal from "../../hooks/common/useModal";
-import TabsModal, { TabsEnum } from "../../components/common/TabsModal";
 
 const WalkthroughView = walkthroughable(View);
 
-const PersonWalkthroughComponent = ({ person = new Person(), isWalkthrough = false, isHelp = false }) => {
+const PersonWalkthroughComponent = ({ person = new Person(), isWalkthrough = false }) => {
   return (
     <>
       {isWalkthrough ? (
@@ -22,8 +20,6 @@ const PersonWalkthroughComponent = ({ person = new Person(), isWalkthrough = fal
             <PersonComponent key={person.id} person={person} isWalkthrough={true} />
           </WalkthroughView>
         </WalkthroughStep>
-      ) : isHelp ? (
-        <HelpComponent />
       ) : (
         <PersonComponent key={person.id} person={person} />
       )}
@@ -56,23 +52,6 @@ const PersonComponent = ({ person = new Person(), isWalkthrough }) => {
         <PhoneIcon size={23} color={"gray"} />
       </TouchableOpacity>
     </TouchableOpacity>
-  );
-};
-
-const HelpComponent = () => {
-  const showHelp = (e) => {};
-  const { hideModal, modalVisible, showModal } = useModal();
-  return (
-    <>
-      <TouchableOpacity className="p-2 rounded-xl bg-black-500 mt-5 flex-row justify-center items-center" onPress={showModal}>
-        <TouchableOpacity className="p-2" onPress={showModal}>
-          <QuestionMarkCircleIcon size={40} color={"gray"} />
-        </TouchableOpacity>
-      </TouchableOpacity>
-      {modalVisible && ( //for faster performance
-        <TabsModal hideModal={hideModal} modalVisible={modalVisible} selectedTab={TabsEnum.HINT} showCredits={true} />
-      )}
-    </>
   );
 };
 

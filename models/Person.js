@@ -2,18 +2,29 @@ import { PersonMood } from "../constants/Person";
 import { Handshake } from "./Handshake";
 
 class PersonImages {
-  constructor(Happy = () => [], Angry = () => [], Normal = () => []) {
+  constructor(Happy = () => [], Angry = () => [], Normal = () => [], Signature = () => []) {
     this[PersonMood.HAPPY.name] = Happy;
     this[PersonMood.ANGRY.name] = Angry;
     this[PersonMood.NORMAL.name] = Normal;
+    this[PersonMood.SIGNATURE.name] = Signature;
   }
 }
 
 class PersonAudio {
-  constructor(Happy = () => [], Normal = () => [], Angry = () => []) {
+  constructor(Happy = () => [], Normal = () => [], Angry = () => [], Signature = () => []) {
     this[PersonMood.HAPPY.name] = Happy;
     this[PersonMood.ANGRY.name] = Angry;
     this[PersonMood.NORMAL.name] = Normal;
+    this[PersonMood.SIGNATURE.name] = Signature;
+  }
+}
+
+class PersonLines {
+  constructor(Happy = () => [], Normal = () => [], Angry = () => [], Signature = () => []) {
+    this[PersonMood.HAPPY.name] = Happy;
+    this[PersonMood.ANGRY.name] = Angry;
+    this[PersonMood.NORMAL.name] = Normal;
+    this[PersonMood.SIGNATURE.name] = Signature;
   }
 }
 
@@ -30,24 +41,24 @@ class Person {
     name = "",
     images = new PersonImages(),
     audio = new PersonAudio(),
+    lines = new PersonLines(),
     signatureLine = "",
     signatureHandshake = new Handshake(),
     handshakesOccurance = defaultHandshakesOccurance,
-    greetings = { positive: [], negative: [] },
     moodBreakpoints = { DEFAULT: 0, ANGRY: 30, NORMAL: 60, HAPPY: 100 }
   ) {
     this.id = id;
     this.name = name;
     this.images = images;
     this.audio = audio;
+    this.lines = lines;
     this.signatureLine = signatureLine;
     this.signatureHandshake = signatureHandshake;
     this.handshakesOccurance = handshakesOccurance;
     this.handshakesOccurance.highChance.ids.push(this.signatureHandshake.id, this.signatureHandshake.id);
     this.moodBreakpoints = moodBreakpoints;
-    this.greetings = greetings;
   }
   chanceRange = { min: 0, max: 100 };
 }
 
-export { PersonImages, PersonAudio, Person };
+export { PersonImages, PersonAudio, Person, PersonLines };

@@ -20,4 +20,5 @@ export const initialState = {
   gifVisible: false,
   achievementResult: PlayerAchievementMethods.Result,
   getPersonMood: { value: 2, name: "Normal", imageIndex: 0, audioIndex: 0 },
+  isPersonSoundPlaying: false,
 };

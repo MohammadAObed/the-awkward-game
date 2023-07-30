@@ -71,8 +71,29 @@ function generateMoodValue({ selectedPersonHandshake = new Handshake(), selected
 
   return value;
 }
-async function handlePlayAudio(mood = { ...PersonMood.NORMAL, imageIndex: 0, audioIndex: 0 }, personAudio = new PersonAudio()) {
-  playAudio(personAudio[mood.name], true, mood.audioIndex);
+async function mHandlePlayAudio(mood = { ...PersonMood.NORMAL, imageIndex: 0, audioIndex: 0 }, personAudio = new PersonAudio()) {
+  const sound = await playAudio(personAudio[mood.name], true, mood.audioIndex);
+  let timeout;
+  if (sound) {
+    if (timeout) clearTimeout(timeout);
+    globalState.setIsPersonSoundPlaying(true);
+  }
+  sound?.setOnPlaybackStatusUpdate((status) => {
+    if (status.isLoaded && (status.durationMillis === status.positionMillis || status.didJustFinish)) {
+      timeout = setTimeout(() => {
+        globalState.setIsPersonSoundPlaying((prev) => false);
+        clearTimeout(timeout);
+      }, 800);
+
+      sound.unloadAsync();
+    }
+  });
+  if (globalState.isPersonSoundPlaying && globalState.personHadEnough) {
+    const cautionTimeout = setTimeout(() => {
+      globalState.setIsPersonSoundPlaying((prev) => false);
+      clearTimeout(cautionTimeout);
+    }, 7000);
+  }
 }
 
 function getMoodBasedOnHandshake() {
@@ -86,11 +107,13 @@ function getMoodBasedOnHandshake() {
 
   if (globalState.isFirstEncounterEver === true || globalState.achievementResult.showAchievement === true) {
     mood = PersonMood.HAPPY;
+  } else if (globalState.selectedPersonHandshake.id === globalState.person.signatureHandshake.id) {
+    mood = PersonMood.SIGNATURE;
   } else if (hasHandshakeMatched && oldMoodValue === PersonMood.ANGRY.value) {
     mood = PersonMood.NORMAL;
-  } else if (hasHandshakeMatched && (oldMoodValue === PersonMood.NORMAL.value || oldMoodValue === PersonMood.HAPPY.value)) {
+  } else if (hasHandshakeMatched && [PersonMood.NORMAL.value, PersonMood.HAPPY.value, PersonMood.SIGNATURE.value].includes(oldMoodValue)) {
     mood = PersonMood.HAPPY;
-  } else if (!hasHandshakeMatched && (oldMoodValue === PersonMood.ANGRY.value || oldMoodValue === PersonMood.NORMAL.value)) {
+  } else if (!hasHandshakeMatched && [PersonMood.ANGRY.value, PersonMood.NORMAL.value, PersonMood.SIGNATURE.value].includes(oldMoodValue)) {
     mood = PersonMood.ANGRY;
   } else if (!hasHandshakeMatched && oldMoodValue === PersonMood.HAPPY.value) {
     mood = PersonMood.NORMAL;
@@ -180,7 +203,7 @@ export function handleShakeEnded() {
     imageIndex: newMood.imageIndex,
     audioIndex: newMood.audioIndex,
   }));
-  handlePlayAudio(newMood, globalState.person.audio);
+  mHandlePlayAudio(newMood, globalState.person.audio);
   let result = PlayerAchievementMethods.Result;
   result = mHandlePlayerAchievements();
   globalState.setAchievementResult((prev) => result);

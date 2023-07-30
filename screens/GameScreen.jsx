@@ -99,6 +99,13 @@ const GameComponent = () => {
   useGlobalState(globalState, useState, [initialState.achievementResult], nGlobalState.achievementResult, nGlobalState.setAchievementResult);
   initialState.getPersonMood = getInitialMoodAndImage(meter.meterValue, initialState.initialPerson) || initialState.getPersonMood;
   useGlobalState(globalState, useState, [initialState.getPersonMood], nGlobalState.personMood, nGlobalState.setPersonMood, false, true);
+  useGlobalState(
+    globalState,
+    useState,
+    [initialState.isPersonSoundPlaying],
+    nGlobalState.isPersonSoundPlaying,
+    nGlobalState.setIsPersonSoundPlaying
+  );
   //#endregion
   //#region useEffect
   useEffect(() => {
@@ -146,7 +153,8 @@ const GameComponent = () => {
       )}
       {globalState.hasShakeEnded === true && <PersonLineComponent />}
 
-      {globalState.modalVisible && ( //for faster performance
+      {globalState.modalVisible && !globalState.isPersonSoundPlaying && (
+        //for faster performance
         <EmptyModal hideModal={() => {}} modalVisible={globalState.modalVisible}>
           {globalState.gifVisible === true ? (
             <GifComponent leaveScreen={(e) => leaveScreen(e, ScreenNames.AchievementsScreen)}></GifComponent>

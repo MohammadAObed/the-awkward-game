@@ -6,13 +6,10 @@ import { initialState } from "../../initials/GameScreen";
 
 const PersonLineComponent = () => {
   const hasHandshakeMatched = globalState.selectedPlayerHandshake.id === globalState.selectedPersonHandshake.id;
-  const greeting = useMemo(
-    () =>
-      hasHandshakeMatched || globalState.achievementResult.showAchievement || globalState.isFirstEncounterEver
-        ? globalState.person.greetings.positive[getRandomNumber(globalState.person.greetings.positive.length)]
-        : globalState.person.greetings.negative[getRandomNumber(globalState.person.greetings.negative.length)],
-    [globalState.timesPlayed, globalState.timesPlayed == initialState.timesPlayed]
-  );
+  const greeting = useMemo(() => {
+    const personLines = globalState.person.lines[globalState.personMood.name]() || [];
+    return personLines[getRandomNumber(personLines?.length || 0)];
+  }, [globalState.timesPlayed, globalState.timesPlayed == initialState.timesPlayed]);
 
   return (
     <View className="h-40 mb-2 flex justify-center">

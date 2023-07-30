@@ -42,6 +42,8 @@ export const globalState = {
   setAchievementResult: function () {},
   personMood: { ...PersonMood.NORMAL, imageIndex: 0, audioIndex: 0 },
   setPersonMood: function () {},
+  isPersonSoundPlaying: false,
+  setIsPersonSoundPlaying: function () {},
   //#endregion
 };
 export const nGlobalState = {
@@ -81,5 +83,7 @@ export const nGlobalState = {
   setAchievementResult: "setAchievementResult",
   personMood: "personMood",
   setPersonMood: "setPersonMood",
+  isPersonSoundPlaying: "isPersonSoundPlaying",
+  setIsPersonSoundPlaying: "setIsPersonSoundPlaying",
   //#endregion
 };

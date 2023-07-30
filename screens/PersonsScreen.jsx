@@ -1,4 +1,4 @@
-import { View, FlatList } from "react-native";
+import { View, FlatList, TouchableOpacity } from "react-native";
 import React, { useEffect, useMemo } from "react";
 import { WalkthroughProvider, WalkthroughStep, WalkthroughTooltip } from "../libraries/walkthrough";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -11,6 +11,9 @@ import useWalkthroughShow from "../hooks/common/useWalkthroughShow";
 import { useDispatch } from "react-redux";
 import PersonWalkthroughComponent from "../components/PersonsScreen/PersonWalkthroughComponent";
 import { ScreenNames } from "../constants/ScreenNames";
+import useModal from "../hooks/common/useModal";
+import { QuestionMarkCircleIcon } from "react-native-heroicons/solid";
+import TabsModal, { TabsEnum } from "../components/common/TabsModal";
 
 const PersonsScreen = () => {
   return (
@@ -57,7 +60,7 @@ const PersonsComponent = () => {
   );
 };
 
-const HelpIndex = 2;
+const HelpIndex = 1;
 
 const PersonsListComponent = () => {
   //! if meter value is bigger, then its first, etc....
@@ -79,11 +82,39 @@ const PersonsListComponent = () => {
     <>
       <FlatList
         data={personsList}
-        renderItem={({ item, index }) => (
-          <PersonWalkthroughComponent person={item} isWalkthrough={index === 0 ? true : false} isHelp={index === HelpIndex} />
-        )}
+        renderItem={({ item, index }) => {
+          return (
+            <>
+              {HelpIndex === index ? (
+                <>
+                  <PersonWalkthroughComponent person={item} isWalkthrough={index === 0 ? true : false} />
+                  <HelpComponent />
+                </>
+              ) : (
+                <PersonWalkthroughComponent person={item} isWalkthrough={index === 0 ? true : false} />
+              )}
+            </>
+          );
+        }}
         keyExtractor={(item) => item.id}
       />
+    </>
+  );
+};
+
+const HelpComponent = () => {
+  const showHelp = (e) => {};
+  const { hideModal, modalVisible, showModal } = useModal();
+  return (
+    <>
+      <TouchableOpacity className="p-2 rounded-xl bg-black-500 mt-5 flex-row justify-center items-center" onPress={showModal}>
+        <TouchableOpacity className="p-2" onPress={showModal}>
+          <QuestionMarkCircleIcon size={40} color={"gray"} />
+        </TouchableOpacity>
+      </TouchableOpacity>
+      {modalVisible && ( //for faster performance
+        <TabsModal hideModal={hideModal} modalVisible={modalVisible} selectedTab={TabsEnum.HINT} showCredits={true} />
+      )}
     </>
   );
 };
