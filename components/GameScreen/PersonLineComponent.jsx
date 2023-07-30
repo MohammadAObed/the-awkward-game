@@ -12,7 +12,7 @@ const PersonLineComponent = () => {
   }, [globalState.timesPlayed, globalState.timesPlayed == initialState.timesPlayed]);
 
   return (
-    <View className="h-40 mb-2 flex justify-center">
+    <View className="h-40 mb-2 flex justify-center -z-10">
       <View className="h-fit space-y-2 flex items-center bg-black-600 p-5 pt-7">
         <Text className="text-xl text-white text-center">
           {!hasHandshakeMatched && (globalState.isFirstEncounterEver || globalState.achievementResult.showAchievement) && "No Problem! "}{" "}

@@ -32,7 +32,8 @@ class PlayerAchievementMethods {
     execute: function (param = PlayerAchievementMethods.Param) {
       if (
         globalState.personMood.value === PersonMood.NORMAL.value &&
-        globalState.selectedPersonHandshake.id === globalState.selectedPlayerHandshake.id
+        globalState.selectedPersonHandshake.id === globalState.selectedPlayerHandshake.id &&
+        globalState.selectedPersonHandshake.id !== globalState.person.signatureHandshake.id
       ) {
         return { msg: this.DisplayedMsg, showAchievement: true, requireImage: this.requireImage, methodName: this.Name };
       }

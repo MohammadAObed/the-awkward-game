@@ -19,7 +19,7 @@ const handshakes = [
   new Handshake(16, "😮", 0, 0, 0.85, 0),
   new Handshake(17, "☝️", 0, 0, 0.85, 0, 1, -1),
   new Handshake(18, "👈", 0, 0, 0.85, 0, 1, -1),
-  new Handshake(19, "👍👍", 0, 0, 0.75, 10, -1, 1),
+  new Handshake(19, "👍 👍", 0, 0, 0.75, 10, -1, 1),
   new Handshake(20, "🤚", 30, 30, 0.55, 10, -1, 1),
   new Handshake(21, "🤲", 0, 180, 0.85, 10),
   new Handshake(22, "🙂", 0, 0, 1, -10),

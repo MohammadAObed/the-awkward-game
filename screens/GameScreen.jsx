@@ -128,7 +128,7 @@ const GameComponent = () => {
       <View className="mt-1">
         <TimerComponent />
       </View>
-      <View className="-mt-0 z-50">
+      <View className="-mt-4 z-50">
         <PersonImageWalkthroughComponent />
       </View>
       <View className="flex-row items-center">
@@ -136,7 +136,7 @@ const GameComponent = () => {
           <ShakeEndedBtnComponent handlePress={leaveScreen} btnText="Leave 👋" />
         )}
         {!globalState.showWalkthrough && (
-          <View className="z-0 boder -mx-7">
+          <View className="z-0 -mx-7">
             <MovingHandshakesComponent />
           </View>
         )}
