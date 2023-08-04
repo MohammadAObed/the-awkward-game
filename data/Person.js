@@ -143,7 +143,7 @@ const SpeedAudio = new PersonAudio(
 const SpongeAudio = new PersonAudio(
   () => [require("../assets/audio/persons/SpongeHappy.mp3")],
   () => [require("../assets/audio/persons/SpongeNormal.mp3")],
-  () => [require("../assets/audio/persons/SpongeHappy.mp3")],
+  () => [require("../assets/audio/persons/SpongeAngry.mp3")],
   () => [require("../assets/audio/persons/SpongeSign.mp3")]
 );
 
@@ -154,12 +154,9 @@ const TheRockLines = new PersonLines(
     "You're an absolute beast in the game!",
     "Your charisma is infectious",
     "Amazed by your incredible energy!",
-    "A true champion, your spirit's unstoppable!",
     "Your work ethic and drive are truly inspiring!",
     "That's a rock-solid handshake! You leave a lasting impression!",
-    "Nailed the handshake! Just like I nail my movie roles!",
-    "Your handshake is solid, just like The Rock!",
-    "You're like The Rock of handshakes – strong and iconic!",
+    "Nailed the handshake! Just like I nail my movies!",
     "I like your style",
   ],
   () => [
@@ -171,7 +168,6 @@ const TheRockLines = new PersonLines(
     "You've shown promise.",
     "Hmm, your handshake could use a little more power.",
     "That's a firm grip! Keep it consistent.",
-    "Impressive handshake! You've got that Rock charm!",
     "Your handshake game is solid",
   ],
   () => [
@@ -203,7 +199,7 @@ const TrumpLines = new PersonLines(
     "You bring joy and winning to everyone around you!",
     "Your handshake is legendary, just like my leadership!",
     "Nailed the handshake! Just like I nailed the deals!",
-    "Your handshake is so good, it's like a Trump Tower!",
+    "We're on the winning path!",
   ],
   () => [
     "Interesting approach, but let me show you how a real handshake is done!",
@@ -218,13 +214,12 @@ const TrumpLines = new PersonLines(
   ],
   () => [
     "Your handshake needs some work, believe me, no offense!",
-    "Well, that was an attempt... not quite a Trump handshake!",
-    "Effort as horsepower, barely a tricycle – step up your game!",
+    "You're fired!",
     "Your handshake needs work, but don't worry, I'll help you!",
     "Better luck next time, keep practicing those handshakes!",
     "not a winner's choice!",
     "That's not how you greet like a winner – let me teach you!",
-    "The handshake needs improvement, but I'll show you the Trump way!",
+    "Move away, im taking your ride",
     "A little more Trump magic in the handshake needed",
     "You'll master handshakes with my guidance – let's make them great!",
   ],
@@ -240,7 +235,7 @@ const TrumpLines = new PersonLines(
 const CatLines = new PersonLines(
   () => ["Purr", "Mrrp", "Chirp", "Trill", "Meow-purr", "Rumble"],
   () => ["Meow", "Mew", "Miaow", "Mraow", "Mreow"],
-  () => ["Hiss", "Growl", "Yowl", "Howl", "Spit", "Thanks Sir :("],
+  () => ["Hiss", "Hissss", "Miaowwwrrr", "Thanks Sir :("],
   () => ["Meoooow"]
 );
 
@@ -257,16 +252,14 @@ const RonaldoLines = new PersonLines(
   ],
   () => [
     "Interesting approach, my friend. Maybe add some Ronaldo flair next time!",
-    "Solid effort, but I expect excellence – even in handshakes!",
+    "Solid effort, but I expect excellence",
     "Not bad, but you'll need to step up your game to match my handshake!",
     "A decent effort. Keep refining your style, like I do with my shots!",
     "You're getting there, but you'll need more practice to match me!",
     "You've shown promise, but my handshakes are in a league of their own!",
     "Hmm, your handshake could use a little more Ronaldo magic.",
-    "That's a good grip, but let me show you how a football legend does it!",
-    "Your handshake is on par with your skills – not quite Ronaldo level!",
-    "Impressive handshake, but remember, I'm the real Ronaldo here!",
-    "Your handshake game is decent, but it's not the Ronaldo standard!",
+    "That's a good grip, but let me show you how a GOAT does it!",
+    "Your handshake game is decent, but it's not my standard!",
   ],
   () => [
     "Who is that guy, hahaha",

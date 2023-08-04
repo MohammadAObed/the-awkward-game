@@ -17,6 +17,7 @@ import { playAudio } from "../utils/common/playAudio";
 //#region private
 function mHandlePlayerAchievements(param = PlayerAchievementMethods.Param) {
   let result = PlayerAchievementMethods.Result;
+  if (globalState.isFirstEncounterEver) return result;
   for (const playerAchievement of globalState.playerPersonAchievementList) {
     if (playerAchievement.hasUnlocked) continue;
     param.playerPersonAchievement = playerAchievement;
@@ -207,7 +208,7 @@ export function handleShakeEnded() {
   let result = PlayerAchievementMethods.Result;
   result = mHandlePlayerAchievements();
   globalState.setAchievementResult((prev) => result);
-  mUpdateMoodValue(result.showAchievement ? 5 : 0);
+  mUpdateMoodValue(result.showAchievement ? 4 : 0);
   return mShakeEndedTimeout(result);
 }
 export function mShakeAgain() {

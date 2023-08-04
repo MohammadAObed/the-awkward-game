@@ -4,10 +4,15 @@ import { globalState } from "../../global/GameScreen";
 import { GameType } from "../../constants/GameScreen";
 import { playAudio } from "../../utils/common/playAudio";
 import { getRandomNumber } from "../../utils/common/getRandomNumber";
+import { useSelector } from "react-redux";
+import { selectSettingsByName } from "../../features/SettingsSlice";
+import { Setting, SettingsNames } from "../../models/Setting";
 
 const LeaveMsgComponent = ({ leaveScreen = function () {} }) => {
   const [msg, setMsg] = useState("");
   const [sound, setSound] = useState(null);
+  let settingsModel = new Setting();
+  settingsModel = useSelector((state) => selectSettingsByName(state, SettingsNames.AiVoice));
   useEffect(() => {
     if (globalState.isPersonSoundPlaying) {
       return;
@@ -18,7 +23,10 @@ const LeaveMsgComponent = ({ leaveScreen = function () {} }) => {
       try {
         if (globalState.isFirstEncounterEver && globalState.personHadEnough) {
           newMsg = `He Enjoyed that!, you can contact with him later...`;
-          newSound = await playAudio(() => require("../../assets/audio/aiadam/EnjoyedThat.mp3"), true, -1, false, true);
+          newSound =
+            settingsModel.value !== true
+              ? null
+              : await playAudio(() => require("../../assets/audio/aiadam/EnjoyedThat.mp3"), true, -1, false, true);
         } else if (globalState.gameType == GameType.QUICK && globalState.personHadEnough) {
           let msgArr = [`He Was just passing by and left...`, `He just wanted to say hi...`];
           let audioArr = [
@@ -27,7 +35,7 @@ const LeaveMsgComponent = ({ leaveScreen = function () {} }) => {
           ];
           let randNum = getRandomNumber(msgArr.length);
           newMsg = msgArr[randNum];
-          newSound = await playAudio(audioArr[randNum], true, -1, false, true);
+          newSound = settingsModel.value !== true ? null : await playAudio(audioArr[randNum], true, -1, false, true);
         } else {
           let msgArr = [`Got bored! bye bye...`, `He had enough...`];
           let audioArr = [
@@ -36,7 +44,7 @@ const LeaveMsgComponent = ({ leaveScreen = function () {} }) => {
           ];
           let randNum = getRandomNumber(msgArr.length);
           newMsg = msgArr[randNum];
-          newSound = await playAudio(audioArr[randNum], true, -1, false, true);
+          newSound = settingsModel.value !== true ? null : await playAudio(audioArr[randNum], true, -1, false, true);
         }
         setSound(newSound);
         setMsg((prev) => prev + newMsg);

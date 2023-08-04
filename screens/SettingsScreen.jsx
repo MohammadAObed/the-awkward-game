@@ -1,16 +1,23 @@
 import { View, Text, Switch } from "react-native";
 import React, { Children, useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useDispatch, useSelector } from "react-redux";
+import { selectSettings, settingsUpdate } from "../features/SettingsSlice";
+import { Setting, SettingsNames } from "../models/Setting";
 
 const SettingsScreen = () => {
-  const toggleSwitch = (e, isEnabled) => {
-    // alert(isEnabled);
+  let settingsModel = [new Setting()];
+  settingsModel = useSelector((state) => selectSettings(state));
+  const dispatch = useDispatch();
+
+  const setValue = (e, id, newValue) => {
+    dispatch(settingsUpdate({ id: id, value: newValue }));
   };
   return (
     <SafeAreaView className="flex-1 px-5 bg-black-700">
       <SettingComponent title={"Settings"}>
         <SettingItemComponent name="AI Voice">
-          <AIVoiceComponent toggleSwitch={toggleSwitch} />
+          <AIVoiceComponent setValue={setValue} value={settingsModel.find((s) => s.name === SettingsNames.AiVoice)} />
         </SettingItemComponent>
       </SettingComponent>
     </SafeAreaView>
@@ -35,8 +42,8 @@ const SettingItemComponent = ({ name, children }) => {
   );
 };
 
-const AIVoiceComponent = ({ toggleSwitch }) => {
-  const [isEnabled, setIsEnabled] = useState(true);
+const AIVoiceComponent = ({ setValue, value = new Setting() }) => {
+  const [isEnabled, setIsEnabled] = useState(value.value);
   return (
     <>
       <Switch
@@ -44,7 +51,7 @@ const AIVoiceComponent = ({ toggleSwitch }) => {
         thumbColor={isEnabled ? "#F4C41C" : "#f4f3f4"}
         ios_backgroundColor="#3e3e3e"
         onValueChange={(e) => {
-          toggleSwitch(e, !isEnabled);
+          setValue(e, value.id, !isEnabled);
           setIsEnabled((prev) => !prev);
         }}
         value={isEnabled}

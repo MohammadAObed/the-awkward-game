@@ -28,18 +28,14 @@ const PersonWalkthroughComponent = ({ person = new Person(), isWalkthrough = fal
 };
 
 const PersonComponent = ({ person = new Person(), isWalkthrough }) => {
-  const navigateToGame = () => {
-    if (globalState.showWalkthrough === true) {
-      return;
-    }
-    globalState.navigation.reset({
-      index: 0,
-      routes: [{ name: ScreenNames.GameScreen, params: { gameType: GameType.NORMAL, personId: person.id } }], //testing bcs personmood is funky, and when console logging here in this screen, and update some state in my gamescreen, the log here is called, wtf bitch
-    });
-    //globalState.navigation.navigate(ScreenNames.GameScreen, { gameType: GameType.NORMAL, personId: person.id });
-  };
   return (
-    <TouchableOpacity className="p-2 rounded-xl bg-black-500 mt-5 flex-row justify-between items-center" onPress={navigateToGame}>
+    <TouchableOpacity
+      className="p-2 rounded-xl bg-black-500 mt-5 flex-row justify-between items-center"
+      onPress={() => {
+        globalState.setPerson(person);
+        globalState.showModal();
+      }}
+    >
       <View className="flex-row items-center space-x-2">
         <PersonImageComponent person={person} />
         <View className="">
@@ -48,7 +44,13 @@ const PersonComponent = ({ person = new Person(), isWalkthrough }) => {
         </View>
       </View>
 
-      <TouchableOpacity className="p-2" onPress={navigateToGame}>
+      <TouchableOpacity
+        className="p-2"
+        onPress={() => {
+          globalState.setPerson(person);
+          globalState.showModal();
+        }}
+      >
         <PhoneIcon size={23} color={"gray"} />
       </TouchableOpacity>
     </TouchableOpacity>

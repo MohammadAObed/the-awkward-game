@@ -1,5 +1,5 @@
 import { View, Text, Image, ScrollView, TouchableOpacity, Alert } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useSelector } from "react-redux";
 import { selectPlayerAchievementByMethodName, selectPlayerAchievements } from "../features/PlayerAchievementSlice";
@@ -36,6 +36,15 @@ const AchievementsScreen = () => {
   const [personId, setPersonId] = useState(params?.personId ?? 0);
   globalState.personId = personId;
   globalState.setPersonId = setPersonId;
+  let achievements = [new PlayerAchievement()];
+  achievements = useSelector((state) => selectPlayerAchievements(state));
+  let achievementsCompleted = useMemo(
+    () =>
+      achievements.reduce((acc, currentVal) => {
+        return acc + (currentVal.hasUnlocked ? 1 : 0);
+      }, 0),
+    [achievements]
+  );
   //#endregion
   useEffect(() => {
     const showModalTimeout = setTimeout(() => {
@@ -48,8 +57,8 @@ const AchievementsScreen = () => {
   }, []);
   return (
     <SafeAreaView className="flex-1 px-5 bg-black-700">
-      <SettingComponent title={"Stickers"}>
-        <PersonsComponent />
+      <SettingComponent title={`Stickers`} number={`${(achievementsCompleted * 100) / achievements.length}%`}>
+        <PersonsComponent achievements={achievements} />
         {modalVisible && (
           <EmptyModal hideModal={hideModal} modalVisible={modalVisible}>
             <GifComponent />
@@ -60,20 +69,21 @@ const AchievementsScreen = () => {
   );
 };
 
-const SettingComponent = ({ title, children }) => {
+const SettingComponent = ({ title, number, children }) => {
   return (
     <View className="mt-2 flex space-y-2">
-      <Text className="text-xl text-yellow-500">{title}</Text>
+      <View className="flex-row justify-between">
+        <Text className="text-xl text-yellow-500">{title}</Text>
+        <Text className="text-xl text-yellow-500">{number}</Text>
+      </View>
       {children}
     </View>
   );
 };
 
-const PersonsComponent = () => {
-  let achievements = [new PlayerAchievement()];
-  achievements = useSelector((state) => selectPlayerAchievements(state));
+const PersonsComponent = ({ achievements }) => {
   return (
-    <ScrollView>
+    <ScrollView className="mb-12 mt-2">
       {persons.map((p) => {
         let personAchievements = achievements.filter((a) => a.personId == p.id);
         return <PersonComponent key={p.id} personAchievements={personAchievements} person={p} />;

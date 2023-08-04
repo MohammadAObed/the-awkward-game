@@ -5,6 +5,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import walkthroughReducer from "./features/walkthroughSlice";
 import meterReducer from "./features/PersonMeterSlice";
 import playerAchievementReducer from "./features/PlayerAchievementSlice";
+import settingsReducer from "./features/SettingsSlice";
 
 const persistConfig = {
   key: "root",
@@ -17,6 +18,7 @@ const reducers = combineReducers({
   walkthrough: walkthroughReducer,
   meter: meterReducer,
   playerAchievement: playerAchievementReducer,
+  settings: settingsReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducers);
