@@ -45,6 +45,7 @@ const AchievementsScreen = () => {
       }, 0),
     [achievements]
   );
+  let achievementsPercentage = ((achievementsCompleted * 100) / achievements.length).toFixed(0);
   //#endregion
   useEffect(() => {
     const showModalTimeout = setTimeout(() => {
@@ -57,7 +58,7 @@ const AchievementsScreen = () => {
   }, []);
   return (
     <SafeAreaView className="flex-1 px-5 bg-black-700">
-      <SettingComponent title={`Stickers`} number={`${(achievementsCompleted * 100) / achievements.length}%`}>
+      <SettingComponent title={`Stickers`} number={`${achievementsPercentage}%`}>
         <PersonsComponent achievements={achievements} />
         {modalVisible && (
           <EmptyModal hideModal={hideModal} modalVisible={modalVisible}>
@@ -162,7 +163,7 @@ const GifComponent = () => {
   }
   return (
     <View className=" flex items-center">
-      <Image className="w-56 h-52" source={image} />
+      <Image className="w-60 h-52" source={image} />
       <Text className="mt-5 text-white w-72 text-center text-lg">
         {PlayerAchievementMethods[globalState.achievement.methodName]?.DisplayedMsg}
       </Text>

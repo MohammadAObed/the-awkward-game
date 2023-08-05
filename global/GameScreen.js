@@ -38,7 +38,7 @@ export const globalState = {
   showModal: function () {},
   gifVisible: false,
   setGifVisible: function () {},
-  achievementResult: { msg: "", showAchievement: false, image: () => null, methodName: "" },
+  achievementResult: { msg: "", showAchievement: false, requireImage: () => null, methodName: "" },
   setAchievementResult: function () {},
   personMood: { ...PersonMood.NORMAL, imageIndex: 0, audioIndex: 0 },
   setPersonMood: function () {},

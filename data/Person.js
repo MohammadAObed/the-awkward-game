@@ -243,7 +243,7 @@ const RonaldoLines = new PersonLines(
   () => [
     "You see, my handshake is like my goals – precise and unstoppable!",
     "When I shake your hand, it's like the ball hitting the back of the net!",
-    "They call me the goat, and you are goat of handshakes",
+    "They call me the goat, and you are the goat of handshakes",
     "My handshake is as powerful as my headers – you won't forget it!",
     "You're in the presence of Ronaldo - cherish the moment!",
     "That's a firm grip, just like my determination to win!",

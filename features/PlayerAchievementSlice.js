@@ -7,7 +7,17 @@ import { PlayerAchievementMethods } from "../models/PlayerAchievementMethods";
 export const initialState = {
   playerAchievements: [
     new PlayerAchievement(1, persons[0], PlayerAchievementMethods.TheEyebrow.Name).serialize(),
-    new PlayerAchievement(2, persons[4], PlayerAchievementMethods.DiCaprioDjangoLaugh.Name).serialize(),
+    new PlayerAchievement(2, persons[1], PlayerAchievementMethods.TrumpNo.Name).serialize(),
+    new PlayerAchievement(3, persons[2], PlayerAchievementMethods.CatSad.Name).serialize(),
+    new PlayerAchievement(4, persons[3], PlayerAchievementMethods.RonaldoSiu.Name).serialize(),
+    new PlayerAchievement(5, persons[4], PlayerAchievementMethods.DiCaprioPointing.Name).serialize(),
+    new PlayerAchievement(6, persons[5], PlayerAchievementMethods.ElonThumbsUp.Name).serialize(),
+    new PlayerAchievement(7, persons[6], PlayerAchievementMethods.CenaYouCantSeeMe.Name).serialize(),
+    new PlayerAchievement(8, persons[7], PlayerAchievementMethods.KhabyHowItsDone.Name).serialize(),
+    new PlayerAchievement(9, persons[8], PlayerAchievementMethods.MarkOk.Name).serialize(),
+    new PlayerAchievement(10, persons[9], PlayerAchievementMethods.SpeedGibberish.Name).serialize(),
+    new PlayerAchievement(11, persons[10], PlayerAchievementMethods.SpongeLonely.Name).serialize(),
+    //new PlayerAchievement(4, persons[4], PlayerAchievementMethods.DiCaprioDjangoLaugh.Name).serialize(),
     // new PlayerAchievement(3, Tate).serialize(),
   ],
 };
