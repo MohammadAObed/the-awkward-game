@@ -31,7 +31,7 @@ class PlayerAchievementMethods {
     requireImage: () => require("../assets/images/persons/DiCaprioHappy.png"),
     execute: function (param = PlayerAchievementMethods.Param) {
       if (
-        globalState.personMood.value === PersonMood.NORMAL.value &&
+        (globalState.personMood.value === PersonMood.NORMAL.value || globalState.personMood.value === PersonMood.HAPPY.value) &&
         globalState.selectedPersonHandshake.id === globalState.selectedPlayerHandshake.id &&
         globalState.selectedPersonHandshake.id !== globalState.person.signatureHandshake.id
       ) {

@@ -1,5 +1,5 @@
 import { Audio } from "expo-av";
-import { FinishMsgTimeout, GameType, MaxTimesPlayed, TimerStartValue } from "../constants/GameScreen";
+import { FinishMsgTimeout, GameType, MaxTimesPlayed, MaxTimesSoundPlayed, TimerStartValue } from "../constants/GameScreen";
 import { ScreenNames } from "../constants/ScreenNames";
 import handshakes from "../data/Handshake";
 import { meterUpdate } from "../features/PersonMeterSlice";
@@ -72,12 +72,27 @@ function generateMoodValue({ selectedPersonHandshake = new Handshake(), selected
 
   return value;
 }
-async function mHandlePlayAudio(mood = { ...PersonMood.NORMAL, imageIndex: 0, audioIndex: 0 }, personAudio = new PersonAudio()) {
+async function mHandlePlayAudio(
+  mood = { ...PersonMood.NORMAL, imageIndex: 0, audioIndex: 0 },
+  personAudio = new PersonAudio(),
+  result = PlayerAchievementMethods.Result
+) {
+  const soundTimesPlayed = globalState.personMoodSoundCount[mood.name].timesPlayed;
+  const hasJustPlayed = globalState.personMoodSoundCount[mood.name].hasJustPlayed;
+  if ((soundTimesPlayed >= MaxTimesSoundPlayed || hasJustPlayed) && globalState.timesPlayed < MaxTimesPlayed && !result.showAchievement) {
+    globalState.setPersonMoodSoundCount((prev) => {
+      return { ...prev, [mood.name]: { timesPlayed: soundTimesPlayed, hasJustPlayed: false } };
+    });
+    return;
+  }
   const sound = await playAudio(personAudio[mood.name], true, mood.audioIndex);
   let timeout;
   if (sound) {
     if (timeout) clearTimeout(timeout);
     globalState.setIsPersonSoundPlaying(true);
+    globalState.setPersonMoodSoundCount((prev) => {
+      return { ...prev, [mood.name]: { timesPlayed: prev[mood.name].timesPlayed + 1, hasJustPlayed: true } };
+    });
   }
   sound?.setOnPlaybackStatusUpdate((status) => {
     if (status.isLoaded && (status.durationMillis === status.positionMillis || status.didJustFinish)) {
@@ -96,7 +111,6 @@ async function mHandlePlayAudio(mood = { ...PersonMood.NORMAL, imageIndex: 0, au
     }, 7000);
   }
 }
-
 function getMoodBasedOnHandshake() {
   let hasHandshakeMatched = globalState.selectedPersonHandshake.id === globalState.selectedPlayerHandshake.id;
   let oldMoodValue = globalState.personMood.value;
@@ -204,10 +218,10 @@ export function handleShakeEnded() {
     imageIndex: newMood.imageIndex,
     audioIndex: newMood.audioIndex,
   }));
-  mHandlePlayAudio(newMood, globalState.person.audio);
   let result = PlayerAchievementMethods.Result;
   result = mHandlePlayerAchievements();
   globalState.setAchievementResult((prev) => result);
+  mHandlePlayAudio(newMood, globalState.person.audio, result);
   mUpdateMoodValue(result.showAchievement ? 4 : 0);
   return mShakeEndedTimeout(result);
 }

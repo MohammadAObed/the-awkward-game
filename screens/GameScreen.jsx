@@ -102,6 +102,15 @@ const GameComponent = () => {
   useGlobalState(
     globalState,
     useState,
+    [initialState.getPersonMoodSoundCount],
+    nGlobalState.personMoodSoundCount,
+    nGlobalState.setPersonMoodSoundCount,
+    false,
+    true
+  );
+  useGlobalState(
+    globalState,
+    useState,
     [initialState.isPersonSoundPlaying],
     nGlobalState.isPersonSoundPlaying,
     nGlobalState.setIsPersonSoundPlaying

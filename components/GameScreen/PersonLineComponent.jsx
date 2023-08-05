@@ -19,7 +19,7 @@ const PersonLineComponent = () => {
           {greeting}
         </Text>
         {(globalState.isFirstEncounterEver || globalState.personHadEnough) && (
-          <Text className="text-center text-xl text-yellow-500">{globalState.person.signatureLine}!</Text>
+          <Text className="text-center text-xl text-yellow-500">{globalState.person.signatureLine}</Text>
         )}
       </View>
     </View>

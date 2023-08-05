@@ -6,6 +6,7 @@ import { getRandomNumber } from "../utils/common/getRandomNumber";
 import { ScreenNames } from "../constants/ScreenNames";
 import { getInitialMoodAndImage } from "../helpers/common/getPersonMood";
 import { PlayerAchievementMethods } from "../models/PlayerAchievementMethods";
+import { PersonMoodSoundCount } from "../constants/Person";
 
 export const initialState = {
   hasShakeStarted: false,
@@ -21,4 +22,5 @@ export const initialState = {
   achievementResult: PlayerAchievementMethods.Result,
   getPersonMood: { value: 2, name: "Normal", imageIndex: 0, audioIndex: 0 },
   isPersonSoundPlaying: false,
+  getPersonMoodSoundCount: PersonMoodSoundCount,
 };

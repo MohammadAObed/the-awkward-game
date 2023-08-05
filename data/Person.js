@@ -521,7 +521,7 @@ const Cat = new Person(
   CatImages,
   CatAudio,
   CatLines,
-  "Meow!",
+  "Meow",
   handshakes.find((h) => h.id === 5),
   {
     highChance: { ids: [1, 2, 3], value: highValue },
@@ -569,7 +569,7 @@ const ElonMusk = new Person(
   ElonMuskImages,
   ElonAudio,
   ElonMuskLines,
-  "Imma let you stay",
+  "Imma let you keep your job",
   handshakes.find((h) => h.id === 19),
   {
     highChance: { ids: [1, 2, 3, 6], value: highValue },
@@ -585,7 +585,7 @@ const JohnCena = new Person(
   JohnCenaImages,
   CenaAudio,
   JohnCenaLines,
-  "you can see me!",
+  "You can't see me",
   handshakes.find((h) => h.id === 20),
   {
     highChance: { ids: [1, 2, 3, 6, 4], value: highValue },
@@ -649,7 +649,7 @@ const SpongeBob = new Person(
   SpongeBobImages,
   SpongeAudio,
   SpongeBobLines,
-  "The recipe of Krabby Patty is...",
+  "The recipe of the burger is...",
   handshakes.find((h) => h.id === 24),
   {
     highChance: { ids: [1, 2, 3, 6], value: highValue },

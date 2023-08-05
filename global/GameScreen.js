@@ -1,5 +1,5 @@
 import { GameType } from "../constants/GameScreen";
-import { PersonMood } from "../constants/Person";
+import { PersonMood, PersonMoodSoundCount } from "../constants/Person";
 import { Handshake } from "../models/Handshake";
 import { Person } from "../models/Person";
 import { PersonMeter } from "../models/PersonMeter";
@@ -42,6 +42,8 @@ export const globalState = {
   setAchievementResult: function () {},
   personMood: { ...PersonMood.NORMAL, imageIndex: 0, audioIndex: 0 },
   setPersonMood: function () {},
+  personMoodSoundCount: PersonMoodSoundCount,
+  setPersonMoodSoundCount: function () {},
   isPersonSoundPlaying: false,
   setIsPersonSoundPlaying: function () {},
   //#endregion
@@ -83,6 +85,8 @@ export const nGlobalState = {
   setAchievementResult: "setAchievementResult",
   personMood: "personMood",
   setPersonMood: "setPersonMood",
+  personMoodSoundCount: "personMoodSoundCount",
+  setPersonMoodSoundCount: "setPersonMoodSoundCount",
   isPersonSoundPlaying: "isPersonSoundPlaying",
   setIsPersonSoundPlaying: "setIsPersonSoundPlaying",
   //#endregion

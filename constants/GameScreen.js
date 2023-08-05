@@ -1,6 +1,6 @@
 //#region constants
 export const TimerStartValue = 7;
-export const TimerIntervalValue = 1000;
+export const TimerIntervalValue = 1500;
 export const HandshakeDuration = 750;
 export const HandshakeSpaceX = 120;
 export const HandshakeSpaceY2 = 20;
@@ -17,7 +17,8 @@ export const personHandshakeAnimationValues = {
   x2: HandshakeSpaceX / 2,
 };
 export const FinishMsgTimeout = 2000;
-export const MaxTimesPlayed = 7;
+export const MaxTimesPlayed = 10;
+export const MaxTimesSoundPlayed = 2;
 //#endregion
 
 //#region Enums
