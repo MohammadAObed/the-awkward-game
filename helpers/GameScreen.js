@@ -23,8 +23,11 @@ function mHandlePlayerAchievements(param = PlayerAchievementMethods.Param) {
     param.playerPersonAchievement = playerAchievement;
     result = checkAchievement(param);
     if (result.showAchievement === true) {
-      globalState.dispatch(playerAchievementUpdate({ id: playerAchievement.id, hasUnlocked: true }));
-      //console.log("🚀 ~ file: GameScreen.js:24 ~ mHandlePlayerAchievements ~ playerAchievement:", playerAchievement);
+      globalState.dispatch(playerAchievementUpdate({ id: playerAchievement.id, hasUnlocked: true, extraValue: result.extraValue }));
+      return result;
+    }
+    if (result.extraValue !== null && result.extraValue !== param.playerPersonAchievement.extraValue) {
+      globalState.dispatch(playerAchievementUpdate({ id: playerAchievement.id, extraValue: result.extraValue }));
       return result;
     }
   }
@@ -56,9 +59,8 @@ function generateMoodValue({ selectedPersonHandshake = new Handshake(), selected
       value += 2;
     } else if (lowChance.ids.includes(selectedPersonHandshake.id)) {
       value += 3;
-    }
-    if (specialChance.ids.includes(selectedPersonHandshake.id)) {
-      //do special stuff
+    } else if (specialChance.ids.includes(selectedPersonHandshake.id)) {
+      value += 5;
     }
   } else {
     value -= 1;
@@ -66,7 +68,7 @@ function generateMoodValue({ selectedPersonHandshake = new Handshake(), selected
       value -= 2;
     }
     if (specialChance.ids.includes(selectedPersonHandshake.id)) {
-      //do special stuff
+      value -= 3;
     }
   }
 
@@ -147,9 +149,8 @@ function getMoodBasedOnHandshake() {
 //#endregion
 
 //#region (m) Mutative Functions
-function mUpdateMoodValue(achievementValue = 0) {
-  let value = achievementValue;
-  value += generateMoodValue({ ...globalState });
+function mUpdateMoodValue(addedValue = 0) {
+  let value = addedValue;
   if (globalState.isFirstEncounterEver && globalState.hasShakeEnded) {
     value = globalState.person.moodBreakpoints.NORMAL + 1;
   } else if (
@@ -218,11 +219,15 @@ export function handleShakeEnded() {
     imageIndex: newMood.imageIndex,
     audioIndex: newMood.audioIndex,
   }));
+  let meterAddedValue = generateMoodValue({ ...globalState });
   let result = PlayerAchievementMethods.Result;
-  result = mHandlePlayerAchievements();
+  let param = PlayerAchievementMethods.Param;
+  param.meterAddedValue = meterAddedValue;
+  result = mHandlePlayerAchievements(param);
   globalState.setAchievementResult((prev) => result);
   mHandlePlayAudio(newMood, globalState.person.audio, result);
-  mUpdateMoodValue(result.showAchievement ? 4 : 0);
+  meterAddedValue += result.showAchievement ? 4 : 0;
+  mUpdateMoodValue(meterAddedValue);
   return mShakeEndedTimeout(result);
 }
 export function mShakeAgain() {

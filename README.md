@@ -1,5 +1,15 @@
 # The Awakward Game
 
+# Online & Offline
+
+- everything about the game is offline, might add functionality in a next update (release version) to read new persons and lines
+  and images and everything frm an online api soruce, so user won't need to download an update each time i add new persons,
+  i just add it to that online source, example: in every monday, 10 pm i tell the users (specific appointment) to watch
+  for new persons or achievments for existing ones, whatever.
+
+  complications: requiring an image or audio dynamically using uri, okay do i fetch them each time
+  (is there any caching in react native, maybe store the data fetched and id in a variable and check if its required, or is there any other simpler built in way, whatever...)
+
 ## Naming:
 
 1. Component: example: HandshakesComponent, The Component in the name tells us that this a component we made, Why? it lets us diferentiate between -custom made components- and -other components- (components from libraries, etc...)

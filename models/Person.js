@@ -32,7 +32,7 @@ const defaultHandshakesOccurance = {
   lowChance: { ids: [], value: 15 }, //15%
   medChance: { ids: [], value: 45 }, //30%
   highChance: { ids: [], value: 100 }, //55%`
-  specialChance: { ids: [], value: 10 }, //has priority for checking
+  specialChance: { ids: [], value: 7 }, //has priority for checking
 };
 
 class Person {

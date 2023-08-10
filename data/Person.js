@@ -233,7 +233,7 @@ const TrumpLines = new PersonLines(
 );
 
 const CatLines = new PersonLines(
-  () => ["Purr", "Mrrp", "Chirp", "Trill", "Meow-purr", "Rumble"],
+  () => ["Purr", "Mrrp", "Pirp", "Meow-purr"],
   () => ["Meow", "Mew", "Miaow", "Mraow", "Mreow"],
   () => ["Hiss", "Hissss", "Miaowwwrrr", "Thanks Sir :("],
   () => ["Meoooow"]
@@ -527,7 +527,7 @@ const Cat = new Person(
     highChance: { ids: [1, 2, 3], value: highValue },
     medChance: { ids: [25], value: medValue },
     lowChance: { ids: [], value: lowValue },
-    specialChance: { ids: [], value: specialValue },
+    specialChance: { ids: [27], value: specialValue },
   }
 );
 

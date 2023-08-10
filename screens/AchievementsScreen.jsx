@@ -163,7 +163,7 @@ const GifComponent = () => {
   }
   return (
     <View className=" flex items-center">
-      <Image className="w-60 h-52" source={image} />
+      <Image className="w-60 h-60" source={image} />
       <Text className="mt-5 text-white w-72 text-center text-lg">
         {PlayerAchievementMethods[globalState.achievement.methodName]?.DisplayedMsg}
       </Text>

@@ -16,7 +16,7 @@ const handshakes = [
   new Handshake(12, "🥊", 0, 180, 0.85, 0),
   new Handshake(13, "🤨", 0, 0, 1, -10),
   new Handshake(14, "🤛 🤛", 90, 270, 0.85, 0),
-  new Handshake(16, "😮", 0, 0, 0.85, 0),
+  new Handshake(16, "😮", 0, 0, 1, -10),
   new Handshake(17, "☝️", 0, 0, 0.85, 0, 1, -1),
   new Handshake(18, "👈", 0, 0, 0.85, 0, 1, -1),
   new Handshake(19, "👍 👍", 0, 0, 0.75, 10, -1, 1),
@@ -27,6 +27,7 @@ const handshakes = [
   new Handshake(24, "☹️", 0, 0, 1, -10),
   new Handshake(25, "😐", 0, 0, 1, -10),
   new Handshake(26, "💪", 0, 0, 0.85, 0, 1, -1),
+  new Handshake(27, "😎", 0, 0, 1, -10),
 ];
 
 export default handshakes;

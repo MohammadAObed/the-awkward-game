@@ -17,7 +17,7 @@ const StartScreen = () => {
   //Temp
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  dispatch(walkthroughReset({}));
+  //dispatch(walkthroughReset({}));
   dispatch(meterReset({}));
   dispatch(playerAchievementReset({}));
   //

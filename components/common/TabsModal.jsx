@@ -116,16 +116,16 @@ const HintsTabContentComponent = () => {
           Characters
         </Text>
         <Text className="text-white leading-6 mt-2" style={{ fontSize: 15 }}>
+          - Try to be a friend with the character, The bar indicates level of friendship 🤝‍🧑
+        </Text>
+        <Text className="text-white leading-6 mt-2" style={{ fontSize: 15 }}>
+          - Bar 📏 decreases or increses by matching a handshake or unlocking an achievment
+        </Text>
+        <Text className="text-white leading-6 mt-2" style={{ fontSize: 15 }}>
           - Each character has a signature handshake 🤝
         </Text>
         <Text className="text-white leading-6 mt-2" style={{ fontSize: 15 }}>
           - If you match certain conditions, you get an achievment 🌟 with a sticker
-        </Text>
-        <Text className="text-white leading-6 mt-2" style={{ fontSize: 15 }}>
-          - The bar indicates level of friendship 🤝‍🧑 with the character
-        </Text>
-        <Text className="text-white leading-6 mt-2" style={{ fontSize: 15 }}>
-          - Bar 📏 decreases or increses by matching a handshake or unlocking an achievment
         </Text>
       </View>
     </View>
