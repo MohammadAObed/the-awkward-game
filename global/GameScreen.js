@@ -46,6 +46,8 @@ export const globalState = {
   setPersonMoodSoundCount: function () {},
   isPersonSoundPlaying: false,
   setIsPersonSoundPlaying: function () {},
+  hasPressedShake: false,
+  setHasPressedShake: function () {},
   //#endregion
 };
 export const nGlobalState = {
@@ -89,5 +91,7 @@ export const nGlobalState = {
   setPersonMoodSoundCount: "setPersonMoodSoundCount",
   isPersonSoundPlaying: "isPersonSoundPlaying",
   setIsPersonSoundPlaying: "setIsPersonSoundPlaying",
+  hasPressedShake: "hasPressedShake",
+  setHasPressedShake: "setHasPressedShake",
   //#endregion
 };

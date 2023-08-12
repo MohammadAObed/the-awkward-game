@@ -181,18 +181,57 @@ class PlayerAchievementMethods {
     },
   };
 
+  static DiCaprio100 = {
+    Name: "DiCaprio100",
+    DisplayedMsg: "100% \n Brilliant!",
+    requireImage: () => require("../assets/awkwardstickers/DiCaprio/DiCaprio100.webp"),
+    execute: hundredPercentExecute,
+  };
+
+  static DiCaprio0 = {
+    Name: "DiCaprio0",
+    DisplayedMsg: "0% \n Don't worry, I know you're acting!",
+    requireImage: () => require("../assets/awkwardstickers/DiCaprio/DiCaprio0.webp"),
+    execute: ZeroPercentExecute,
+  };
+
   static DiCaprioDjangoLaugh = {
     Name: "DiCaprioDjangoLaugh",
     DisplayedMsg: "Hilarious!",
     requireImage: () => require("../assets/images/persons/DiCaprioHappy.png"),
+    execute: (param) => MoodExecute(this.DiCaprioDjangoLaugh, param, PersonMood.HAPPY.value, 0),
+  };
+
+  static DiCaprioFiftyFifty = {
+    Name: "DiCaprioFiftyFifty",
+    DisplayedMsg: "👋 👋 \n Fifty fifty!",
+    requireImage: () => require("../assets/awkwardstickers/DiCaprio/DiCaprioFifty.webp"),
     execute: function (param = PlayerAchievementMethods.Param) {
-      if (
-        (globalState.personMood.value === PersonMood.NORMAL.value ||
-          globalState.personMood.value === PersonMood.HAPPY.value ||
-          globalState.personMood.value === PersonMood.SIGNATURE.value) &&
-        globalState.selectedPersonHandshake.id === globalState.selectedPlayerHandshake.id &&
-        globalState.selectedPersonHandshake.id !== globalState.person.signatureHandshake.id
-      ) {
+      if (globalState.selectedPersonHandshake.id === 6 && globalState.selectedPlayerHandshake.id === 6) {
+        return { msg: this.DisplayedMsg, showAchievement: true, requireImage: this.requireImage, methodName: this.Name };
+      }
+      return PlayerAchievementMethods.Result;
+    },
+  };
+
+  static DiCaprioYouSlick = {
+    Name: "DiCaprioYouSlick",
+    DisplayedMsg: "Oh You!",
+    requireImage: () => require("../assets/awkwardstickers/DiCaprio/DiCaprioYouSlick.webp"),
+    execute: function (param = PlayerAchievementMethods.Param) {
+      if (globalState.selectedPersonHandshake.id === globalState.person.signatureHandshake.id && globalState.selectedPlayerHandshake.id === 7) {
+        return { msg: this.DisplayedMsg, showAchievement: true, requireImage: this.requireImage, methodName: this.Name };
+      }
+      return PlayerAchievementMethods.Result;
+    },
+  };
+
+  static DiCaprioShady = {
+    Name: "DiCaprioShady",
+    DisplayedMsg: "You didnt shake hands, you are acting shady!",
+    requireImage: () => require("../assets/awkwardstickers/DiCaprio/DiCaprioShady.jpg"),
+    execute: function (param = PlayerAchievementMethods.Param) {
+      if (globalState.hasPressedShake === false) {
         return { msg: this.DisplayedMsg, showAchievement: true, requireImage: this.requireImage, methodName: this.Name };
       }
       return PlayerAchievementMethods.Result;
@@ -233,6 +272,13 @@ function MoodAudioExecute(achievement, param = PlayerAchievementMethods.Param, v
     if (param.newMood.value === value && param.newMood.audioIndex === audioIndex) {
       return { msg: achievement.DisplayedMsg, showAchievement: true, requireImage: achievement.requireImage, methodName: achievement.Name };
     }
+  }
+  return PlayerAchievementMethods.Result;
+}
+function MoodExecute(achievement, param = PlayerAchievementMethods.Param, value = -1, imageIndex = -1) {
+  if (!param.newMood) return PlayerAchievementMethods.Result;
+  if (param.newMood.value === value && (imageIndex === param.newMood.imageIndex || imageIndex === -1)) {
+    return { msg: achievement.DisplayedMsg, showAchievement: true, requireImage: achievement.requireImage, methodName: achievement.Name };
   }
   return PlayerAchievementMethods.Result;
 }

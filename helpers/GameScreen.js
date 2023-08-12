@@ -63,7 +63,7 @@ function generateMoodValue({ selectedPersonHandshake = new Handshake(), selected
       value += 5;
     }
   } else {
-    value -= 1;
+    value -= 10;
     if (selectedPersonHandshake.id === person.signatureHandshake.id) {
       value -= 2;
     }
@@ -238,6 +238,7 @@ export function mShakeAgain() {
   globalState.setTimer((prev) => TimerStartValue);
   globalState.setHasShakeEnded((prev) => false);
   globalState.setHasShakeStarted((prev) => false);
+  globalState.setHasPressedShake(false);
 }
 export function leaveScreen(e, screenName = ScreenNames.PersonsScreen) {
   //console.log("🚀 ~ file: GameScreen.js:151 ~ leaveScreen ~ screenName:", screenName);

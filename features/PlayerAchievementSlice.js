@@ -27,6 +27,13 @@ export const initialState = {
     new PlayerAchievement(18, persons[2], PlayerAchievementMethods.Cat7BadInARow.Name, 0).serialize(),
 
     new PlayerAchievement(19, persons[0], PlayerAchievementMethods.RockSeeYouSoon.Name).serialize(),
+
+    new PlayerAchievement(20, persons[4], PlayerAchievementMethods.DiCaprio100.Name).serialize(),
+    new PlayerAchievement(21, persons[4], PlayerAchievementMethods.DiCaprio0.Name).serialize(),
+    new PlayerAchievement(22, persons[4], PlayerAchievementMethods.DiCaprioDjangoLaugh.Name).serialize(),
+    new PlayerAchievement(23, persons[4], PlayerAchievementMethods.DiCaprioFiftyFifty.Name).serialize(),
+    new PlayerAchievement(24, persons[4], PlayerAchievementMethods.DiCaprioYouSlick.Name).serialize(),
+    new PlayerAchievement(25, persons[4], PlayerAchievementMethods.DiCaprioShady.Name).serialize(),
     //new PlayerAchievement(4, persons[4], PlayerAchievementMethods.DiCaprioDjangoLaugh.Name).serialize(),
     // new PlayerAchievement(3, Tate).serialize(),
   ],

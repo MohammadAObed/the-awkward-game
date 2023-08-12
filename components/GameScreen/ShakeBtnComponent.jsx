@@ -14,6 +14,7 @@ const ShakeBtnComponent = () => {
     globalState.setTimer((prev) => 0);
     globalState.personHandshakeAnimation.values.opacity.stopAnimation(); //(opacity, positionY, etc... just one will stop all (bcz parallel))
     globalState.playerHandshakeAnimation.values.opacity.stopAnimation();
+    globalState.setHasPressedShake(true);
     // globalState.personHandshakeAnimation.values.positionX.stopAnimation();
     // globalState.playerHandshakeAnimation.values.positionX.stopAnimation();
     // globalState.playerHandshakeAnimation.values.positionY.stopAnimation();

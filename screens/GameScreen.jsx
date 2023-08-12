@@ -115,6 +115,7 @@ const GameComponent = () => {
     nGlobalState.isPersonSoundPlaying,
     nGlobalState.setIsPersonSoundPlaying
   );
+  useGlobalState(globalState, useState, [false], nGlobalState.hasPressedShake, nGlobalState.setHasPressedShake);
   //#endregion
   //#region useEffect
   useEffect(() => {
