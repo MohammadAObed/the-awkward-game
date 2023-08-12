@@ -25,6 +25,8 @@ export const initialState = {
     new PlayerAchievement(16, persons[2], PlayerAchievementMethods.CatProcessing.Name).serialize(),
     new PlayerAchievement(17, persons[2], PlayerAchievementMethods.CatTasleekSmile.Name).serialize(),
     new PlayerAchievement(18, persons[2], PlayerAchievementMethods.Cat7BadInARow.Name, 0).serialize(),
+
+    new PlayerAchievement(19, persons[0], PlayerAchievementMethods.RockSeeYouSoon.Name).serialize(),
     //new PlayerAchievement(4, persons[4], PlayerAchievementMethods.DiCaprioDjangoLaugh.Name).serialize(),
     // new PlayerAchievement(3, Tate).serialize(),
   ],

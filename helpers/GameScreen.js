@@ -149,7 +149,7 @@ function getMoodBasedOnHandshake() {
 //#endregion
 
 //#region (m) Mutative Functions
-function mUpdateMoodValue(addedValue = 0) {
+function mUpdateMeterValue(addedValue = 0) {
   let value = addedValue;
   if (globalState.isFirstEncounterEver && globalState.hasShakeEnded) {
     value = globalState.person.moodBreakpoints.NORMAL + 1;
@@ -223,11 +223,12 @@ export function handleShakeEnded() {
   let result = PlayerAchievementMethods.Result;
   let param = PlayerAchievementMethods.Param;
   param.meterAddedValue = meterAddedValue;
+  param.newMood = newMood;
   result = mHandlePlayerAchievements(param);
   globalState.setAchievementResult((prev) => result);
   mHandlePlayAudio(newMood, globalState.person.audio, result);
   meterAddedValue += result.showAchievement ? 4 : 0;
-  mUpdateMoodValue(meterAddedValue);
+  mUpdateMeterValue(meterAddedValue);
   return mShakeEndedTimeout(result);
 }
 export function mShakeAgain() {

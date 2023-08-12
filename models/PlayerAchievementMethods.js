@@ -1,3 +1,4 @@
+import { MaxTimesPlayed, MaxTimesSoundPlayed } from "../constants/GameScreen";
 import { PersonMood } from "../constants/Person";
 import { globalState } from "../global/GameScreen";
 import { PlayerAchievement } from "./PlayerAchievement";
@@ -7,6 +8,7 @@ class PlayerAchievementMethods {
   static Param = {
     playerPersonAchievement: new PlayerAchievement(),
     meterAddedValue: 0,
+    newMood: null, //{ name: "Normal", value: 2, imageIndex: 0, audioIndex: 0 },
   };
   static Result = {
     msg: "",
@@ -85,6 +87,13 @@ class PlayerAchievementMethods {
     execute: signatureExecute,
   };
   //#endregion
+
+  static RockSeeYouSoon = {
+    Name: "RockSeeYouSoon",
+    DisplayedMsg: "I hope your audio was up!",
+    requireImage: () => require("../assets/awkwardstickers/Rock/RockSeeYouSoon.webp"),
+    execute: (param) => MoodAudioExecute(this.RockSeeYouSoon, param, PersonMood.NORMAL.value, 0),
+  };
 
   static Cat100 = {
     Name: "Cat100",
@@ -212,6 +221,18 @@ function ZeroPercentExecute(param = PlayerAchievementMethods.Param) {
     globalState.meter.meterValue !== globalState.person.moodBreakpoints.DEFAULT
   ) {
     return { msg: this.DisplayedMsg, showAchievement: true, requireImage: this.requireImage, methodName: this.Name };
+  }
+  return PlayerAchievementMethods.Result;
+}
+function MoodAudioExecute(achievement, param = PlayerAchievementMethods.Param, value = -1, audioIndex = -1) {
+  if (!param.newMood) return PlayerAchievementMethods.Result;
+  const soundTimesPlayed = globalState.personMoodSoundCount[param.newMood.name].timesPlayed;
+  const hasJustPlayed = globalState.personMoodSoundCount[param.newMood.name].hasJustPlayed;
+  //if ((soundTimesPlayed < MaxTimesSoundPlayed && !hasJustPlayed) || globalState.timesPlayed >= MaxTimesPlayed) {
+  if (!((soundTimesPlayed >= MaxTimesSoundPlayed || hasJustPlayed) && globalState.timesPlayed < MaxTimesPlayed)) {
+    if (param.newMood.value === value && param.newMood.audioIndex === audioIndex) {
+      return { msg: achievement.DisplayedMsg, showAchievement: true, requireImage: achievement.requireImage, methodName: achievement.Name };
+    }
   }
   return PlayerAchievementMethods.Result;
 }
