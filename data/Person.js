@@ -495,8 +495,8 @@ const TheRock = new Person(
   {
     highChance: { ids: [1, 2, 3, 6], value: highValue },
     medChance: { ids: [5, 26], value: medValue },
-    lowChance: { ids: [8], value: lowValue },
-    specialChance: { ids: [], value: specialValue },
+    lowChance: { ids: [], value: lowValue },
+    specialChance: { ids: [28], value: specialValue },
   }
 );
 const Trump = new Person(

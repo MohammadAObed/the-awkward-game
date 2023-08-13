@@ -87,12 +87,33 @@ class PlayerAchievementMethods {
     execute: signatureExecute,
   };
   //#endregion
+  //#region 100 & 0 Methods
+  static Rock100 = {
+    Name: "Rock100",
+    DisplayedMsg: "100% \n True Legend!",
+    requireImage: () => require("../assets/awkwardstickers/Rock/Rock100.webp"),
+    execute: hundredPercentExecute,
+  };
 
-  static RockSeeYouSoon = {
-    Name: "RockSeeYouSoon",
-    DisplayedMsg: "I hope your audio was up!",
-    requireImage: () => require("../assets/awkwardstickers/Rock/RockSeeYouSoon.webp"),
-    execute: (param) => MoodAudioExecute(this.RockSeeYouSoon, param, PersonMood.NORMAL.value, 0),
+  static Rock0 = {
+    Name: "Rock0",
+    DisplayedMsg: "0% \n Kev! Help me with this dude!",
+    requireImage: () => require("../assets/awkwardstickers/Rock/Rock0.jpg"),
+    execute: ZeroPercentExecute,
+  };
+
+  static Trump100 = {
+    Name: "Trump100",
+    DisplayedMsg: "100% \n Massive Win, Money in your bag!",
+    requireImage: () => require("../assets/awkwardstickers/Trump/Trump100.webp"),
+    execute: hundredPercentExecute,
+  };
+
+  static Trump0 = {
+    Name: "Trump0",
+    DisplayedMsg: "0% \n You're Fired!!!",
+    requireImage: () => require("../assets/awkwardstickers/Trump/Trump0.jpg"),
+    execute: ZeroPercentExecute,
   };
 
   static Cat100 = {
@@ -107,6 +128,176 @@ class PlayerAchievementMethods {
     DisplayedMsg: "0% \n Purrrrr!",
     requireImage: () => require("../assets/awkwardstickers/Cat/Cat0.png"),
     execute: ZeroPercentExecute,
+  };
+
+  static Ronaldo100 = {
+    Name: "Ronaldo100",
+    DisplayedMsg: "100% \n Aim for better! always!",
+    requireImage: () => require("../assets/awkwardstickers/Ronaldo/Ronaldo100.webp"),
+    execute: hundredPercentExecute,
+  };
+
+  static Ronaldo0 = {
+    Name: "Ronaldo0",
+    DisplayedMsg: "0% \n Done playing! Done!",
+    requireImage: () => require("../assets/awkwardstickers/Ronaldo/Ronaldo0.webp"),
+    execute: ZeroPercentExecute,
+  };
+
+  static DiCaprio100 = {
+    Name: "DiCaprio100",
+    DisplayedMsg: "100% \n Brilliant!",
+    requireImage: () => require("../assets/awkwardstickers/DiCaprio/DiCaprio100.webp"),
+    execute: hundredPercentExecute,
+  };
+
+  static DiCaprio0 = {
+    Name: "DiCaprio0",
+    DisplayedMsg: "0% \n Don't worry, I know you're acting!",
+    requireImage: () => require("../assets/awkwardstickers/DiCaprio/DiCaprio0.webp"),
+    execute: ZeroPercentExecute,
+  };
+
+  static Elon100 = {
+    Name: "Elon100",
+    DisplayedMsg: "100% \n Come work for me!",
+    requireImage: () => require("../assets/awkwardstickers/Elon/Elon100.webp"),
+    execute: hundredPercentExecute,
+  };
+
+  static Elon0 = {
+    Name: "Elon0",
+    DisplayedMsg: "0% \n You challenged me, I ain't mad",
+    requireImage: () => require("../assets/awkwardstickers/Elon/Elon0.webp"),
+    execute: ZeroPercentExecute,
+  };
+
+  static Cena100 = {
+    Name: "Cena100",
+    DisplayedMsg: "100% \n Whatca tryna do?",
+    requireImage: () => require("../assets/awkwardstickers/Cena/Cena100.jpg"),
+    execute: hundredPercentExecute,
+  };
+
+  static Cena0 = {
+    Name: "Cena0",
+    DisplayedMsg: "0% \n Cena Approves!",
+    requireImage: () => require("../assets/awkwardstickers/Cena/Cena0.webp"),
+    execute: ZeroPercentExecute,
+  };
+
+  static Khaby100 = {
+    Name: "Khaby100",
+    DisplayedMsg: "100% \n We finally there!",
+    requireImage: () => require("../assets/awkwardstickers/Khaby/Khaby100.webp"),
+    execute: hundredPercentExecute,
+  };
+
+  static Khaby0 = {
+    Name: "Khaby0",
+    DisplayedMsg: "0% \n C'moooooooon!",
+    requireImage: () => require("../assets/awkwardstickers/Khaby/Khaby0.jpg"),
+    execute: ZeroPercentExecute,
+  };
+
+  static Mark100 = {
+    Name: "Mark100",
+    DisplayedMsg: "100% \n 🙂",
+    requireImage: () => require("../assets/awkwardstickers/Mark/Mark100.webp"),
+    execute: hundredPercentExecute,
+  };
+
+  static Mark0 = {
+    Name: "Mark0",
+    DisplayedMsg: "0% \n Don't do it again!",
+    requireImage: () => require("../assets/awkwardstickers/Mark/Mark0.gif"),
+    execute: ZeroPercentExecute,
+  };
+
+  static Speed100 = {
+    Name: "Speed100",
+    DisplayedMsg: "100% \n Maaaaaaaasive Dub",
+    requireImage: () => require("../assets/awkwardstickers/Speed/Speed100.webp"),
+    execute: hundredPercentExecute,
+  };
+
+  static Speed0 = {
+    Name: "Speed0",
+    DisplayedMsg: "0% \n I'm over, We are over!",
+    requireImage: () => require("../assets/awkwardstickers/Speed/Speed0.jpg"),
+    execute: ZeroPercentExecute,
+  };
+
+  static SpongeBob100 = {
+    Name: "SpongeBob100",
+    DisplayedMsg: "100% \n Mmmmooooaah",
+    requireImage: () => require("../assets/awkwardstickers/SpongeBob/Sponge100.webp"),
+    execute: hundredPercentExecute,
+  };
+
+  static SpongeBob0 = {
+    Name: "SpongeBob0",
+    DisplayedMsg: "0% \n Hurrrrrrrrrr!",
+    requireImage: () => require("../assets/awkwardstickers/SpongeBob/Sponge0.jpg"),
+    execute: ZeroPercentExecute,
+  };
+
+  //#endregion
+  static RockStop = {
+    Name: "RockStop",
+    DisplayedMsg: "Stop! enough shaking!",
+    requireImage: () => require("../assets/awkwardstickers/Rock/RockStop.webp"),
+    execute: function (param = PlayerAchievementMethods.Param) {
+      let increaseTimesPlayedNum = globalState.selectedPersonHandshake.id !== globalState.selectedPlayerHandshake.id ? 2 : 1;
+      if (globalState.timesPlayed + increaseTimesPlayedNum >= MaxTimesPlayed) {
+        return { msg: this.DisplayedMsg, showAchievement: true, requireImage: this.requireImage, methodName: this.Name };
+      }
+      return PlayerAchievementMethods.Result;
+    },
+  };
+
+  static RockSeeYouSoon = {
+    Name: "RockSeeYouSoon",
+    DisplayedMsg: "I hope your audio was up!",
+    requireImage: () => require("../assets/awkwardstickers/Rock/RockSeeYouSoon.webp"),
+    execute: (param) => MoodAudioExecute(this.RockSeeYouSoon, param, PersonMood.NORMAL.value, 0),
+  };
+
+  static RockWink = {
+    Name: "RockWink",
+    DisplayedMsg: "See ya!",
+    requireImage: () => require("../assets/awkwardstickers/Rock/RockWink.webp"),
+    execute: function (param = PlayerAchievementMethods.Param) {
+      let meterValue = globalState.meter.meterValue;
+      if (globalState.selectedPersonHandshake.id == 28 && param.meterAddedValue + meterValue >= globalState.person.moodBreakpoints.NORMAL) {
+        return { msg: this.DisplayedMsg, showAchievement: true, requireImage: this.requireImage, methodName: this.Name };
+      }
+      return PlayerAchievementMethods.Result;
+    },
+  };
+
+  static RockSurprised = {
+    Name: "RockSurprised",
+    DisplayedMsg: "12 reps minimum of flexing!",
+    requireImage: () => require("../assets/awkwardstickers/Rock/RockSurprised.jpg"),
+    execute: function (param = PlayerAchievementMethods.Param) {
+      let bicepFlexStreak = param.playerPersonAchievement.extraValue;
+      if (globalState.selectedPlayerHandshake.id === 26) {
+        bicepFlexStreak += 1;
+        if (bicepFlexStreak >= 12) {
+          return {
+            msg: this.DisplayedMsg,
+            showAchievement: true,
+            requireImage: this.requireImage,
+            methodName: this.Name,
+            extraValue: bicepFlexStreak,
+          };
+        }
+      } else {
+        bicepFlexStreak = 0;
+      }
+      return { ...PlayerAchievementMethods.Result, methodName: this.Name, extraValue: bicepFlexStreak };
+    },
   };
 
   static CatSunglasses = {
@@ -179,20 +370,6 @@ class PlayerAchievementMethods {
       }
       return { ...PlayerAchievementMethods.Result, methodName: this.Name, extraValue: noMatchStreak };
     },
-  };
-
-  static DiCaprio100 = {
-    Name: "DiCaprio100",
-    DisplayedMsg: "100% \n Brilliant!",
-    requireImage: () => require("../assets/awkwardstickers/DiCaprio/DiCaprio100.webp"),
-    execute: hundredPercentExecute,
-  };
-
-  static DiCaprio0 = {
-    Name: "DiCaprio0",
-    DisplayedMsg: "0% \n Don't worry, I know you're acting!",
-    requireImage: () => require("../assets/awkwardstickers/DiCaprio/DiCaprio0.webp"),
-    execute: ZeroPercentExecute,
   };
 
   static DiCaprioDjangoLaugh = {

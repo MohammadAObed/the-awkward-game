@@ -63,9 +63,9 @@ const HandshakeComponent = ({ handshake = new Handshake(), isSelected, selectHan
 export default HandshakesWalkthroughComponent;
 
 function sortHandshakes(person = new Person(), handshakes = [new Handshake()]) {
-  const { highChance, lowChance, medChance, specialChance } = person.handshakesOccurance;
+  const { highChance, lowChance, medChance } = person.handshakesOccurance;
   const newArr = [...highChance.ids.slice(0, 2), person.signatureHandshake.id, ...highChance.ids.slice(2)];
-  const handshakeChances = [...newArr, ...medChance.ids, ...lowChance.ids, ...specialChance.ids];
+  const handshakeChances = [...newArr, ...medChance.ids, ...lowChance.ids];
   let filteredHandshakes = handshakes.filter((h) => handshakeChances.includes(h.id));
   filteredHandshakes = filteredHandshakes.sort((a, b) => {
     const indexA = handshakeChances.indexOf(a.id);

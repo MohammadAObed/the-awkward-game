@@ -60,15 +60,15 @@ function generateMoodValue({ selectedPersonHandshake = new Handshake(), selected
     } else if (lowChance.ids.includes(selectedPersonHandshake.id)) {
       value += 3;
     } else if (specialChance.ids.includes(selectedPersonHandshake.id)) {
-      value += 5;
+      value += 2;
     }
   } else {
-    value -= 10;
+    value -= 20;
     if (selectedPersonHandshake.id === person.signatureHandshake.id) {
       value -= 2;
     }
     if (specialChance.ids.includes(selectedPersonHandshake.id)) {
-      value -= 3;
+      value += 2;
     }
   }
 
@@ -101,7 +101,7 @@ async function mHandlePlayAudio(
       timeout = setTimeout(() => {
         globalState.setIsPersonSoundPlaying((prev) => false);
         clearTimeout(timeout);
-      }, 800);
+      }, 500);
 
       sound.unloadAsync();
     }
@@ -175,7 +175,7 @@ function mShakeEndedTimeout(result = PlayerAchievementMethods.Result) {
   if (
     result.showAchievement ||
     globalState.isFirstEncounterEver ||
-    globalState.timesPlayed >= MaxTimesPlayed ||
+    globalState.timesPlayed + increaseTimesPlayedNum >= MaxTimesPlayed ||
     globalState.gameType === GameType.QUICK
   ) {
     globalState.setPersonHadEnough((prev) => true);
