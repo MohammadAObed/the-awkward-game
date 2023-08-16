@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { selectWalkthroughSliceByScreenNameAndListOrder, walkthroughUpdate } from "../../features/walkthroughSlice";
 import { useWalkthrough } from "../../libraries/walkthrough";
-import { useNavigation } from "@react-navigation/native";
-import { ScreenNames } from "../../constants/ScreenNames";
 import { playAudio } from "../../utils/common/playAudio";
 export default useWalkthroughShow = (
   globalState,
@@ -16,7 +14,6 @@ export default useWalkthroughShow = (
   const walkthroughObj = useSelector((state) => selectWalkthroughSliceByScreenNameAndListOrder(state, screenName, listOrder));
   const [showWalkthrough, setShowWalkthrough] = useState(walkthroughObj?.show || false); //change true to the state in the storage
   const [isFirstEncounterEver] = useState(walkthroughObj?.show || false);
-  //const [sound, setSound] = useState(null);
   useEffect(() => {
     let sound = undefined;
     const walkthroughOnStop = () => {
@@ -59,9 +56,7 @@ export default useWalkthroughShow = (
   }, [showWalkthrough]);
   return {
     showWalkthrough,
-    // setShowWalkthrough,
     startWalkthrough: start,
     isFirstEncounterEver,
-    // stopWalkthrough: stop,
   };
 };

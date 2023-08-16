@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from "react";
+import { useState } from "react";
 
 const useModal = (initialModalVisible = false) => {
   const [modalVisible, setModalVisible] = useState(initialModalVisible);

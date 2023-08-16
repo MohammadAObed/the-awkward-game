@@ -1,6 +1,6 @@
 import { View, Text, TouchableOpacity, Image } from "react-native";
 import React, { useEffect, useRef, useState } from "react";
-import { globalState, nGlobalState } from "../../global/GameScreen";
+import { globalState } from "../../global/GameScreen";
 import { playAudio } from "../../utils/common/playAudio";
 import { getRandomNumber } from "../../utils/common/getRandomNumber";
 import { useSelector } from "react-redux";
@@ -26,7 +26,7 @@ const GifComponent = ({ leaveScreen = function () {} }) => {
         soundRef.current = newSound;
         fireworksRef.current = fireworksSound;
       } catch (error) {
-        console.log("Error loading audio:", error);
+        //console.log("Error loading audio:", error);
       }
     }
     loadSound();

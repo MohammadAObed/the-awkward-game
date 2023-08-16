@@ -1,6 +1,5 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import NavbarComponent from "./components/common/NavbarComponent";
 import GameScreen from "./screens/GameScreen";
 import StartScreen from "./screens/StartScreen";
 import { store, persistor } from "./store";

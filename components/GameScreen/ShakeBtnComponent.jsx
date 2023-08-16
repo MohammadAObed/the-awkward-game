@@ -23,13 +23,11 @@ const ShakeBtnComponent = () => {
   return (
     <View className="w-full items-center mt-7 border">
       <TouchableOpacity
-        // className="bg-yellow-500 px-14 py-4 rounded-sm"
         className="bg-yellow-500 w-full h-16 rounded-md flex-row items-center justify-center space-x-4"
         style={{ opacity: globalState.hasShakeStarted === true && 0.4 }}
         disabled={globalState.hasShakeStarted === true}
         onPress={beginHandshake}
       >
-        {/* <Text className="text-lg text-black-500">Shake!</Text> */}
         <Text className="text-black-700 text-lg text-center font-bold">Shake</Text>
         <Text className="text-xl text-center">🤝</Text>
       </TouchableOpacity>

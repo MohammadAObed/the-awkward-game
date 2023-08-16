@@ -49,7 +49,7 @@ const LeaveMsgComponent = ({ leaveScreen = function () {} }) => {
         setSound(newSound);
         setMsg((prev) => prev + newMsg);
       } catch (error) {
-        console.log("Error playing audio:", error);
+        //console.log("Error playing audio:", error);
       }
     }
 

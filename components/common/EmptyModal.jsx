@@ -1,4 +1,3 @@
-import { useRef, useState } from "react";
 import { Modal, Pressable, ScrollView, Text, TouchableOpacity, TouchableWithoutFeedback, View } from "react-native";
 import { XMarkIcon } from "react-native-heroicons/solid";
 

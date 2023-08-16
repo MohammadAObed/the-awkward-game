@@ -1,7 +1,6 @@
 import { View, Text, Animated } from "react-native";
 import React from "react";
 import { PlayerType } from "../../constants/PlayerType";
-import { Handshake } from "../../models/Handshake";
 import { HandshakeSpaceX } from "../../constants/GameScreen";
 import { globalState } from "../../global/GameScreen";
 

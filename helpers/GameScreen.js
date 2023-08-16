@@ -1,4 +1,3 @@
-import { Audio } from "expo-av";
 import { FinishMsgTimeout, GameType, MaxTimesPlayed, MaxTimesSoundPlayed, TimerStartValue } from "../constants/GameScreen";
 import { ScreenNames } from "../constants/ScreenNames";
 import handshakes from "../data/Handshake";
@@ -211,7 +210,6 @@ export function generateRandomHandshake({ person = new Person() }) {
 export function handleShakeEnded() {
   if (globalState.hasShakeEnded == false) return;
   let newMood = getMoodBasedOnHandshake();
-  //console.log("🚀 ~ " + globalState.person.name + "file: GameScreen.js:183 ~ handleShakeEnded ~ newMood:", newMood);
   globalState.setPersonMood((prev) => ({
     name: newMood.name,
     value: newMood.value,
@@ -240,7 +238,6 @@ export function mShakeAgain() {
   globalState.setHasPressedShake(false);
 }
 export function leaveScreen(e, screenName = ScreenNames.PersonsScreen) {
-  //console.log("🚀 ~ file: GameScreen.js:151 ~ leaveScreen ~ screenName:", screenName);
   globalState.navigation.reset({
     index: 0,
     routes: [

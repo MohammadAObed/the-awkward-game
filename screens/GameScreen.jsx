@@ -2,7 +2,6 @@ import { View, BackHandler } from "react-native";
 import React, { useEffect, useRef, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { WalkthroughProvider, WalkthroughTooltip } from "../libraries/walkthrough";
-import handshakes from "../data/Handshake";
 import { useDispatch, useSelector } from "react-redux";
 import useWalkthroughShow from "../hooks/common/useWalkthroughShow";
 import HandshakesWalkthroughComponent from "../components/GameScreen/HandshakesWalkthroughComponent";

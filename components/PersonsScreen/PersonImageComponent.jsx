@@ -10,18 +10,6 @@ import { getInitialMoodAndImage } from "../../helpers/common/getPersonMood";
 
 const WalkthroughView = walkthroughable(View);
 
-// const PersonImageComponent = () => {
-//   return (
-//     <View className="-mt-0 z-50">
-//       <WalkthroughStep text={`Quick! ${initialPerson.name} is approaching you`} order={1} name="First">
-//         <WalkthroughView>
-//           <PersonImageComponent />
-//         </WalkthroughView>
-//       </WalkthroughStep>
-//     </View>
-//   );
-// };
-
 const PersonImageComponent = ({ person = new Person() }) => {
   // This Won't Work Somehow: useEffect(() => { start();}, []);
   let meter = new PersonMeter();

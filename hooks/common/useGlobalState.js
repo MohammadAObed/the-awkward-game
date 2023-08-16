@@ -1,9 +1,7 @@
 //- Works With globalState object (gs)
 //- Order Of useGlobalState Call is important! bcz a custom hook may be using a state that is defined after that hook
-import React, { useEffect } from "react";
-import { nGlobalState } from "../../global/GameScreen";
 
-//! 1-for later: try put useMemo for global state property variable assignment
+//todo for later: try put useMemo for global state property variable assignment
 const useGlobalState = (globalState, cb, args, valueName, setValueName, isObjReturned = false, stateIsObj = false) => {
   //mostly for custom hooks that return objects
   if (isObjReturned === true) {

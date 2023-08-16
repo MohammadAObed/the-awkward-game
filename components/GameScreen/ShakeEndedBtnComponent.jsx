@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity } from "react-native";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 const ShakeEndedBtnComponent = ({ handlePress, btnText = "" }) => {
   const [visible, setVisible] = useState(false);

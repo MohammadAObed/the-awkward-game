@@ -12,6 +12,6 @@ export async function playAudio(requireAudio = function () {}, shouldPlay = true
       return sound;
     }
   } catch (error) {
-    console.log("Error playing audio:", error);
+    //console.log("Error playing audio:", error);
   }
 }

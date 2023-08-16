@@ -5,7 +5,6 @@ import { WalkthroughStep, walkthroughable } from "../../libraries/walkthrough";
 import PersonImageComponent from "./PersonImageComponent";
 import PersonBarWalkthroughComponent from "./PersonBarWalkthroughComponent";
 import { PhoneIcon } from "react-native-heroicons/solid";
-import { GameType } from "../../constants/GameScreen";
 import { ScreenNames } from "../../constants/ScreenNames";
 import { globalState } from "../../global/PersonsScreen";
 

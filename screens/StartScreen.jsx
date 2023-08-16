@@ -18,10 +18,10 @@ const StartScreen = () => {
   //Temp
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  dispatch(walkthroughReset({}));
-  dispatch(meterReset({}));
-  dispatch(playerAchievementReset({}));
-  dispatch(settingsReset({}));
+  //dispatch(walkthroughReset({}));
+  //dispatch(meterReset({}));
+  //dispatch(playerAchievementReset({}));
+  //dispatch(settingsReset({}));
   //
   const [videoLoaded, setVideoLoaded] = useState(false);
   const { modalVisible, showModal, hideModal } = useModal();

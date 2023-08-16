@@ -78,7 +78,7 @@ const PersonsComponent = () => {
 const HelpIndex = 1;
 
 const PersonsListComponent = () => {
-  //! if meter value is bigger, then its first, etc....
+  //todo: if meter value is bigger, then its first, etc....
   const params = useRoute().params;
 
   let personsList = useMemo(() => {

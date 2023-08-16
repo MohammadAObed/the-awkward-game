@@ -1,5 +1,5 @@
 import { View, Text } from "react-native";
-import React, { useEffect, useMemo } from "react";
+import React, { useMemo } from "react";
 import { globalState } from "../../global/GameScreen";
 import { getRandomNumber } from "../../utils/common/getRandomNumber";
 import { initialState } from "../../initials/GameScreen";

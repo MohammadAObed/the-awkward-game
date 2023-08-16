@@ -1,5 +1,5 @@
 import { View, Text, Image } from "react-native";
-import React, { useMemo, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { WalkthroughStep, walkthroughable } from "../../libraries/walkthrough";
 import { globalState } from "../../global/GameScreen";
 import { PersonMeter } from "../../models/PersonMeter";
