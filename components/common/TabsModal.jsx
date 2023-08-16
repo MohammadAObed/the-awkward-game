@@ -148,7 +148,10 @@ const CreditsTabContentComponent = () => {
           Clout
         </Text>
         <Text className="text-white leading-6 mt-2" style={{ fontSize: 15 }}>
-          🗣 Shout out to all the characters in this game
+          🗣 Shout out to all the characters in the game
+        </Text>
+        <Text className="text-white leading-6 mt-2" style={{ fontSize: 15 }}>
+          🔊 Shout out to all the great people I got my images and stickers from
         </Text>
       </View>
     </View>
