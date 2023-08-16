@@ -509,9 +509,9 @@ const Trump = new Person(
   handshakes.find((h) => h.id === 17),
   {
     highChance: { ids: [1, 2, 3, 6], value: highValue },
-    medChance: { ids: [5, 7], value: medValue },
+    medChance: { ids: [5], value: medValue },
     lowChance: { ids: [11], value: lowValue },
-    specialChance: { ids: [], value: specialValue },
+    specialChance: { ids: [29], value: specialValue },
   }
 );
 
@@ -540,9 +540,9 @@ const Ronaldo = new Person(
   "Siuuuuuuuuuuuu",
   handshakes.find((h) => h.id === 16),
   {
-    highChance: { ids: [1, 2, 3, 5], value: highValue },
-    medChance: { ids: [6, 7], value: medValue },
-    lowChance: { ids: [8], value: lowValue },
+    highChance: { ids: [1, 5, 3, 2], value: highValue },
+    medChance: { ids: [6], value: medValue },
+    lowChance: { ids: [8, 30], value: lowValue },
     specialChance: { ids: [], value: specialValue },
   }
 );
@@ -573,9 +573,9 @@ const ElonMusk = new Person(
   handshakes.find((h) => h.id === 19),
   {
     highChance: { ids: [1, 2, 3, 6], value: highValue },
-    medChance: { ids: [5, 7], value: medValue },
+    medChance: { ids: [5], value: medValue },
     lowChance: { ids: [10], value: lowValue },
-    specialChance: { ids: [], value: specialValue },
+    specialChance: { ids: [18], value: specialValue },
   }
 );
 
@@ -636,8 +636,8 @@ const Speed = new Person(
   "Crista Ronaldo, sui",
   handshakes.find((h) => h.id === 23),
   {
-    highChance: { ids: [1, 2, 3, 4], value: highValue },
-    medChance: { ids: [5, 6, 7], value: medValue },
+    highChance: { ids: [1, 2, 3], value: highValue },
+    medChance: { ids: [5, 12], value: medValue },
     lowChance: { ids: [8], value: lowValue },
     specialChance: { ids: [], value: specialValue },
   }

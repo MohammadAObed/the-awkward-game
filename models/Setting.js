@@ -2,6 +2,7 @@ import { Common } from "./Common";
 
 const SettingsNames = {
   AiVoice: "AiVoice",
+  Reached100AchievmentsHidden: "Reached100AchievmentsHidden",
 };
 
 class Setting extends Common {

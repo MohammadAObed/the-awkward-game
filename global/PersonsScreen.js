@@ -10,6 +10,7 @@ export const globalState = {
   hideModal: function () {},
   person: new Person(),
   setPerson: function () {},
+  showHelpModal: function () {},
 };
 export const nGlobalState = {
   navigation: "navigation",

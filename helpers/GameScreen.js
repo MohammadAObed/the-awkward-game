@@ -28,7 +28,6 @@ function mHandlePlayerAchievements(param = PlayerAchievementMethods.Param) {
     }
     if (result.extraValue !== null && result.extraValue !== param.playerPersonAchievement.extraValue) {
       globalState.dispatch(playerAchievementUpdate({ id: playerAchievement.id, extraValue: result.extraValue }));
-      return result;
     }
   }
   return result;
@@ -63,7 +62,7 @@ function generateMoodValue({ selectedPersonHandshake = new Handshake(), selected
       value += 2;
     }
   } else {
-    value -= 20;
+    value -= 2;
     if (selectedPersonHandshake.id === person.signatureHandshake.id) {
       value -= 2;
     }

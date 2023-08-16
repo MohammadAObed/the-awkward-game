@@ -54,6 +54,7 @@ const PersonsComponent = () => {
       globalState,
       { ...initialState.showWalkthrough },
       [() => require("../assets/audio/aiadam/ClickOnAContact.mp3"), () => require("../assets/audio/aiadam/barIndicatesLevelOf.mp3")],
+      () => globalState.showHelpModal(true),
     ],
     null,
     null,
@@ -119,6 +120,17 @@ const PersonsListComponent = () => {
 const HelpComponent = () => {
   const showHelp = (e) => {};
   const { hideModal, modalVisible, showModal } = useModal();
+  let showDelayTimeout;
+  globalState.showHelpModal = (withTimeout = false) => {
+    if (!withTimeout) {
+      showModal();
+      return;
+    }
+    showDelayTimeout = setTimeout(() => {
+      showModal();
+      if (showDelayTimeout) clearTimeout(showDelayTimeout);
+    }, 100);
+  };
   return (
     <>
       <TouchableOpacity className="p-2 rounded-xl bg-black-500 mt-5 flex-row justify-center items-center" onPress={showModal}>

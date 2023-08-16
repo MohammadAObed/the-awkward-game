@@ -46,18 +46,44 @@ export const initialState = {
     new PlayerAchievement(36, persons[0], PlayerAchievementMethods.RockSurprised.Name, 0).serialize(),
     new PlayerAchievement(37, persons[0], PlayerAchievementMethods.RockWink.Name).serialize(),
 
-    new PlayerAchievement(41, persons[2], PlayerAchievementMethods.CatSunglasses.Name).serialize(),
-    new PlayerAchievement(42, persons[2], PlayerAchievementMethods.CatSurprised.Name).serialize(),
-    new PlayerAchievement(43, persons[2], PlayerAchievementMethods.CatProcessing.Name).serialize(),
-    new PlayerAchievement(44, persons[2], PlayerAchievementMethods.CatTasleekSmile.Name).serialize(),
-    new PlayerAchievement(45, persons[2], PlayerAchievementMethods.Cat7BadInARow.Name, 0).serialize(),
+    new PlayerAchievement(38, persons[1], PlayerAchievementMethods.TrumpNiceThumb.Name, 0).serialize(),
+    new PlayerAchievement(39, persons[1], PlayerAchievementMethods.TrumpFakeNews.Name).serialize(),
 
-    new PlayerAchievement(50, persons[4], PlayerAchievementMethods.DiCaprioDjangoLaugh.Name).serialize(),
-    new PlayerAchievement(51, persons[4], PlayerAchievementMethods.DiCaprioFiftyFifty.Name).serialize(),
-    new PlayerAchievement(52, persons[4], PlayerAchievementMethods.DiCaprioYouSlick.Name).serialize(),
-    new PlayerAchievement(53, persons[4], PlayerAchievementMethods.DiCaprioShady.Name).serialize(),
-    //new PlayerAchievement(4, persons[4], PlayerAchievementMethods.DiCaprioDjangoLaugh.Name).serialize(),
-    // new PlayerAchievement(3, Tate).serialize(),
+    new PlayerAchievement(40, persons[2], PlayerAchievementMethods.CatSunglasses.Name).serialize(),
+    new PlayerAchievement(41, persons[2], PlayerAchievementMethods.CatSurprised.Name).serialize(),
+    new PlayerAchievement(42, persons[2], PlayerAchievementMethods.CatProcessing.Name).serialize(),
+    new PlayerAchievement(43, persons[2], PlayerAchievementMethods.CatTasleekSmile.Name).serialize(),
+    new PlayerAchievement(44, persons[2], PlayerAchievementMethods.Cat7BadInARow.Name, 0).serialize(),
+
+    new PlayerAchievement(45, persons[3], PlayerAchievementMethods.RonaldoSuiAudio.Name).serialize(),
+    new PlayerAchievement(46, persons[3], PlayerAchievementMethods.Ronaldo12Sui.Name, 0).serialize(),
+    new PlayerAchievement(47, persons[3], PlayerAchievementMethods.RonaldoDontTouchMe.Name).serialize(),
+
+    new PlayerAchievement(48, persons[4], PlayerAchievementMethods.DiCaprioDjangoLaugh.Name).serialize(),
+    new PlayerAchievement(49, persons[4], PlayerAchievementMethods.DiCaprioFiftyFifty.Name).serialize(),
+    new PlayerAchievement(50, persons[4], PlayerAchievementMethods.DiCaprioYouSlick.Name).serialize(),
+    new PlayerAchievement(51, persons[4], PlayerAchievementMethods.DiCaprioShady.Name).serialize(),
+
+    new PlayerAchievement(52, persons[5], PlayerAchievementMethods.ElonPointing.Name).serialize(),
+    new PlayerAchievement(53, persons[5], PlayerAchievementMethods.ElonThisis.Name).serialize(),
+
+    new PlayerAchievement(54, persons[6], PlayerAchievementMethods.CenaBingChiling.Name).serialize(),
+    new PlayerAchievement(55, persons[6], PlayerAchievementMethods.CenaConfused.Name).serialize(),
+
+    new PlayerAchievement(56, persons[7], PlayerAchievementMethods.KhabyMax.Name).serialize(),
+    new PlayerAchievement(57, persons[7], PlayerAchievementMethods.KhabyConfused.Name).serialize(),
+
+    new PlayerAchievement(58, persons[8], PlayerAchievementMethods.MarkBlink.Name).serialize(),
+    new PlayerAchievement(59, persons[8], PlayerAchievementMethods.MarkFist.Name).serialize(),
+    new PlayerAchievement(60, persons[8], PlayerAchievementMethods.MarkTiredSmile.Name, 0).serialize(),
+
+    new PlayerAchievement(61, persons[9], PlayerAchievementMethods.SpeedMaxPlayed.Name).serialize(),
+    new PlayerAchievement(62, persons[9], PlayerAchievementMethods.SpeedWhat.Name).serialize(),
+    new PlayerAchievement(63, persons[9], PlayerAchievementMethods.SpeedWakey.Name).serialize(),
+
+    new PlayerAchievement(64, persons[10], PlayerAchievementMethods.SpongeConfused.Name).serialize(),
+    new PlayerAchievement(65, persons[10], PlayerAchievementMethods.SpongeMax.Name).serialize(),
+    new PlayerAchievement(66, persons[10], PlayerAchievementMethods.SpongeTired.Name, 0).serialize(),
   ],
 };
 

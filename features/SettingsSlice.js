@@ -3,7 +3,10 @@ import { SettingsUpdate, SettingstReset } from "../controllers/SettingsControlle
 import { Setting, SettingsNames } from "../models/Setting";
 //containing all items
 export const initialState = {
-  settings: [new Setting(1, SettingsNames.AiVoice, true).serialize()],
+  settings: [
+    new Setting(1, SettingsNames.AiVoice, true).serialize(),
+    new Setting(2, SettingsNames.Reached100AchievmentsHidden, false).serialize(),
+  ],
 };
 
 export const SettingSlice = createSlice({

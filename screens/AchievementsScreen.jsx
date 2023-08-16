@@ -1,7 +1,7 @@
 import { View, Text, Image, ScrollView, TouchableOpacity, Alert } from "react-native";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectPlayerAchievementByMethodName, selectPlayerAchievements } from "../features/PlayerAchievementSlice";
 import { PlayerAchievement } from "../models/PlayerAchievement";
 import persons from "../data/Person";
@@ -13,6 +13,10 @@ import * as MediaLibrary from "expo-media-library";
 import { Asset } from "expo-asset";
 import { useRoute } from "@react-navigation/native";
 import { PlayerAchievementMethods } from "../models/PlayerAchievementMethods";
+import { Setting, SettingsNames } from "../models/Setting";
+import { selectSettingsByName, settingsUpdate } from "../features/SettingsSlice";
+import { getRandomNumber } from "../utils/common/getRandomNumber";
+import { playAudio } from "../utils/common/playAudio";
 
 const globalState = {
   showModal: function () {},
@@ -27,6 +31,9 @@ const AchievementsScreen = () => {
   const params = useRoute().params;
   //#region globalState
   const { hideModal, modalVisible, showModal } = useModal();
+  const [is100, setIs100] = useState(false);
+  globalState.is100 = is100;
+  globalState.setIs100 = setIs100;
   globalState.showModal = showModal;
   globalState.hideModal = hideModal;
   const initialAchievement = useSelector((state) => selectPlayerAchievementByMethodName(state, params?.methodName));
@@ -36,6 +43,7 @@ const AchievementsScreen = () => {
   const [personId, setPersonId] = useState(params?.personId ?? 0);
   globalState.personId = personId;
   globalState.setPersonId = setPersonId;
+  //#endregion
   let achievements = [new PlayerAchievement()];
   achievements = useSelector((state) => selectPlayerAchievements(state));
   let achievementsCompleted = useMemo(
@@ -46,10 +54,20 @@ const AchievementsScreen = () => {
     [achievements]
   );
   let achievementsPercentage = ((achievementsCompleted * 100) / achievements.length).toFixed(0);
-  //#endregion
+  let settingsModel = new Setting();
+  settingsModel = useSelector((state) => selectSettingsByName(state, SettingsNames.Reached100AchievmentsHidden));
+  const dispatch = useDispatch();
   useEffect(() => {
     const showModalTimeout = setTimeout(() => {
-      if (params) showModal();
+      let showFireworks = false;
+      if (achievementsCompleted === achievements.length) {
+        if (settingsModel.value !== true) {
+          dispatch(settingsUpdate({ id: settingsModel.id, value: true }));
+          showFireworks = true;
+          setIs100(true);
+        }
+      }
+      if (params || showFireworks) showModal();
     }, 500);
 
     return () => {
@@ -62,7 +80,7 @@ const AchievementsScreen = () => {
         <PersonsComponent achievements={achievements} />
         {modalVisible && (
           <EmptyModal hideModal={hideModal} modalVisible={modalVisible}>
-            <GifComponent />
+            {is100 ? <FireworksComponent /> : <GifComponent />}
           </EmptyModal>
         )}
       </SettingComponent>
@@ -161,18 +179,69 @@ const GifComponent = () => {
       Alert.alert("", "Download failed!");
     }
   }
+  var lines = PlayerAchievementMethods[globalState.achievement.methodName]?.DisplayedMsg.split(PlayerAchievementMethods.MultiLineSepeartor);
   return (
     <View className=" flex items-center">
       <Image className="w-60 h-60" source={image} />
-      <Text className="mt-5 text-white w-72 text-center text-lg">
-        {PlayerAchievementMethods[globalState.achievement.methodName]?.DisplayedMsg}
-      </Text>
+      {lines.length > 1 ? (
+        <>
+          <Text className="mt-5 text-yellow-500 w-72 text-center text-lg">{lines[0]}</Text>
+          <Text className="mt-2 text-white w-72 text-center text-lg">{lines[1]}</Text>
+        </>
+      ) : (
+        <Text className="mt-5 text-white w-72 text-center text-lg">{lines.length == 1 ? lines[0] : ""}</Text>
+      )}
       <View className="flex-row space-x-2">
         <TouchableOpacity className="bg-yellow-500 py-3 px-16 rounded-md mt-5" onPress={() => handleDownload(image)}>
           <Text className=" text-black-500 text-center">Download 👇</Text>
         </TouchableOpacity>
       </View>
     </View>
+  );
+};
+
+const FireworksComponent = () => {
+  const soundRef = useRef(null);
+  const fireworksRef = useRef(null);
+  let settingsModel = new Setting();
+  settingsModel = useSelector((state) => selectSettingsByName(state, SettingsNames.AiVoice));
+  useEffect(() => {
+    async function loadSound() {
+      try {
+        const audioArr = [
+          require("../assets/audio/aiadam/hurraaaay.mp3"),
+          require("../assets/audio/aiadam/hurrayBuddy.mp3"),
+          require("../assets/audio/aiadam/congrats.mp3"),
+        ];
+        const fireworksSound = await playAudio(() => require("../assets/audio/fireworksShort.mp3"), true, -1, true);
+        const newSound = settingsModel.value !== true ? null : await playAudio(() => audioArr, true, getRandomNumber(audioArr.length));
+        soundRef.current = newSound;
+        fireworksRef.current = fireworksSound;
+      } catch (error) {
+        //no need to display alert, its just sound
+      }
+    }
+    loadSound();
+    return () => {
+      if (soundRef.current) {
+        soundRef.current.unloadAsync();
+      }
+      if (fireworksRef.current) {
+        fireworksRef.current.unloadAsync();
+      }
+    };
+  }, []);
+  return (
+    <TouchableOpacity
+      className="w-full h-full flex justify-center"
+      onPress={() => {
+        globalState.hideModal();
+        globalState.setIs100(false);
+      }}
+    >
+      <Image className="w-full h-full absolute" source={require("../assets/images/fireworks.gif")} />
+      <Text className="text-5xl text-yellow-500 text-center">100%</Text>
+    </TouchableOpacity>
   );
 };
 

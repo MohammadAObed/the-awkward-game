@@ -5,7 +5,13 @@ import { useWalkthrough } from "../../libraries/walkthrough";
 import { useNavigation } from "@react-navigation/native";
 import { ScreenNames } from "../../constants/ScreenNames";
 import { playAudio } from "../../utils/common/playAudio";
-export default useWalkthroughShow = (globalState, { screenName = "", listOrder = 1 }, audioArray, prevStepOrder = 0) => {
+export default useWalkthroughShow = (
+  globalState,
+  { screenName = "", listOrder = 1 },
+  audioArray,
+  onLastStepExecute = null,
+  prevStepOrder = 0
+) => {
   const { start, stop, walkthroughEvents, currentStep } = useWalkthrough();
   const walkthroughObj = useSelector((state) => selectWalkthroughSliceByScreenNameAndListOrder(state, screenName, listOrder));
   const [showWalkthrough, setShowWalkthrough] = useState(walkthroughObj?.show || false); //change true to the state in the storage
@@ -23,6 +29,9 @@ export default useWalkthroughShow = (globalState, { screenName = "", listOrder =
         })
       );
       setShowWalkthrough(false);
+      if (typeof onLastStepExecute === "function") {
+        onLastStepExecute();
+      }
     };
     async function walkthroughOnStepChanged(step) {
       if (step?.order == prevStepOrder) return;

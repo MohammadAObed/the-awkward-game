@@ -12,14 +12,16 @@ import { meterReset } from "../features/PersonMeterSlice";
 import { playerAchievementReset } from "../features/PlayerAchievementSlice";
 import EmptyModal from "../components/common/EmptyModal";
 import TabsModal from "../components/common/TabsModal";
+import { settingsReset } from "../features/SettingsSlice";
 
 const StartScreen = () => {
   //Temp
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  //dispatch(walkthroughReset({}));
+  dispatch(walkthroughReset({}));
   dispatch(meterReset({}));
   dispatch(playerAchievementReset({}));
+  dispatch(settingsReset({}));
   //
   const [videoLoaded, setVideoLoaded] = useState(false);
   const { modalVisible, showModal, hideModal } = useModal();
