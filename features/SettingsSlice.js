@@ -6,6 +6,7 @@ export const initialState = {
   settings: [
     new Setting(1, SettingsNames.AiVoice, true).serialize(),
     new Setting(2, SettingsNames.Reached100AchievmentsHidden, false).serialize(),
+    new Setting(3, SettingsNames.timerSound, true).serialize(),
   ],
 };
 

@@ -17,7 +17,10 @@ const SettingsScreen = () => {
     <SafeAreaView className="flex-1 px-5 bg-black-700">
       <SettingComponent title={"Settings"}>
         <SettingItemComponent name="AI Voice">
-          <AIVoiceComponent setValue={setValue} value={settingsModel.find((s) => s.name === SettingsNames.AiVoice)} />
+          <SwitchSettingComponent setValue={setValue} value={settingsModel.find((s) => s.name === SettingsNames.AiVoice)} />
+        </SettingItemComponent>
+        <SettingItemComponent name="Timer Sound">
+          <SwitchSettingComponent setValue={setValue} value={settingsModel.find((s) => s.name === SettingsNames.timerSound)} />
         </SettingItemComponent>
       </SettingComponent>
     </SafeAreaView>
@@ -42,7 +45,7 @@ const SettingItemComponent = ({ name, children }) => {
   );
 };
 
-const AIVoiceComponent = ({ setValue, value = new Setting() }) => {
+const SwitchSettingComponent = ({ setValue, value = new Setting() }) => {
   const [isEnabled, setIsEnabled] = useState(value.value);
   return (
     <>

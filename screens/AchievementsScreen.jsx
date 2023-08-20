@@ -151,6 +151,8 @@ const AchievementComponent = ({ personAchievement = new PlayerAchievement() }) =
 };
 
 const GifComponent = () => {
+  const [downloadMsg, setDownloadMsg] = useState({ show: false, msg: "" });
+
   const image = PlayerAchievementMethods[globalState.achievement.methodName]?.requireImage();
 
   async function handleDownload(image) {
@@ -173,17 +175,19 @@ const GifComponent = () => {
       } else {
         albumAsset = await MediaLibrary.addAssetsToAlbumAsync([mediaAsset], album);
       }
-      Alert.alert("Download completed!", "It's saved in The Awkward Game Stickers Album");
-      globalState.hideModal();
+      setDownloadMsg((prev) => ({ show: true, msg: "Download Completed!" }));
     } catch (error) {
-      Alert.alert("", "Download failed!");
+      setDownloadMsg((prev) => ({ show: true, msg: "Download Failed!" }));
     }
   }
-  var lines = PlayerAchievementMethods[globalState.achievement.methodName]?.DisplayedMsg.split(PlayerAchievementMethods.MultiLineSepeartor);
+  let lines = PlayerAchievementMethods[globalState.achievement.methodName]?.DisplayedMsg.split(PlayerAchievementMethods.MultiLineSepeartor);
+  let showDownloadMsg = downloadMsg.show;
   return (
     <View className=" flex items-center">
-      <Image className="w-60 h-60" source={image} />
-      {lines.length > 1 ? (
+      {!showDownloadMsg && <Image className="w-60 h-60" source={image} />}
+      {showDownloadMsg ? (
+        <Text className="mt-5 text-white w-72 text-center text-lg">{downloadMsg.msg}</Text>
+      ) : lines.length > 1 ? (
         <>
           <Text className="mt-5 text-yellow-500 w-72 text-center text-lg">{lines[0]}</Text>
           <Text className="mt-2 text-white w-72 text-center text-lg">{lines[1]}</Text>
@@ -192,8 +196,13 @@ const GifComponent = () => {
         <Text className="mt-5 text-white w-72 text-center text-lg">{lines.length == 1 ? lines[0] : ""}</Text>
       )}
       <View className="flex-row space-x-2">
-        <TouchableOpacity className="bg-yellow-500 py-3 px-16 rounded-md mt-5" onPress={() => handleDownload(image)}>
-          <Text className=" text-black-500 text-center">Download 👇</Text>
+        <TouchableOpacity
+          className="bg-yellow-500 py-3 px-16 rounded-md mt-5"
+          onPress={() => {
+            showDownloadMsg ? globalState.hideModal() : handleDownload(image);
+          }}
+        >
+          <Text className=" text-black-500 text-center">{showDownloadMsg ? `Ok 👍` : `Download 👇`}</Text>
         </TouchableOpacity>
       </View>
     </View>

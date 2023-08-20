@@ -5,10 +5,17 @@ import { getRandomNumber } from "../../utils/common/getRandomNumber";
 import { globalState } from "../../global/GameScreen";
 import { HandshakeDuration, TimerIntervalValue, TimerStartValue } from "../../constants/GameScreen";
 import { generateRandomHandshake } from "../../helpers/GameScreen";
+import { playAudio } from "../../utils/common/playAudio";
+import { Setting, SettingsNames } from "../../models/Setting";
+import { useSelector } from "react-redux";
+import { selectSettingsByName } from "../../features/SettingsSlice";
 
 export default useTimer = () => {
   const [timer, setTimer] = useState(TimerStartValue);
   const [timerInterval, setTimerInterval] = useState(null); //So When Timer Stops, I Clear Interval
+  const [countdownSound, setCountdownSound] = useState(null);
+  let settingsModel = new Setting();
+  settingsModel = useSelector((state) => selectSettingsByName(state, SettingsNames.timerSound));
   useEffect(() => {
     if (globalState.hasPlayStarted !== true || globalState.showWalkthrough !== false) return;
     const interval = setInterval(() => {
@@ -28,6 +35,16 @@ export default useTimer = () => {
   }, [globalState.showWalkthrough, globalState.hasPlayStarted]);
 
   useEffect(() => {
+    if (globalState.hasPlayStarted !== true || globalState.showWalkthrough !== false) return;
+    async function playCountdownSound() {
+      if (countdownSound) {
+        await countdownSound.playAsync();
+      }
+    }
+    playCountdownSound();
+  }, [globalState.showWalkthrough, globalState.hasPlayStarted, countdownSound]);
+
+  useEffect(() => {
     if (timer > 0) return;
     clearInterval(timerInterval);
     globalState.setHasPlayStarted((prev) => false);
@@ -35,9 +52,29 @@ export default useTimer = () => {
     const delayTimeout = setTimeout(() => {
       globalState.setHasShakeEnded((prev) => true);
     }, HandshakeDuration);
+    async function stopCountdownSound() {
+      if (countdownSound) {
+        await countdownSound.stopAsync();
+      }
+    }
+    stopCountdownSound();
     return () => {
       clearTimeout(delayTimeout);
     };
   }, [timer]);
+
+  useEffect(() => {
+    if (settingsModel.value !== true) {
+      return;
+    }
+    async function fetchAudio() {
+      const audio = await playAudio(() => require("../../assets/audio/countdown.mp3"), false, -1, true);
+      await audio.setVolumeAsync(0.01);
+      setCountdownSound(audio);
+    }
+
+    fetchAudio();
+  }, []);
+
   return [timer, setTimer];
 };

@@ -15,9 +15,9 @@ import TabsModal from "../components/common/TabsModal";
 import { settingsReset } from "../features/SettingsSlice";
 
 const StartScreen = () => {
-  //Temp
   const navigation = useNavigation();
   const dispatch = useDispatch();
+  //Temp
   //dispatch(walkthroughReset({}));
   //dispatch(meterReset({}));
   //dispatch(playerAchievementReset({}));
