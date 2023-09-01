@@ -22,6 +22,9 @@ import { getInitialMoodAndImage } from "../helpers/common/getPersonMood";
 import { getRandomNumber } from "../utils/common/getRandomNumber";
 import { meetupLines } from "../data/PersonMeetupLines";
 import { GameType } from "../constants/GameScreen";
+import { useAppContext } from "../components/common/AppContext";
+import { BtnSounds } from "../constants/BtnSound";
+import useButtonAudio from "../hooks/common/useButtonAudio";
 
 const PersonsScreen = () => {
   return (
@@ -118,6 +121,8 @@ const PersonsListComponent = () => {
 };
 
 const HelpComponent = () => {
+  const { playBtnSound } = useAppContext();
+
   const showHelp = (e) => {};
   const { hideModal, modalVisible, showModal } = useModal();
   let showDelayTimeout;
@@ -133,7 +138,13 @@ const HelpComponent = () => {
   };
   return (
     <>
-      <TouchableOpacity className="p-2 rounded-xl bg-black-500 mt-5 flex-row justify-center items-center" onPress={showModal}>
+      <TouchableOpacity
+        className="p-2 rounded-xl bg-black-500 mt-5 flex-row justify-center items-center"
+        onPress={(e) => {
+          showModal(e);
+          playBtnSound();
+        }}
+      >
         <TouchableOpacity className="p-2" onPress={showModal}>
           <QuestionMarkCircleIcon size={40} color={"gray"} />
         </TouchableOpacity>
@@ -146,6 +157,7 @@ const HelpComponent = () => {
 };
 
 const PersonModalContentComponent = () => {
+  const { playSound: playBtnSound } = useButtonAudio(BtnSounds.StartScreenSound);
   let meter = new PersonMeter();
   meter = useSelector((state) => selectMeterByPersonId(state, globalState.person.id));
   let mood = useMemo(() => getInitialMoodAndImage(meter.meterValue, globalState.person), [globalState.person.id]);
@@ -176,7 +188,13 @@ const PersonModalContentComponent = () => {
         </View>
       </View>
       <Text className="text-lg text-white text-center w-52">{greeting}</Text>
-      <TouchableOpacity className="bg-yellow-500 py-3 px-16 rounded-md mt-5" onPress={navigateToGame}>
+      <TouchableOpacity
+        className="bg-yellow-500 py-3 px-16 rounded-md mt-5"
+        onPress={() => {
+          navigateToGame();
+          playBtnSound();
+        }}
+      >
         <Text className=" text-black-500 text-center">Meet up {globalState.person.signatureHandshake.symbol}</Text>
       </TouchableOpacity>
     </View>

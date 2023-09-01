@@ -30,7 +30,8 @@
     "tailwindcss": "^3.3.2",
     "expo-file-system": "~15.2.2",
     "expo-media-library": "~15.2.3",
-    "expo-asset": "~8.9.1"
+    "expo-asset": "~8.9.1",
+    "expo-sharing": "~11.2.2"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

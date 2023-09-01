@@ -10,28 +10,30 @@ import PersonsScreen from "./screens/PersonsScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { AdjustmentsHorizontalIcon, HomeIcon, HomeModernIcon, QuestionMarkCircleIcon, StarIcon } from "react-native-heroicons/solid";
 import AchievementsScreen from "./screens/AchievementsScreen";
-import { View } from "react-native";
 import SettingsScreen from "./screens/SettingsScreen";
+import { AppContextProvider } from "./components/common/AppContext";
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          <Stack.Navigator
-            screenOptions={{
-              animation: "fade_from_bottom",
-              headerShown: false,
-            }}
-          >
-            <Stack.Screen name={ScreenNames.StartScreen} component={StartScreen} />
-            <Stack.Screen name={ScreenNames.GameScreen} component={GameScreen} />
-            <Stack.Screen name={ScreenNames.HomeScreen} component={HomeScreenWithTabs} />
-          </Stack.Navigator>
-        </PersistGate>
-      </Provider>
-    </NavigationContainer>
+    <AppContextProvider>
+      <NavigationContainer>
+        <Provider store={store}>
+          <PersistGate loading={null} persistor={persistor}>
+            <Stack.Navigator
+              screenOptions={{
+                animation: "fade_from_bottom",
+                headerShown: false,
+              }}
+            >
+              <Stack.Screen name={ScreenNames.StartScreen} component={StartScreen} />
+              <Stack.Screen name={ScreenNames.GameScreen} component={GameScreen} />
+              <Stack.Screen name={ScreenNames.HomeScreen} component={HomeScreenWithTabs} />
+            </Stack.Navigator>
+          </PersistGate>
+        </Provider>
+      </NavigationContainer>
+    </AppContextProvider>
   );
 }
 

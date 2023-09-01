@@ -1,23 +1,12 @@
-import { View, Text, Dimensions } from "react-native";
+import { View, Text, Dimensions, Platform } from "react-native";
 import React from "react";
-import {
-  CopilotStep,
-  useCopilot,
-  walkthroughable,
-  CopilotProvider,
-} from "react-native-copilot";
+import { CopilotStep, useCopilot, walkthroughable, CopilotProvider } from "react-native-copilot";
 import { WalkthroughTooltip } from "./WalkthroughTooltip";
 
 const MARGIN = Dimensions.get("window").width / 20;
 const WIDTH = Dimensions.get("window").width - 2 * MARGIN;
 
-const WalkthroughProvider = ({
-  children,
-  tooltipComponent = View,
-  stepNumberComponent = View,
-  animated = false,
-  arrowColor = "#212121",
-}) => {
+const WalkthroughProvider = ({ children, tooltipComponent = View, stepNumberComponent = View, animated = false, arrowColor = "#212121" }) => {
   return (
     <CopilotProvider
       tooltipComponent={tooltipComponent}
@@ -31,6 +20,7 @@ const WalkthroughProvider = ({
       animated={animated}
       stepNumberComponent={stepNumberComponent}
       arrowColor={arrowColor}
+      androidStatusBarVisible={Platform.OS === "ios" ? false : true}
       // margin={-305}
     >
       {children}
@@ -80,10 +70,4 @@ const useWalkthrough = () => {
   };
 };
 
-export {
-  WalkthroughProvider,
-  WalkthroughStep,
-  useWalkthrough,
-  walkthroughable,
-  WalkthroughTooltip,
-};
+export { WalkthroughProvider, WalkthroughStep, useWalkthrough, walkthroughable, WalkthroughTooltip };

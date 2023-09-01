@@ -7,6 +7,7 @@ import PersonBarWalkthroughComponent from "./PersonBarWalkthroughComponent";
 import { PhoneIcon } from "react-native-heroicons/solid";
 import { ScreenNames } from "../../constants/ScreenNames";
 import { globalState } from "../../global/PersonsScreen";
+import { useAppContext } from "../common/AppContext";
 
 const WalkthroughView = walkthroughable(View);
 
@@ -27,12 +28,15 @@ const PersonWalkthroughComponent = ({ person = new Person(), isWalkthrough = fal
 };
 
 const PersonComponent = ({ person = new Person(), isWalkthrough }) => {
+  const { playBtnSound } = useAppContext();
+
   return (
     <TouchableOpacity
       className="p-2 rounded-xl bg-black-500 mt-5 flex-row justify-between items-center"
       onPress={() => {
         globalState.setPerson(person);
         globalState.showModal();
+        playBtnSound();
       }}
     >
       <View className="flex-row items-center space-x-2">

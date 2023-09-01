@@ -13,6 +13,8 @@ import { playerAchievementReset } from "../features/PlayerAchievementSlice";
 import EmptyModal from "../components/common/EmptyModal";
 import TabsModal from "../components/common/TabsModal";
 import { settingsReset } from "../features/SettingsSlice";
+import { BtnSounds } from "../constants/BtnSound";
+import useButtonAudio from "../hooks/common/useButtonAudio";
 
 const StartScreen = () => {
   const navigation = useNavigation();
@@ -94,12 +96,17 @@ const ShadeComponent = () => {
 };
 
 const ContentComponent = ({ shakeBtnOnClick = function () {} }) => {
+  const { playSound: playBtnSound } = useButtonAudio(BtnSounds.StartScreenSound);
+
   return (
     <SafeAreaView className="flex-1 flex items-center justify-center px-5 mt-10">
       <Text className="text-white text-3xl font-bold w-60 text-center mt-10">Get Awkward !</Text>
       <TouchableOpacity
         className="bg-yellow-500 w-full h-16 my-5 rounded-md flex-row items-center justify-center space-x-4"
-        onPress={shakeBtnOnClick}
+        onPress={(e) => {
+          shakeBtnOnClick(e);
+          playBtnSound();
+        }}
       >
         <Text className="text-black-700 text-lg text-center font-bold">Start shaking</Text>
         <Text className="text-xl">🤝</Text>

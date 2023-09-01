@@ -1,4 +1,4 @@
-import { View, Text, Image, ScrollView, TouchableOpacity, Alert } from "react-native";
+import { View, Text, Image, ScrollView, TouchableOpacity } from "react-native";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,6 +9,7 @@ import EmptyModal from "../components/common/EmptyModal";
 import useModal from "../hooks/common/useModal";
 import { Person } from "../models/Person";
 import { ArrowRightIcon, ChevronDownIcon, ChevronRightIcon, PhoneIcon } from "react-native-heroicons/solid";
+import * as FileSystem from "expo-file-system";
 import * as MediaLibrary from "expo-media-library";
 import { Asset } from "expo-asset";
 import { useRoute } from "@react-navigation/native";
@@ -17,6 +18,7 @@ import { Setting, SettingsNames } from "../models/Setting";
 import { selectSettingsByName, settingsUpdate } from "../features/SettingsSlice";
 import { getRandomNumber } from "../utils/common/getRandomNumber";
 import { playAudio } from "../utils/common/playAudio";
+import { useAppContext } from "../components/common/AppContext";
 
 const globalState = {
   showModal: function () {},
@@ -151,33 +153,47 @@ const AchievementComponent = ({ personAchievement = new PlayerAchievement() }) =
 };
 
 const GifComponent = () => {
+  const { playBtnSound } = useAppContext();
   const [downloadMsg, setDownloadMsg] = useState({ show: false, msg: "" });
+  const [image, setImage] = useState(null);
+  useEffect(() => {
+    const img = PlayerAchievementMethods[globalState.achievement.methodName]?.requireImage();
+    setImage(img);
+  }, []);
 
-  const image = PlayerAchievementMethods[globalState.achievement.methodName]?.requireImage();
-
-  async function handleDownload(image) {
+  const handleDownloadSticker = async (img) => {
     try {
-      const { status } = await MediaLibrary.requestPermissionsAsync();
-      if (status !== "granted") {
-        alert("Please Grant permission to download");
-        return;
-      }
-
-      const asset = Asset.fromModule(image);
+      const gavePermission = await askPermissions();
+      if (!gavePermission) return;
+      const asset = Asset.fromModule(img);
       await asset.downloadAsync();
       const fileUri = asset.localUri || asset.uri;
-      const mediaAsset = await MediaLibrary.createAssetAsync(fileUri);
-
-      const albumName = "The Awkward Game Stickers";
-      const album = await MediaLibrary.getAlbumAsync(albumName);
-      if (album === null) {
-        albumAsset = await MediaLibrary.createAlbumAsync(albumName, mediaAsset);
-      } else {
-        albumAsset = await MediaLibrary.addAssetsToAlbumAsync([mediaAsset], album);
-      }
-      setDownloadMsg((prev) => ({ show: true, msg: "Download Completed!" }));
+      const downloadPath = `${FileSystem.documentDirectory}${globalState.achievement.methodName}.${asset.type}`;
+      await FileSystem.copyAsync({ from: fileUri, to: downloadPath }); //After a week of debugging in production apk build app, createAssetAsync wont work on a uri\localUri, because uri is just a name, (an identifier as stated on web in a github question, but copy in my experience the copy method will take this identifier just fine)
+      await saveImageToAlbum(downloadPath);
+      setDownloadMsg((prev) => ({ show: true, msg: "Album: The Awkward Stickers \n Download Completed!" }));
     } catch (error) {
       setDownloadMsg((prev) => ({ show: true, msg: "Download Failed!" }));
+    }
+  };
+
+  const saveImageToAlbum = async (downloadPath) => {
+    const mediaAsset = await MediaLibrary.createAssetAsync(downloadPath);
+    const album = await MediaLibrary.getAlbumAsync("The Awkward Stickers");
+    if (album === null) {
+      await MediaLibrary.createAlbumAsync("The Awkward Stickers", mediaAsset, true); //false
+    } else {
+      await MediaLibrary.addAssetsToAlbumAsync([mediaAsset], album, true); //false
+    }
+  };
+
+  async function askPermissions() {
+    const { status } = await MediaLibrary.requestPermissionsAsync();
+    if (status !== "granted") {
+      alert("Please Grant permission to download");
+      return false;
+    } else {
+      return true;
     }
   }
   let lines = PlayerAchievementMethods[globalState.achievement.methodName]?.DisplayedMsg.split(PlayerAchievementMethods.MultiLineSepeartor);
@@ -199,7 +215,8 @@ const GifComponent = () => {
         <TouchableOpacity
           className="bg-yellow-500 py-3 px-16 rounded-md mt-5"
           onPress={() => {
-            showDownloadMsg ? globalState.hideModal() : handleDownload(image);
+            showDownloadMsg ? globalState.hideModal() : handleDownloadSticker(image);
+            playBtnSound();
           }}
         >
           <Text className=" text-black-500 text-center">{showDownloadMsg ? `Ok 👍` : `Download 👇`}</Text>

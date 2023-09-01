@@ -3,7 +3,7 @@ import handshakes from "../../data/Handshake";
 import { Handshake } from "../../models/Handshake";
 import { getRandomNumber } from "../../utils/common/getRandomNumber";
 import { globalState } from "../../global/GameScreen";
-import { HandshakeDuration, TimerIntervalValue, TimerStartValue } from "../../constants/GameScreen";
+import { HandshakeChangingIntervalValue, HandshakeDuration, TimerIntervalValue, TimerStartValue } from "../../constants/GameScreen";
 import { generateRandomHandshake } from "../../helpers/GameScreen";
 import { playAudio } from "../../utils/common/playAudio";
 import { Setting, SettingsNames } from "../../models/Setting";
@@ -22,15 +22,17 @@ export default useTimer = () => {
       setTimer((count) => {
         return count - TimerIntervalValue / 1000; //must use () => bcz it will get stuck at 7, won't add bcz its inside an interval, (common problem with (stale closures (useMemo, useEffect,etc...) or async) inside useeffect and setState)
       });
+    }, TimerIntervalValue);
+    setTimerInterval(interval);
+    const handshakeInterval = setInterval(() => {
       globalState.setSelectedPersonHandshake((prev) => generateRandomHandshake({ person: globalState.person }) || new Handshake());
       //globalState.setSelectedPersonHandshake((prev) => globalState.person.signatureHandshake);
       //globalState.setSelectedPersonHandshake((prev) => handshakes[getRandomNumber(handshakes.length, 0, prev)] || new Handshake());
-    }, TimerIntervalValue);
-    setTimerInterval(interval);
-
+    }, HandshakeChangingIntervalValue);
     return () => {
       clearInterval(timerInterval);
       clearInterval(interval);
+      clearInterval(handshakeInterval);
     };
   }, [globalState.showWalkthrough, globalState.hasPlayStarted]);
 

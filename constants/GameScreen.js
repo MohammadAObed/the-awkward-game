@@ -1,6 +1,7 @@
 //#region constants
 export const TimerStartValue = 7;
 export const TimerIntervalValue = 1000;
+export const HandshakeChangingIntervalValue = 950;
 export const HandshakeDuration = 750;
 export const HandshakeSpaceX = 120;
 export const HandshakeSpaceY2 = 20;

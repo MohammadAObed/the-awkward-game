@@ -7,8 +7,11 @@ import { getRandomNumber } from "../../utils/common/getRandomNumber";
 import { useSelector } from "react-redux";
 import { selectSettingsByName } from "../../features/SettingsSlice";
 import { Setting, SettingsNames } from "../../models/Setting";
+import { useAppContext } from "../common/AppContext";
 
 const LeaveMsgComponent = ({ leaveScreen = function () {} }) => {
+  const { playBtnSound } = useAppContext();
+
   const [msg, setMsg] = useState("");
   const [sound, setSound] = useState(null);
   let settingsModel = new Setting();
@@ -66,6 +69,7 @@ const LeaveMsgComponent = ({ leaveScreen = function () {} }) => {
       <TouchableOpacity
         className="bg-yellow-500 py-3 px-16 rounded-md mt-2"
         onPress={(e) => {
+          playBtnSound();
           sound?.stopAsync();
           sound?.unloadAsync();
           leaveScreen(e);

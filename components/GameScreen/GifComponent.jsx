@@ -7,8 +7,11 @@ import { useSelector } from "react-redux";
 import { selectSettingsByName } from "../../features/SettingsSlice";
 import { Setting, SettingsNames } from "../../models/Setting";
 import { PlayerAchievementMethods } from "../../models/PlayerAchievementMethods";
+import { useAppContext } from "../common/AppContext";
 
 const GifComponent = ({ leaveScreen = function () {} }) => {
+  const { playBtnSound } = useAppContext();
+
   const soundRef = useRef(null);
   const fireworksRef = useRef(null);
   let settingsModel = new Setting();
@@ -51,7 +54,13 @@ const GifComponent = ({ leaveScreen = function () {} }) => {
       ) : (
         <Text className="mt-5 text-white w-72 text-center text-lg">{lines.length == 1 ? lines[0] : ""}</Text>
       )}
-      <TouchableOpacity className="bg-yellow-500 py-3 px-16 rounded-md mt-5" onPress={leaveScreen}>
+      <TouchableOpacity
+        className="bg-yellow-500 py-3 px-16 rounded-md mt-5"
+        onPress={(e) => {
+          leaveScreen(e);
+          playBtnSound();
+        }}
+      >
         <Text className=" text-black-500 text-center">Achievement 👉</Text>
       </TouchableOpacity>
     </View>

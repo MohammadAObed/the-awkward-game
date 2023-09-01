@@ -23,13 +23,13 @@ class PlayerAchievementMethods {
   static TheEyebrow = {
     Name: "TheEyebrow",
     DisplayedMsg: "Sus Levels Rising  🤨",
-    requireImage: () => require("../assets/awkwardstickers/Rock/TheEyebrow.webp"),
+    requireImage: () => require("../assets/awkwardstickers/Rock/TheEyebrow.gif"),
     execute: signatureExecute,
   };
   static TrumpNo = {
     Name: "TrumpNo",
     DisplayedMsg: "No",
-    requireImage: () => require("../assets/awkwardstickers/Trump/TrumpNo.webp"),
+    requireImage: () => require("../assets/awkwardstickers/Trump/TrumpNo.gif"),
     execute: signatureExecute,
   };
   static CatSad = {
@@ -47,7 +47,7 @@ class PlayerAchievementMethods {
   static DiCaprioPointing = {
     Name: "DiCaprioPointing",
     DisplayedMsg: "Woh Woh Look!",
-    requireImage: () => require("../assets/awkwardstickers/DiCaprio/DiCaprioPointing.webp"),
+    requireImage: () => require("../assets/awkwardstickers/DiCaprio/DiCaprioPointing.gif"),
     execute: signatureExecute,
   };
   static ElonThumbsUp = {
@@ -59,7 +59,7 @@ class PlayerAchievementMethods {
   static CenaYouCantSeeMe = {
     Name: "CenaYouCantSeeMe",
     DisplayedMsg: "You cant see me!",
-    requireImage: () => require("../assets/awkwardstickers/Cena/CenaYouCantSeeMe.webp"),
+    requireImage: () => require("../assets/awkwardstickers/Cena/CenaYouCantSeeMe.gif"),
     execute: signatureExecute,
   };
   static KhabyHowItsDone = {
@@ -91,7 +91,7 @@ class PlayerAchievementMethods {
   static Rock100 = {
     Name: "Rock100",
     DisplayedMsg: "100%" + this.MultiLineSepeartor + "True Legend!",
-    requireImage: () => require("../assets/awkwardstickers/Rock/Rock100.webp"),
+    requireImage: () => require("../assets/awkwardstickers/Rock/Rock100.gif"),
     execute: hundredPercentExecute,
   };
 
@@ -105,7 +105,7 @@ class PlayerAchievementMethods {
   static Trump100 = {
     Name: "Trump100",
     DisplayedMsg: "100%" + this.MultiLineSepeartor + "Massive Win, Money in your bag!",
-    requireImage: () => require("../assets/awkwardstickers/Trump/Trump100.webp"),
+    requireImage: () => require("../assets/awkwardstickers/Trump/Trump100.gif"),
     execute: hundredPercentExecute,
   };
 
@@ -119,7 +119,7 @@ class PlayerAchievementMethods {
   static Cat100 = {
     Name: "Cat100",
     DisplayedMsg: "100%" + this.MultiLineSepeartor + "MeMeMeMeow!",
-    requireImage: () => require("../assets/awkwardstickers/Cat/Cat100.webp"),
+    requireImage: () => require("../assets/awkwardstickers/Cat/Cat100.gif"),
     execute: hundredPercentExecute,
   };
 
@@ -133,42 +133,42 @@ class PlayerAchievementMethods {
   static Ronaldo100 = {
     Name: "Ronaldo100",
     DisplayedMsg: "100%" + this.MultiLineSepeartor + "Aim for better! always!",
-    requireImage: () => require("../assets/awkwardstickers/Ronaldo/Ronaldo100.webp"),
+    requireImage: () => require("../assets/awkwardstickers/Ronaldo/Ronaldo100.jpg"),
     execute: hundredPercentExecute,
   };
 
   static Ronaldo0 = {
     Name: "Ronaldo0",
     DisplayedMsg: "0%" + this.MultiLineSepeartor + "Done playing! Done!",
-    requireImage: () => require("../assets/awkwardstickers/Ronaldo/Ronaldo0.webp"),
+    requireImage: () => require("../assets/awkwardstickers/Ronaldo/Ronaldo0.gif"),
     execute: ZeroPercentExecute,
   };
 
   static DiCaprio100 = {
     Name: "DiCaprio100",
     DisplayedMsg: "100%" + this.MultiLineSepeartor + "Brilliant!",
-    requireImage: () => require("../assets/awkwardstickers/DiCaprio/DiCaprio100.webp"),
+    requireImage: () => require("../assets/awkwardstickers/DiCaprio/DiCaprio100.gif"),
     execute: hundredPercentExecute,
   };
 
   static DiCaprio0 = {
     Name: "DiCaprio0",
     DisplayedMsg: "0%" + this.MultiLineSepeartor + "Don't worry, I know you're acting!",
-    requireImage: () => require("../assets/awkwardstickers/DiCaprio/DiCaprio0.webp"),
+    requireImage: () => require("../assets/awkwardstickers/DiCaprio/DiCaprio0.gif"),
     execute: ZeroPercentExecute,
   };
 
   static Elon100 = {
     Name: "Elon100",
     DisplayedMsg: "100%" + this.MultiLineSepeartor + "Come work for me!",
-    requireImage: () => require("../assets/awkwardstickers/Elon/Elon100.webp"),
+    requireImage: () => require("../assets/awkwardstickers/Elon/Elon100.gif"),
     execute: hundredPercentExecute,
   };
 
   static Elon0 = {
     Name: "Elon0",
     DisplayedMsg: "0%" + this.MultiLineSepeartor + "You challenged me, I ain't mad",
-    requireImage: () => require("../assets/awkwardstickers/Elon/Elon0.webp"),
+    requireImage: () => require("../assets/awkwardstickers/Elon/Elon0.jpg"),
     execute: ZeroPercentExecute,
   };
 
@@ -182,14 +182,14 @@ class PlayerAchievementMethods {
   static Cena0 = {
     Name: "Cena0",
     DisplayedMsg: "0%" + this.MultiLineSepeartor + "Cena Approves!",
-    requireImage: () => require("../assets/awkwardstickers/Cena/Cena0.webp"),
+    requireImage: () => require("../assets/awkwardstickers/Cena/Cena0.gif"),
     execute: ZeroPercentExecute,
   };
 
   static Khaby100 = {
     Name: "Khaby100",
     DisplayedMsg: "100%" + this.MultiLineSepeartor + "We finally there!",
-    requireImage: () => require("../assets/awkwardstickers/Khaby/Khaby100.webp"),
+    requireImage: () => require("../assets/awkwardstickers/Khaby/Khaby100.gif"),
     execute: hundredPercentExecute,
   };
 
@@ -203,7 +203,7 @@ class PlayerAchievementMethods {
   static Mark100 = {
     Name: "Mark100",
     DisplayedMsg: "100%" + this.MultiLineSepeartor + "🙂",
-    requireImage: () => require("../assets/awkwardstickers/Mark/Mark100.webp"),
+    requireImage: () => require("../assets/awkwardstickers/Mark/Mark100.gif"),
     execute: hundredPercentExecute,
   };
 
@@ -217,7 +217,7 @@ class PlayerAchievementMethods {
   static Speed100 = {
     Name: "Speed100",
     DisplayedMsg: "100%" + this.MultiLineSepeartor + "Maaaaaaaasive Dub",
-    requireImage: () => require("../assets/awkwardstickers/Speed/Speed100.webp"),
+    requireImage: () => require("../assets/awkwardstickers/Speed/Speed100.gif"),
     execute: hundredPercentExecute,
   };
 
@@ -231,7 +231,7 @@ class PlayerAchievementMethods {
   static SpongeBob100 = {
     Name: "SpongeBob100",
     DisplayedMsg: "100%" + this.MultiLineSepeartor + "Mmmmooooaah",
-    requireImage: () => require("../assets/awkwardstickers/SpongeBob/Sponge100.webp"),
+    requireImage: () => require("../assets/awkwardstickers/SpongeBob/Sponge100.gif"),
     execute: hundredPercentExecute,
   };
 
@@ -246,21 +246,21 @@ class PlayerAchievementMethods {
   static RockStop = {
     Name: "RockStop",
     DisplayedMsg: "Stop! enough shaking!",
-    requireImage: () => require("../assets/awkwardstickers/Rock/RockStop.webp"),
+    requireImage: () => require("../assets/awkwardstickers/Rock/RockStop.gif"),
     execute: PersonHadEnoughExecute,
   };
 
   static RockSeeYouSoon = {
     Name: "RockSeeYouSoon",
     DisplayedMsg: "I hope your audio was up!",
-    requireImage: () => require("../assets/awkwardstickers/Rock/RockSeeYouSoon.webp"),
+    requireImage: () => require("../assets/awkwardstickers/Rock/RockSeeYouSoon.gif"),
     execute: (param) => MoodAudioExecute(this.RockSeeYouSoon, param, PersonMood.NORMAL.value, 0),
   };
 
   static RockWink = {
     Name: "RockWink",
     DisplayedMsg: "See ya!" + this.MultiLineSepeartor + "Exp: The Rock's meter is happy and he's winking",
-    requireImage: () => require("../assets/awkwardstickers/Rock/RockWink.webp"),
+    requireImage: () => require("../assets/awkwardstickers/Rock/RockWink.gif"),
     execute: function (param = PlayerAchievementMethods.Param) {
       let meterValue = globalState.meter.meterValue;
       if (globalState.selectedPersonHandshake.id == 28 && param.meterAddedValue + meterValue >= globalState.person.moodBreakpoints.NORMAL) {
@@ -334,7 +334,7 @@ class PlayerAchievementMethods {
   static RonaldoSuiAudio = {
     Name: "RonaldoSuiAudio",
     DisplayedMsg: "I hope your audio was up!",
-    requireImage: () => require("../assets/awkwardstickers/Ronaldo/RonaldoSuiAudio.webp"),
+    requireImage: () => require("../assets/awkwardstickers/Ronaldo/RonaldoSuiAudio.gif"),
     execute: (param) => MoodAudioExecute(this.RonaldoSuiAudio, param, PersonMood.HAPPY.value, 0),
   };
 
@@ -353,7 +353,7 @@ class PlayerAchievementMethods {
   static Ronaldo12Sui = {
     Name: "Ronaldo12Sui",
     DisplayedMsg: "12 Siuuuus!" + this.MultiLineSepeartor + "Muchas Gracias! Aficion!",
-    requireImage: () => require("../assets/awkwardstickers/Ronaldo/Ronaldo12Sui.webp"),
+    requireImage: () => require("../assets/awkwardstickers/Ronaldo/Ronaldo12Sui.gif"),
     execute: (param) =>
       function (param = PlayerAchievementMethods.Param) {
         let suiStreak = param.playerPersonAchievement.extraValue;
@@ -458,7 +458,7 @@ class PlayerAchievementMethods {
   static DiCaprioFiftyFifty = {
     Name: "DiCaprioFiftyFifty",
     DisplayedMsg: "👋 👋" + this.MultiLineSepeartor + "Fifty fifty!",
-    requireImage: () => require("../assets/awkwardstickers/DiCaprio/DiCaprioFifty.webp"),
+    requireImage: () => require("../assets/awkwardstickers/DiCaprio/DiCaprioFifty.gif"),
     execute: function (param = PlayerAchievementMethods.Param) {
       if (globalState.selectedPersonHandshake.id === 6 && globalState.selectedPlayerHandshake.id === 6) {
         return { msg: this.DisplayedMsg, showAchievement: true, requireImage: this.requireImage, methodName: this.Name };
@@ -470,7 +470,7 @@ class PlayerAchievementMethods {
   static DiCaprioYouSlick = {
     Name: "DiCaprioYouSlick",
     DisplayedMsg: "Oh You!" + this.MultiLineSepeartor + "Exp: this handshake matches the hands in gif",
-    requireImage: () => require("../assets/awkwardstickers/DiCaprio/DiCaprioYouSlick.webp"),
+    requireImage: () => require("../assets/awkwardstickers/DiCaprio/DiCaprioYouSlick.jpg"),
     execute: function (param = PlayerAchievementMethods.Param) {
       if (globalState.selectedPersonHandshake.id === globalState.person.signatureHandshake.id && globalState.selectedPlayerHandshake.id === 6) {
         return { msg: this.DisplayedMsg, showAchievement: true, requireImage: this.requireImage, methodName: this.Name };
@@ -502,7 +502,7 @@ class PlayerAchievementMethods {
   static ElonThisis = {
     Name: "ElonThisis",
     DisplayedMsg: "This is Elon Musk!" + this.MultiLineSepeartor + "Exp: You/Elon tried one thumbs up, and the other has two",
-    requireImage: () => require("../assets/awkwardstickers/Elon/ElonThisis.webp"),
+    requireImage: () => require("../assets/awkwardstickers/Elon/ElonThisis.gif"),
     execute: function (param = PlayerAchievementMethods.Param) {
       if (
         (globalState.selectedPersonHandshake.id === 19 && globalState.selectedPlayerHandshake.id === 5) ||
@@ -517,21 +517,21 @@ class PlayerAchievementMethods {
   static CenaBingChiling = {
     Name: "CenaBingChiling",
     DisplayedMsg: "I Hope your audio was up!",
-    requireImage: () => require("../assets/awkwardstickers/Cena/CenaBingChiling.webp"),
+    requireImage: () => require("../assets/awkwardstickers/Cena/CenaBingChiling.gif"),
     execute: (param) => MoodAudioExecute(this.CenaBingChiling, param, PersonMood.NORMAL.value, 0),
   };
 
   static CenaConfused = {
     Name: "CenaConfused",
     DisplayedMsg: "What handshake do you want!!!!!",
-    requireImage: () => require("../assets/awkwardstickers/Cena/CenaConfused.webp"),
+    requireImage: () => require("../assets/awkwardstickers/Cena/CenaConfused.gif"),
     execute: DidntPressShakeExecute,
   };
 
   static KhabyMax = {
     Name: "KhabyMax",
     DisplayedMsg: "Enough, Get out.",
-    requireImage: () => require("../assets/awkwardstickers/Khaby/KhabyMax.webp"),
+    requireImage: () => require("../assets/awkwardstickers/Khaby/KhabyMax.gif"),
     execute: PersonHadEnoughExecute,
   };
 
@@ -550,7 +550,7 @@ class PlayerAchievementMethods {
   static MarkFist = {
     Name: "MarkFist",
     DisplayedMsg: "There you go friend",
-    requireImage: () => require("../assets/awkwardstickers/Mark/MarkFist.webp"),
+    requireImage: () => require("../assets/awkwardstickers/Mark/MarkFist.gif"),
     execute: function (param = PlayerAchievementMethods.Param) {
       if (globalState.selectedPersonHandshake.id === 3 && globalState.selectedPlayerHandshake.id === 3) {
         return { msg: this.DisplayedMsg, showAchievement: true, requireImage: this.requireImage, methodName: this.Name };
@@ -596,7 +596,7 @@ class PlayerAchievementMethods {
   static SpeedMaxPlayed = {
     Name: "SpeedMaxPlayed",
     DisplayedMsg: "Oh man!",
-    requireImage: () => require("../assets/awkwardstickers/Speed/SpeedMaxPlayed.webp"),
+    requireImage: () => require("../assets/awkwardstickers/Speed/SpeedMaxPlayed.gif"),
     execute: PersonHadEnoughExecute,
   };
 
@@ -610,7 +610,7 @@ class PlayerAchievementMethods {
   static SpeedWhat = {
     Name: "SpeedWhat",
     DisplayedMsg: "Punch Speed at first encounter!" + this.MultiLineSepeartor + "You brought Me to be humiliated from the very start!",
-    requireImage: () => require("../assets/awkwardstickers/Speed/SpeedWhat.webp"),
+    requireImage: () => require("../assets/awkwardstickers/Speed/SpeedWhat.gif"),
     execute: function (param = PlayerAchievementMethods.Param) {
       if (globalState.timesPlayed <= 0 && globalState.selectedPlayerHandshake.id === 12) {
         return { msg: this.DisplayedMsg, showAchievement: true, requireImage: this.requireImage, methodName: this.Name };
