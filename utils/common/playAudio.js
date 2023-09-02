@@ -8,7 +8,7 @@ export async function playAudio(requireAudio = function () {}, shouldPlay = true
     }
     if (asset && !Array.isArray(asset)) {
       const { sound } = await Audio.Sound.createAsync(asset, { shouldPlay: shouldPlay, isLooping: isLooping });
-      if (isAI) sound.setVolumeAsync(0.8);
+      if (isAI) sound.setVolumeAsync(0.7);
       return sound;
     }
   } catch (error) {

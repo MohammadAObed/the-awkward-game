@@ -1,16 +1,12 @@
 import { View, Text, TouchableOpacity } from "react-native";
 import React from "react";
 import { globalState } from "../../global/GameScreen";
-import { useAppContext } from "../common/AppContext";
+//import { useAppContext } from "../common/AppContext";
 
 const ShakeBtnComponent = () => {
-  const { playBtnSound } = useAppContext();
+  //const { playBtnSound } = useAppContext();
 
   const beginHandshake = () => {
-    // globalState.setSelectedPersonHandshake(
-    //   (prev) => handshakes[getRandomNumber(handshakes.length, 0, prev)] || new Handshake()
-    //   // handshakes[0] || new Handshake()
-    // );
     if (globalState.showWalkthrough === true) {
       return;
     }
@@ -31,7 +27,7 @@ const ShakeBtnComponent = () => {
         disabled={globalState.hasShakeStarted === true}
         onPress={() => {
           beginHandshake();
-          playBtnSound();
+          //playBtnSound();
         }}
       >
         <Text className="text-black-700 text-lg text-center font-bold">Shake</Text>

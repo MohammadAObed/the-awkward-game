@@ -640,7 +640,7 @@ class PlayerAchievementMethods {
     execute: function (param = PlayerAchievementMethods.Param) {
       let noMatchStreak = param.playerPersonAchievement.extraValue;
       noMatchStreak += 1;
-      if (noMatchStreak >= 2) {
+      if (noMatchStreak >= 120) {
         return {
           msg: this.DisplayedMsg,
           showAchievement: true,

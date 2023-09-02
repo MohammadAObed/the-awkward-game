@@ -73,7 +73,7 @@ const SpongeBobImages = new PersonImages(
 const TheRockAudio = new PersonAudio(
   () => [require("../assets/audio/persons/RockHappy.mp3")],
   () => [require("../assets/audio/persons/RockNormal.mp3")],
-  () => [require("../assets/audio/persons/RockAngry.mp3"), require("../assets/audio/persons/RockAngry2.mp3")],
+  () => [require("../assets/audio/persons/RockAngry2.mp3")],
   () => [require("../assets/audio/persons/RockSign.mp3")]
 );
 
