@@ -174,14 +174,14 @@ class PlayerAchievementMethods {
 
   static Cena100 = {
     Name: "Cena100",
-    DisplayedMsg: "100%" + this.MultiLineSepeartor + "Whatca tryna do?",
+    DisplayedMsg: "100%" + this.MultiLineSepeartor + "Cena Approves!",
     requireImage: () => require("../assets/awkwardstickers/Cena/Cena100.jpg"),
     execute: hundredPercentExecute,
   };
 
   static Cena0 = {
     Name: "Cena0",
-    DisplayedMsg: "0%" + this.MultiLineSepeartor + "Cena Approves!",
+    DisplayedMsg: "0%" + this.MultiLineSepeartor + "Whatchya tryna do?",
     requireImage: () => require("../assets/awkwardstickers/Cena/Cena0.gif"),
     execute: ZeroPercentExecute,
   };
