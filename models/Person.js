@@ -55,7 +55,7 @@ class Person {
     this.signatureLine = signatureLine;
     this.signatureHandshake = signatureHandshake;
     this.handshakesOccurance = handshakesOccurance;
-    this.handshakesOccurance.highChance.ids.push(this.signatureHandshake.id, this.signatureHandshake.id);
+    this.handshakesOccurance.highChance.ids.push(this.signatureHandshake.id);
     this.moodBreakpoints = moodBreakpoints;
   }
   chanceRange = { min: 0, max: 100 };
