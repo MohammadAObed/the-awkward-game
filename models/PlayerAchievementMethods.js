@@ -272,13 +272,13 @@ class PlayerAchievementMethods {
 
   static RockSurprised = {
     Name: "RockSurprised",
-    DisplayedMsg: "12 reps minimum of flexing!",
+    DisplayedMsg: "10 reps minimum of flexing!",
     requireImage: () => require("../assets/awkwardstickers/Rock/RockSurprised.jpg"),
     execute: function (param = PlayerAchievementMethods.Param) {
       let bicepFlexStreak = param.playerPersonAchievement.extraValue;
       if (globalState.selectedPlayerHandshake.id === 26) {
         bicepFlexStreak += 1;
-        if (bicepFlexStreak >= 12) {
+        if (bicepFlexStreak >= 10) {
           return {
             msg: this.DisplayedMsg,
             showAchievement: true,
@@ -352,28 +352,27 @@ class PlayerAchievementMethods {
 
   static Ronaldo12Sui = {
     Name: "Ronaldo12Sui",
-    DisplayedMsg: "12 Siuuuus!" + this.MultiLineSepeartor + "Muchas Gracias! Aficion!",
+    DisplayedMsg: "7 Siuuuus!" + this.MultiLineSepeartor + "Muchas Gracias! Aficion!",
     requireImage: () => require("../assets/awkwardstickers/Ronaldo/Ronaldo12Sui.gif"),
-    execute: (param) =>
-      function (param = PlayerAchievementMethods.Param) {
-        let suiStreak = param.playerPersonAchievement.extraValue;
-        if (
-          globalState.selectedPersonHandshake.id === globalState.selectedPlayerHandshake.id &&
-          globalState.selectedPersonHandshake.id === globalState.person.signatureHandshake.id
-        ) {
-          suiStreak += 1;
-          if (suiStreak >= 12) {
-            return {
-              msg: this.DisplayedMsg,
-              showAchievement: true,
-              requireImage: this.requireImage,
-              methodName: this.Name,
-              extraValue: suiStreak,
-            };
-          }
+    execute: function (param = PlayerAchievementMethods.Param) {
+      let suiStreak = param.playerPersonAchievement.extraValue;
+      if (
+        globalState.selectedPersonHandshake.id === globalState.selectedPlayerHandshake.id &&
+        globalState.selectedPersonHandshake.id === globalState.person.signatureHandshake.id
+      ) {
+        suiStreak += 1;
+        if (suiStreak >= 7) {
+          return {
+            msg: this.DisplayedMsg,
+            showAchievement: true,
+            requireImage: this.requireImage,
+            methodName: this.Name,
+            extraValue: suiStreak,
+          };
         }
-        return { ...PlayerAchievementMethods.Result, methodName: this.Name, extraValue: suiStreak };
-      },
+      }
+      return { ...PlayerAchievementMethods.Result, methodName: this.Name, extraValue: suiStreak };
+    },
   };
 
   static CatSunglasses = {
@@ -586,8 +585,6 @@ class PlayerAchievementMethods {
             extraValue: smileMatchStreak,
           };
         }
-      } else {
-        smileMatchStreak = 0;
       }
       return { ...PlayerAchievementMethods.Result, methodName: this.Name, extraValue: smileMatchStreak };
     },
@@ -635,12 +632,12 @@ class PlayerAchievementMethods {
 
   static SpongeTired = {
     Name: "SpongeTired",
-    DisplayedMsg: "120 HandShakes!" + this.MultiLineSepeartor + "My arms feeling spongy after that ;)",
+    DisplayedMsg: "100 HandShakes!" + this.MultiLineSepeartor + "My arms feeling spongy after that ;)",
     requireImage: () => require("../assets/awkwardstickers/SpongeBob/SpongeTired.jpg"),
     execute: function (param = PlayerAchievementMethods.Param) {
       let noMatchStreak = param.playerPersonAchievement.extraValue;
       noMatchStreak += 1;
-      if (noMatchStreak >= 120) {
+      if (noMatchStreak >= 100) {
         return {
           msg: this.DisplayedMsg,
           showAchievement: true,
