@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "the-awkward-game",
+    "name": "Awkward Game",
     "slug": "the-awkward-game",
-    "version": "1.0.0",
+    "version": "1.0.3",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -17,7 +17,8 @@
       "infoPlist": {
         "NSPhotoLibraryUsageDescription": "Allow $(PRODUCT_NAME) to access your photos.",
         "NSPhotoLibraryAddUsageDescription": "Allow $(PRODUCT_NAME) to save photos."
-      }
+      },
+      "bundleIdentifier": "com.mohammadobed.theawkwardgame"
     },
     "android": {
       "adaptiveIcon": {
@@ -31,7 +32,11 @@
         "android.permission.WRITE_EXTERNAL_STORAGE",
         "android.permission.ACCESS_MEDIA_LOCATION"
       ],
-      "package": "com.mohammadobed.theawkwardgame"
+      "package": "com.mohammadobed.theawkwardgame",
+      "versionCode": 3,
+      "compileSdkVersion": 34,
+      "targetSdkVersion": 34,
+      "buildToolsVersion": "34.0.0"
     },
     "web": {
       "favicon": "./assets/favicon.png"

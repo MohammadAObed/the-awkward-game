@@ -1,7 +1,7 @@
-import { View, Text, Animated } from "react-native";
 import React from "react";
-import { PlayerType } from "../../constants/PlayerType";
+import { Animated, Text, View } from "react-native";
 import { HandshakeSpaceX } from "../../constants/GameScreen";
+import { PlayerType } from "../../constants/PlayerType";
 import { globalState } from "../../global/GameScreen";
 
 const MovingHandshakeComponent = ({ playerType = PlayerType.PLAYER }) => {

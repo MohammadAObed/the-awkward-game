@@ -1,24 +1,25 @@
-import { View, Text, Image, ScrollView, TouchableOpacity } from "react-native";
+import { useRoute } from "@react-navigation/native";
+import { Asset } from "expo-asset";
+import * as FileSystem from "expo-file-system";
+import { Image } from "expo-image";
+import * as MediaLibrary from "expo-media-library";
 import React, { useEffect, useMemo, useRef, useState } from "react";
+import { ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { ChevronDownIcon, ChevronRightIcon } from "react-native-heroicons/solid";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useDispatch, useSelector } from "react-redux";
-import { selectPlayerAchievementByMethodName, selectPlayerAchievements } from "../features/PlayerAchievementSlice";
-import { PlayerAchievement } from "../models/PlayerAchievement";
-import persons from "../data/Person";
+import { useAppContext } from "../components/common/AppContext";
 import EmptyModal from "../components/common/EmptyModal";
+import persons from "../data/Person";
+import { selectPlayerAchievementByMethodName, selectPlayerAchievements } from "../features/PlayerAchievementSlice";
+import { selectSettingsByName, settingsUpdate } from "../features/SettingsSlice";
 import useModal from "../hooks/common/useModal";
 import { Person } from "../models/Person";
-import { ArrowRightIcon, ChevronDownIcon, ChevronRightIcon, PhoneIcon } from "react-native-heroicons/solid";
-import * as FileSystem from "expo-file-system";
-import * as MediaLibrary from "expo-media-library";
-import { Asset } from "expo-asset";
-import { useRoute } from "@react-navigation/native";
+import { PlayerAchievement } from "../models/PlayerAchievement";
 import { PlayerAchievementMethods } from "../models/PlayerAchievementMethods";
 import { Setting, SettingsNames } from "../models/Setting";
-import { selectSettingsByName, settingsUpdate } from "../features/SettingsSlice";
 import { getRandomNumber } from "../utils/common/getRandomNumber";
 import { playAudio } from "../utils/common/playAudio";
-import { useAppContext } from "../components/common/AppContext";
 
 const globalState = {
   showModal: function () {},

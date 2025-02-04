@@ -1,12 +1,13 @@
-import { View, Text, TouchableOpacity, Image } from "react-native";
-import React, { useEffect, useRef, useState } from "react";
-import { globalState } from "../../global/GameScreen";
-import { playAudio } from "../../utils/common/playAudio";
-import { getRandomNumber } from "../../utils/common/getRandomNumber";
+import { Image } from "expo-image";
+import React, { useEffect, useRef } from "react";
+import { Text, TouchableOpacity, View } from "react-native";
 import { useSelector } from "react-redux";
 import { selectSettingsByName } from "../../features/SettingsSlice";
-import { Setting, SettingsNames } from "../../models/Setting";
+import { globalState } from "../../global/GameScreen";
 import { PlayerAchievementMethods } from "../../models/PlayerAchievementMethods";
+import { Setting, SettingsNames } from "../../models/Setting";
+import { getRandomNumber } from "../../utils/common/getRandomNumber";
+import { playAudio } from "../../utils/common/playAudio";
 import { useAppContext } from "../common/AppContext";
 
 const GifComponent = ({ leaveScreen = function () {} }) => {

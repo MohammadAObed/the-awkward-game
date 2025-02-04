@@ -1,39 +1,31 @@
-import { View, BackHandler } from "react-native";
-import React, { useEffect, useRef, useState } from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { WalkthroughProvider, WalkthroughTooltip } from "../libraries/walkthrough";
-import { useDispatch, useSelector } from "react-redux";
-import useWalkthroughShow from "../hooks/common/useWalkthroughShow";
-import HandshakesWalkthroughComponent from "../components/GameScreen/HandshakesWalkthroughComponent";
-import PersonImageWalkthroughComponent from "../components/GameScreen/PersonImageWalkthroughComponent";
-import { initialState } from "../initials/GameScreen";
-import { globalState, nGlobalState } from "../global/GameScreen";
-import { ScreenNames } from "../constants/ScreenNames";
-import {
-  FinishMsgTimeout,
-  GameType,
-  MaxTimesPlayed,
-  TimerStartValue,
-  personHandshakeAnimationValues,
-  playerHandshakeAnimationValues,
-} from "../constants/GameScreen";
-import useGlobalState from "../hooks/common/useGlobalState";
-import useModal from "../hooks/common/useModal";
-import EmptyModal from "../components/common/EmptyModal";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { walkthroughReset } from "../features/walkthroughSlice";
-import persons from "../data/Person";
-import MovingHandshakesComponent from "../components/GameScreen/MovingHandshakesComponent";
-import ShakeBtnComponent from "../components/GameScreen/ShakeBtnComponent";
-import PersonLineComponent from "../components/GameScreen/PersonLineComponent";
+import React, { useEffect, useState } from "react";
+import { BackHandler, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { useDispatch, useSelector } from "react-redux";
+import EmptyModal from "../components/common/EmptyModal";
+import GifComponent from "../components/GameScreen/GifComponent";
+import HandshakesWalkthroughComponent from "../components/GameScreen/HandshakesWalkthroughComponent";
 import LeaveMsgComponent from "../components/GameScreen/LeaveMsgComponent";
+import MovingHandshakesComponent from "../components/GameScreen/MovingHandshakesComponent";
+import PersonImageWalkthroughComponent from "../components/GameScreen/PersonImageWalkthroughComponent";
+import PersonLineComponent from "../components/GameScreen/PersonLineComponent";
+import ShakeBtnComponent from "../components/GameScreen/ShakeBtnComponent";
 import ShakeEndedBtnComponent from "../components/GameScreen/ShakeEndedBtnComponent";
 import TimerComponent from "../components/GameScreen/TimerComponent";
-import { meterReset, selectMeterByPersonId } from "../features/PersonMeterSlice";
-import { playerAchievementReset, selectPlayerAchievementsByPersonId } from "../features/PlayerAchievementSlice";
-import { handlePlayerAchievements, handleShakeEnded, leaveScreen, mShakeAgain } from "../helpers/GameScreen";
-import GifComponent from "../components/GameScreen/GifComponent";
+import { GameType } from "../constants/GameScreen";
+import { ScreenNames } from "../constants/ScreenNames";
+import persons from "../data/Person";
+import { selectMeterByPersonId } from "../features/PersonMeterSlice";
+import { selectPlayerAchievementsByPersonId } from "../features/PlayerAchievementSlice";
+import { globalState, nGlobalState } from "../global/GameScreen";
 import { getInitialMoodAndImage } from "../helpers/common/getPersonMood";
+import { handleShakeEnded, leaveScreen, mShakeAgain } from "../helpers/GameScreen";
+import useGlobalState from "../hooks/common/useGlobalState";
+import useModal from "../hooks/common/useModal";
+import useWalkthroughShow from "../hooks/common/useWalkthroughShow";
+import { initialState } from "../initials/GameScreen";
+import { WalkthroughProvider, WalkthroughTooltip } from "../libraries/walkthrough";
 
 const GameScreen = () => {
   return (

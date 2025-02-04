@@ -1,20 +1,18 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { Video, ResizeMode } from "expo-av";
+import { useIsFocused, useNavigation } from "@react-navigation/native";
+import { ResizeMode, Video } from "expo-av";
+import { Image } from "expo-image";
+import { useState } from "react";
+import { Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useEffect, useState } from "react";
-import useModal from "../hooks/common/useModal";
-import { useNavigation, useIsFocused } from "@react-navigation/native";
-import { ScreenNames } from "../constants/ScreenNames";
-import { GameType } from "../constants/GameScreen";
 import { useDispatch, useSelector } from "react-redux";
-import { selectWalkthroughSliceByScreenNameAndListOrder, walkthroughReset, walkthroughUpdate } from "../features/walkthroughSlice";
-import { meterReset } from "../features/PersonMeterSlice";
-import { playerAchievementReset } from "../features/PlayerAchievementSlice";
 import EmptyModal from "../components/common/EmptyModal";
 import TabsModal from "../components/common/TabsModal";
-import { settingsReset } from "../features/SettingsSlice";
 import { BtnSounds } from "../constants/BtnSound";
+import { GameType } from "../constants/GameScreen";
+import { ScreenNames } from "../constants/ScreenNames";
+import { selectWalkthroughSliceByScreenNameAndListOrder, walkthroughUpdate } from "../features/walkthroughSlice";
 import useButtonAudio from "../hooks/common/useButtonAudio";
+import useModal from "../hooks/common/useModal";
 
 const StartScreen = () => {
   const navigation = useNavigation();

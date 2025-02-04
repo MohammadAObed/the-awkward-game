@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import useGlobalState from "../../hooks/common/useGlobalState";
-import { globalState, nGlobalState } from "../../global/GameScreen";
-import { PlayerType } from "../../constants/PlayerType";
 import { personHandshakeAnimationValues, playerHandshakeAnimationValues } from "../../constants/GameScreen";
-import MovingHandshakeComponent from "./MovingHandshakeComponent";
-import { initialState } from "../../initials/GameScreen";
+import { PlayerType } from "../../constants/PlayerType";
+import { globalState, nGlobalState } from "../../global/GameScreen";
 import { generateRandomHandshake } from "../../helpers/GameScreen";
+import useGlobalState from "../../hooks/common/useGlobalState";
 import useAnimatedHandshake from "../../hooks/GameScreen/useAnimatedHandshake";
+import { initialState } from "../../initials/GameScreen";
+import MovingHandshakeComponent from "./MovingHandshakeComponent";
 
 const MovingHandshakesComponent = () => {
   initialState.initialPersonHandshake = generateRandomHandshake({ person: initialState.initialPerson }) || initialState.initialHandshake;

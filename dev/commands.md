@@ -1,0 +1,2 @@
+- android build apk: eas build -p android --profile preview
+- android build aap (for google play store): eas build --platform android

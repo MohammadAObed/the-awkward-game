@@ -1,12 +1,13 @@
-import { View, Text, Image } from "react-native";
+import { Image } from "expo-image";
 import React, { useMemo } from "react";
-import { WalkthroughStep, walkthroughable } from "../../libraries/walkthrough";
-import { Person } from "../../models/Person";
-import { globalState } from "../../global/PersonsScreen";
-import { PersonMeter } from "../../models/PersonMeter";
+import { View } from "react-native";
 import { useSelector } from "react-redux";
 import { selectMeterByPersonId } from "../../features/PersonMeterSlice";
+import { globalState } from "../../global/PersonsScreen";
 import { getInitialMoodAndImage } from "../../helpers/common/getPersonMood";
+import { walkthroughable } from "../../libraries/walkthrough";
+import { Person } from "../../models/Person";
+import { PersonMeter } from "../../models/PersonMeter";
 
 const WalkthroughView = walkthroughable(View);
 

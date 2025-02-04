@@ -1,7 +1,7 @@
-import { View, Text } from "react-native";
 import React from "react";
-import useGlobalState from "../../hooks/common/useGlobalState";
+import { Text, View } from "react-native";
 import { globalState, nGlobalState } from "../../global/GameScreen";
+import useGlobalState from "../../hooks/common/useGlobalState";
 import useTimer from "../../hooks/GameScreen/useTimer";
 
 const TimerComponent = () => {
