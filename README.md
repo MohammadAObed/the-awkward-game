@@ -4,8 +4,6 @@ Awkward Game is where you have a list of popular people contacts 📒, like Cris
 
 The best thing is while you handshake you may get an achievement (with a sticker) because you chose to handshake in a specific way.
 
-bruh! you've read all this, just install, smh 🤦‍♂️
-
 ## Online & Offline
 - everything about the game is offline
 
